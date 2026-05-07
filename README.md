@@ -751,7 +751,7 @@ All write-ups in this repository reference one or more of the following industry
 
 **Michael Asante Anim** | `0x1aerixis`
 BSc Cyber Security — University of Mines and Technology (UMaT), Tarkwa, Ghana
-Member, The Digital Frontline
+
 
 [![GitHub](https://img.shields.io/badge/GitHub-anim--michael--asante-black?logo=github)](https://github.com/anim-michael-asante)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?logo=linkedin)](https://linkedin.com/in/michael-asante-anim)
