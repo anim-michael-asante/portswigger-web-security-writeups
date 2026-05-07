@@ -736,7 +736,7 @@ All write-ups in this repository reference one or more of the following industry
 
 | Tool | Purpose |
 |------|---------|
-| [Burp Suite Professional / Community](https://portswigger.net/burp) | Primary HTTP interception, scanning, and exploitation proxy |
+| [Burp Suite Community](https://portswigger.net/burp) | Primary HTTP interception, scanning, and exploitation proxy |
 | [PortSwigger Web Security Academy](https://portswigger.net/web-security) | Target lab environment |
 | Firefox / Chromium | Browser-based payload delivery and response observation |
 | Python 3 | Scripted exploitation and payload generation where applicable |
