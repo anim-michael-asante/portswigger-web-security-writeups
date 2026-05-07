@@ -252,8 +252,9 @@ The finding is considered remediated when:
 
 ### Screenshot — Lab Solved
 
-./sql-injection/01-sqli-where-clause/evidence/lab-solved.jpeg
-![Lab solved confirmation banner and full product listing including unreleased items returned after SQL injection payload was submitted via the category filter parameter.](./evidence/lab-solved.png)
+![Lab solved confirmation banner and full product listing including unreleased items returned after SQL injection payload was submitted via the category filter parameter.](./evidence/lab-solved.jpeg)
+
+> Caption: The PortSwigger Academy banner confirms lab completion. The expanded product listing visible below the search bar reflects all records returned by the injected query, including items not present under standard category navigation.
 
 > Caption: The PortSwigger Academy banner confirms lab completion. The expanded product listing visible below the search bar reflects all records returned by the injected query, including items not present under standard category navigation.
 
