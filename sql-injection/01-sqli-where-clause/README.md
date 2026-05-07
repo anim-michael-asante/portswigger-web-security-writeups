@@ -256,7 +256,6 @@ The finding is considered remediated when:
 
 > Caption: The PortSwigger Academy banner confirms lab completion. The expanded product listing visible below the search bar reflects all records returned by the injected query, including items not present under standard category navigation.
 
-> Caption: The PortSwigger Academy banner confirms lab completion. The expanded product listing visible below the search bar reflects all records returned by the injected query, including items not present under standard category navigation.
 
 **Injected URL (captured from browser address bar):**
 
