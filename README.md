@@ -117,40 +117,40 @@ portswigger-web-security-writeups/
 
 ## Progress Tracker
 
-| #   | Category                                                                               | Difficulty Range          | Labs    | Completed | Status                                                |
-| --- | -------------------------------------------------------------------------------------- | ------------------------- | ------- | --------- | ----------------------------------------------------- |
-| 01  | [SQL Injection](#01-sql-injection--18-labs)                                            | Apprentice — Practitioner | 18      | 2         | ![](https://img.shields.io/badge/2%2F18-brightgreen)  |
-| 02  | [Authentication](#02-authentication--14-labs)                                          | Apprentice — Expert       | 14      | 0         | ![](https://img.shields.io/badge/0%2F14-lightgrey)    |
-| 03  | [Path Traversal](#03-path-traversal--6-labs)                                           | Apprentice — Practitioner | 6       | 0         | ![](https://img.shields.io/badge/0%2F6-lightgrey)     |
-| 04  | [OS Command Injection](#04-os-command-injection--5-labs)                               | Apprentice — Practitioner | 5       | 0         | ![](https://img.shields.io/badge/0%2F5-lightgrey)     |
-| 05  | [Business Logic](#05-business-logic-vulnerabilities--11-labs)                          | Apprentice — Expert       | 11      | 0         | ![](https://img.shields.io/badge/0%2F11-lightgrey)    |
-| 06  | [Information Disclosure](#06-information-disclosure--5-labs)                           | Apprentice — Practitioner | 5       | 0         | ![](https://img.shields.io/badge/0%2F5-lightgrey)     |
-| 07  | [Access Control](#07-access-control-vulnerabilities--13-labs)                          | Apprentice — Practitioner | 13      | 0         | ![](https://img.shields.io/badge/0%2F13-lightgrey)    |
-| 08  | [File Upload](#08-file-upload-vulnerabilities--7-labs)                                 | Apprentice — Expert       | 7       | 0         | ![](https://img.shields.io/badge/0%2F7-lightgrey)     |
-| 09  | [Race Conditions](#09-race-conditions--6-labs)                                         | Apprentice — Expert       | 6       | 0         | ![](https://img.shields.io/badge/0%2F6-lightgrey)     |
-| 10  | [SSRF](#10-server-side-request-forgery-ssrf--7-labs)                                   | Apprentice — Expert       | 7       | 0         | ![](https://img.shields.io/badge/0%2F7-lightgrey)     |
-| 11  | [XXE Injection](#11-xml-external-entity-xxe-injection--9-labs)                         | Apprentice — Expert       | 9       | 0         | ![](https://img.shields.io/badge/0%2F9-lightgrey)     |
-| 12  | [NoSQL Injection](#12-nosql-injection--4-labs)                                         | Apprentice — Practitioner | 4       | 0         | ![](https://img.shields.io/badge/0%2F4-lightgrey)     |
-| 13  | [API Testing](#13-api-testing--5-labs)                                                 | Apprentice — Practitioner | 5       | 0         | ![](https://img.shields.io/badge/0%2F5-lightgrey)     |
-| 14  | [Web Cache Deception](#14-web-cache-deception--5-labs)                                 | Apprentice — Expert       | 5       | 0         | ![](https://img.shields.io/badge/0%2F5-lightgrey)     |
-| 15  | [Cross-Site Scripting](#15-cross-site-scripting-xss--30-labs)                          | Apprentice — Expert       | 30      | 0         | ![](https://img.shields.io/badge/0%2F30-lightgrey)    |
-| 16  | [CSRF](#16-cross-site-request-forgery-csrf--12-labs)                                   | Apprentice — Expert       | 12      | 0         | ![](https://img.shields.io/badge/0%2F12-lightgrey)    |
-| 17  | [CORS](#17-cross-origin-resource-sharing-cors--3-labs)                                 | Apprentice — Practitioner | 3       | 0         | ![](https://img.shields.io/badge/0%2F3-lightgrey)     |
-| 18  | [Clickjacking](#18-clickjacking--5-labs)                                               | Apprentice — Practitioner | 5       | 0         | ![](https://img.shields.io/badge/0%2F5-lightgrey)     |
-| 19  | [DOM-Based Vulnerabilities](#19-dom-based-vulnerabilities--7-labs)                     | Apprentice — Expert       | 7       | 0         | ![](https://img.shields.io/badge/0%2F7-lightgrey)     |
-| 20  | [WebSockets](#20-websockets--3-labs)                                                   | Apprentice — Practitioner | 3       | 0         | ![](https://img.shields.io/badge/0%2F3-lightgrey)     |
-| 21  | [Insecure Deserialization](#21-insecure-deserialization--10-labs)                      | Apprentice — Expert       | 10      | 0         | ![](https://img.shields.io/badge/0%2F10-lightgrey)    |
-| 22  | [Web LLM Attacks](#22-web-llm-attacks--7-labs)                                         | Apprentice — Practitioner | 7       | 0         | ![](https://img.shields.io/badge/0%2F7-lightgrey)     |
-| 23  | [GraphQL API Vulnerabilities](#23-graphql-api-vulnerabilities--5-labs)                 | Apprentice — Practitioner | 5       | 0         | ![](https://img.shields.io/badge/0%2F5-lightgrey)     |
-| 24  | [SSTI](#24-server-side-template-injection--7-labs)                                     | Practitioner — Expert     | 7       | 0         | ![](https://img.shields.io/badge/0%2F7-lightgrey)     |
-| 25  | [Web Cache Poisoning](#25-web-cache-poisoning--13-labs)                                | Practitioner — Expert     | 13      | 0         | ![](https://img.shields.io/badge/0%2F13-lightgrey)    |
-| 26  | [HTTP Host Header Attacks](#26-http-host-header-attacks--7-labs)                       | Apprentice — Expert       | 7       | 0         | ![](https://img.shields.io/badge/0%2F7-lightgrey)     |
-| 27  | [HTTP Request Smuggling](#27-http-request-smuggling--22-labs)                          | Practitioner — Expert     | 22      | 0         | ![](https://img.shields.io/badge/0%2F22-lightgrey)    |
-| 28  | [OAuth Authentication](#28-oauth-authentication--6-labs)                               | Apprentice — Expert       | 6       | 0         | ![](https://img.shields.io/badge/0%2F6-lightgrey)     |
-| 29  | [JWT Attacks](#29-jwt-attacks--8-labs)                                                 | Apprentice — Expert       | 8       | 0         | ![](https://img.shields.io/badge/0%2F8-lightgrey)     |
-| 30  | [Prototype Pollution](#30-prototype-pollution--10-labs)                                | Apprentice — Expert       | 10      | 0         | ![](https://img.shields.io/badge/0%2F10-lightgrey)    |
-| 31  | [Essential Skills](#31-essential-skills--2-labs)                                       | Practitioner              | 2       | 0         | ![](https://img.shields.io/badge/0%2F2-lightgrey)     |
-|     | **TOTAL**                                                                              |                           | **263** | **2**     | ![](https://img.shields.io/badge/2%2F263-brightgreen) |
+| #   | Category                                                               | Difficulty Range          | Labs    | Completed | Status                                                |
+| --- | ---------------------------------------------------------------------- | ------------------------- | ------- | --------- | ----------------------------------------------------- |
+| 01  | [SQL Injection](#01-sql-injection--18-labs)                            | Apprentice — Practitioner | 18      | 2         | ![](https://img.shields.io/badge/2%2F18-brightgreen)  |
+| 02  | [Authentication](#02-authentication--14-labs)                          | Apprentice — Expert       | 14      | 0         | ![](https://img.shields.io/badge/0%2F14-lightgrey)    |
+| 03  | [Path Traversal](#03-path-traversal--6-labs)                           | Apprentice — Practitioner | 6       | 0         | ![](https://img.shields.io/badge/0%2F6-lightgrey)     |
+| 04  | [OS Command Injection](#04-os-command-injection--5-labs)               | Apprentice — Practitioner | 5       | 0         | ![](https://img.shields.io/badge/0%2F5-lightgrey)     |
+| 05  | [Business Logic](#05-business-logic-vulnerabilities--11-labs)          | Apprentice — Expert       | 11      | 0         | ![](https://img.shields.io/badge/0%2F11-lightgrey)    |
+| 06  | [Information Disclosure](#06-information-disclosure--5-labs)           | Apprentice — Practitioner | 5       | 0         | ![](https://img.shields.io/badge/0%2F5-lightgrey)     |
+| 07  | [Access Control](#07-access-control-vulnerabilities--13-labs)          | Apprentice — Practitioner | 13      | 0         | ![](https://img.shields.io/badge/0%2F13-lightgrey)    |
+| 08  | [File Upload](#08-file-upload-vulnerabilities--7-labs)                 | Apprentice — Expert       | 7       | 0         | ![](https://img.shields.io/badge/0%2F7-lightgrey)     |
+| 09  | [Race Conditions](#09-race-conditions--6-labs)                         | Apprentice — Expert       | 6       | 0         | ![](https://img.shields.io/badge/0%2F6-lightgrey)     |
+| 10  | [SSRF](#10-server-side-request-forgery-ssrf--7-labs)                   | Apprentice — Expert       | 7       | 0         | ![](https://img.shields.io/badge/0%2F7-lightgrey)     |
+| 11  | [XXE Injection](#11-xml-external-entity-xxe-injection--9-labs)         | Apprentice — Expert       | 9       | 0         | ![](https://img.shields.io/badge/0%2F9-lightgrey)     |
+| 12  | [NoSQL Injection](#12-nosql-injection--4-labs)                         | Apprentice — Practitioner | 4       | 0         | ![](https://img.shields.io/badge/0%2F4-lightgrey)     |
+| 13  | [API Testing](#13-api-testing--5-labs)                                 | Apprentice — Practitioner | 5       | 0         | ![](https://img.shields.io/badge/0%2F5-lightgrey)     |
+| 14  | [Web Cache Deception](#14-web-cache-deception--5-labs)                 | Apprentice — Expert       | 5       | 0         | ![](https://img.shields.io/badge/0%2F5-lightgrey)     |
+| 15  | [Cross-Site Scripting](#15-cross-site-scripting-xss--30-labs)          | Apprentice — Expert       | 30      | 0         | ![](https://img.shields.io/badge/0%2F30-lightgrey)    |
+| 16  | [CSRF](#16-cross-site-request-forgery-csrf--12-labs)                   | Apprentice — Expert       | 12      | 0         | ![](https://img.shields.io/badge/0%2F12-lightgrey)    |
+| 17  | [CORS](#17-cross-origin-resource-sharing-cors--3-labs)                 | Apprentice — Practitioner | 3       | 0         | ![](https://img.shields.io/badge/0%2F3-lightgrey)     |
+| 18  | [Clickjacking](#18-clickjacking--5-labs)                               | Apprentice — Practitioner | 5       | 0         | ![](https://img.shields.io/badge/0%2F5-lightgrey)     |
+| 19  | [DOM-Based Vulnerabilities](#19-dom-based-vulnerabilities--7-labs)     | Apprentice — Expert       | 7       | 0         | ![](https://img.shields.io/badge/0%2F7-lightgrey)     |
+| 20  | [WebSockets](#20-websockets--3-labs)                                   | Apprentice — Practitioner | 3       | 0         | ![](https://img.shields.io/badge/0%2F3-lightgrey)     |
+| 21  | [Insecure Deserialization](#21-insecure-deserialization--10-labs)      | Apprentice — Expert       | 10      | 0         | ![](https://img.shields.io/badge/0%2F10-lightgrey)    |
+| 22  | [Web LLM Attacks](#22-web-llm-attacks--7-labs)                         | Apprentice — Practitioner | 7       | 0         | ![](https://img.shields.io/badge/0%2F7-lightgrey)     |
+| 23  | [GraphQL API Vulnerabilities](#23-graphql-api-vulnerabilities--5-labs) | Apprentice — Practitioner | 5       | 0         | ![](https://img.shields.io/badge/0%2F5-lightgrey)     |
+| 24  | [SSTI](#24-server-side-template-injection--7-labs)                     | Practitioner — Expert     | 7       | 0         | ![](https://img.shields.io/badge/0%2F7-lightgrey)     |
+| 25  | [Web Cache Poisoning](#25-web-cache-poisoning--13-labs)                | Practitioner — Expert     | 13      | 0         | ![](https://img.shields.io/badge/0%2F13-lightgrey)    |
+| 26  | [HTTP Host Header Attacks](#26-http-host-header-attacks--7-labs)       | Apprentice — Expert       | 7       | 0         | ![](https://img.shields.io/badge/0%2F7-lightgrey)     |
+| 27  | [HTTP Request Smuggling](#27-http-request-smuggling--22-labs)          | Practitioner — Expert     | 22      | 0         | ![](https://img.shields.io/badge/0%2F22-lightgrey)    |
+| 28  | [OAuth Authentication](#28-oauth-authentication--6-labs)               | Apprentice — Expert       | 6       | 0         | ![](https://img.shields.io/badge/0%2F6-lightgrey)     |
+| 29  | [JWT Attacks](#29-jwt-attacks--8-labs)                                 | Apprentice — Expert       | 8       | 0         | ![](https://img.shields.io/badge/0%2F8-lightgrey)     |
+| 30  | [Prototype Pollution](#30-prototype-pollution--10-labs)                | Apprentice — Expert       | 10      | 0         | ![](https://img.shields.io/badge/0%2F10-lightgrey)    |
+| 31  | [Essential Skills](#31-essential-skills--2-labs)                       | Practitioner              | 2       | 0         | ![](https://img.shields.io/badge/0%2F2-lightgrey)     |
+|     | **TOTAL**                                                              |                           | **263** | **2**     | ![](https://img.shields.io/badge/2%2F263-brightgreen) |
 
 > `[SOLVED]` — Write-up published · `[IN PROGRESS]` — Active · `[PENDING]` — Not started
 
@@ -164,26 +164,26 @@ portswigger-web-security-writeups/
 
 > SQL injection enables attackers to interfere with database queries, retrieve hidden data, bypass authentication, and in severe cases execute OS-level commands. Maps to **OWASP A03:2021**, **CWE-89**, **MITRE T1190**.
 
-| #   | Lab Title                                                                           | Difficulty   | Status      | Write-Up                                                                     |
-| --- | ----------------------------------------------------------------------------------- | ------------ | ----------- | ---------------------------------------------------------------------------- |
-| 01  | SQL injection vulnerability in WHERE clause allowing retrieval of hidden data       | Apprentice   | `[SOLVED]`  | [View](./01-sql-injection/01-where-clause-hidden-data/README.md)             |
-| 02  | SQL injection vulnerability allowing login bypass                                   | Apprentice   | `[SOLVED]`  | [View](./01-sql-injection/02-sqli-login-bypass/README.md)                    |
-| 03  | SQL injection attack, querying the database type and version on Oracle              | Practitioner | `[PENDING]` | —                                                                            |
-| 04  | SQL injection attack, querying the database type and version on MySQL and Microsoft | Practitioner | `[PENDING]` | —                                                                            |
-| 05  | SQL injection attack, listing the database contents on non-Oracle databases         | Practitioner | `[PENDING]` | —                                                                            |
-| 06  | SQL injection attack, listing the database contents on Oracle                       | Practitioner | `[PENDING]` | —                                                                            |
-| 07  | SQL injection UNION attack, determining the number of columns returned by the query | Practitioner | `[PENDING]` | —                                                                            |
-| 08  | SQL injection UNION attack, finding a column containing text                        | Practitioner | `[PENDING]` | —                                                                            |
-| 09  | SQL injection UNION attack, retrieving data from other tables                       | Practitioner | `[PENDING]` | —                                                                            |
-| 10  | SQL injection UNION attack, retrieving multiple values in a single column           | Practitioner | `[PENDING]` | —                                                                            |
-| 11  | Blind SQL injection with conditional responses                                      | Practitioner | `[PENDING]` | —                                                                            |
-| 12  | Blind SQL injection with conditional errors                                         | Practitioner | `[PENDING]` | —                                                                            |
-| 13  | Visible error-based SQL injection                                                   | Practitioner | `[PENDING]` | —                                                                            |
-| 14  | Blind SQL injection with time delays                                                | Practitioner | `[PENDING]` | —                                                                            |
-| 15  | Blind SQL injection with time delays and information retrieval                      | Practitioner | `[PENDING]` | —                                                                            |
-| 16  | Blind SQL injection with out-of-band interaction                                    | Practitioner | `[PENDING]` | —                                                                            |
-| 17  | Blind SQL injection with out-of-band data exfiltration                              | Practitioner | `[PENDING]` | —                                                                            |
-| 18  | SQL injection with filter bypass via XML encoding                                   | Practitioner | `[PENDING]` | —                                                                            |
+| #   | Lab Title                                                                           | Difficulty   | Status      | Write-Up                                        |
+| --- | ----------------------------------------------------------------------------------- | ------------ | ----------- | ----------------------------------------------- |
+| 01  | SQL injection vulnerability in WHERE clause allowing retrieval of hidden data       | Apprentice   | `[SOLVED]`  | [View](./01-where-clause-hidden-data/README.md) |
+| 02  | SQL injection vulnerability allowing login bypass                                   | Apprentice   | `[SOLVED]`  | [View](./02-sqli-login-bypass/README.md)        |
+| 03  | SQL injection attack, querying the database type and version on Oracle              | Practitioner | `[PENDING]` | —                                               |
+| 04  | SQL injection attack, querying the database type and version on MySQL and Microsoft | Practitioner | `[PENDING]` | —                                               |
+| 05  | SQL injection attack, listing the database contents on non-Oracle databases         | Practitioner | `[PENDING]` | —                                               |
+| 06  | SQL injection attack, listing the database contents on Oracle                       | Practitioner | `[PENDING]` | —                                               |
+| 07  | SQL injection UNION attack, determining the number of columns returned by the query | Practitioner | `[PENDING]` | —                                               |
+| 08  | SQL injection UNION attack, finding a column containing text                        | Practitioner | `[PENDING]` | —                                               |
+| 09  | SQL injection UNION attack, retrieving data from other tables                       | Practitioner | `[PENDING]` | —                                               |
+| 10  | SQL injection UNION attack, retrieving multiple values in a single column           | Practitioner | `[PENDING]` | —                                               |
+| 11  | Blind SQL injection with conditional responses                                      | Practitioner | `[PENDING]` | —                                               |
+| 12  | Blind SQL injection with conditional errors                                         | Practitioner | `[PENDING]` | —                                               |
+| 13  | Visible error-based SQL injection                                                   | Practitioner | `[PENDING]` | —                                               |
+| 14  | Blind SQL injection with time delays                                                | Practitioner | `[PENDING]` | —                                               |
+| 15  | Blind SQL injection with time delays and information retrieval                      | Practitioner | `[PENDING]` | —                                               |
+| 16  | Blind SQL injection with out-of-band interaction                                    | Practitioner | `[PENDING]` | —                                               |
+| 17  | Blind SQL injection with out-of-band data exfiltration                              | Practitioner | `[PENDING]` | —                                               |
+| 18  | SQL injection with filter bypass via XML encoding                                   | Practitioner | `[PENDING]` | —                                               |
 
 ---
 
@@ -723,15 +723,15 @@ portswigger-web-security-writeups/
 
 All write-ups in this repository reference one or more of the following industry standards:
 
-| Framework                                                                              | Purpose                                              |
-| -------------------------------------------------------------------------------------- | ---------------------------------------------------- |
+| Framework                                                                             | Purpose                                              |
+| ------------------------------------------------------------------------------------- | ---------------------------------------------------- |
 | [OWASP Testing Guide v4.2](https://owasp.org/www-project-web-security-testing-guide/) | Vulnerability classification and testing methodology |
-| [OWASP Top 10 (2021)](https://owasp.org/Top10/)                                        | Risk categorisation                                  |
-| [NIST SP 800-115](https://csrc.nist.gov/publications/detail/sp/800-115/final)          | Technical guide to security testing and assessment   |
-| [PTES](http://www.pentest-standard.org/)                                               | Penetration testing execution standard               |
-| [MITRE ATT&CK](https://attack.mitre.org/)                                              | Adversary tactic and technique mapping               |
-| [CVSS v3.1](https://www.first.org/cvss/v3.1/specification-document)                    | Vulnerability severity scoring                       |
-| [CWE](https://cwe.mitre.org/)                                                          | Weakness enumeration and root cause classification   |
+| [OWASP Top 10 (2021)](https://owasp.org/Top10/)                                       | Risk categorisation                                  |
+| [NIST SP 800-115](https://csrc.nist.gov/publications/detail/sp/800-115/final)         | Technical guide to security testing and assessment   |
+| [PTES](http://www.pentest-standard.org/)                                              | Penetration testing execution standard               |
+| [MITRE ATT&CK](https://attack.mitre.org/)                                             | Adversary tactic and technique mapping               |
+| [CVSS v3.1](https://www.first.org/cvss/v3.1/specification-document)                   | Vulnerability severity scoring                       |
+| [CWE](https://cwe.mitre.org/)                                                         | Weakness enumeration and root cause classification   |
 
 ---
 
@@ -761,7 +761,7 @@ BSc Cyber Security — University of Mines and Technology (UMaT), Tarkwa, Ghana
 [![X](https://img.shields.io/badge/X-0x1aerixis-black?logo=x)](https://x.com/0x1aerixis)
 [![Discord](https://img.shields.io/badge/Discord-0x1aerixis-5865F2?logo=discord)](https://discord.com/users/0x1aerixis)
 
-> *"Built in the lab. Documented for the field."*
+> _"Built in the lab. Documented for the field."_
 
 ---
 
