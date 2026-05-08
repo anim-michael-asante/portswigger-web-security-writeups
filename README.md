@@ -171,14 +171,14 @@ portswigger-web-security-writeups/
 
 ### 01. SQL Injection — 18 Labs
 
-> SQL injection enables attackers to interfere with database queries, retrieve hidden data, bypass authentication, and in severe cases execute OS-level commands. Maps to **OWASP A03:2021**, **CWE-89**, **MITRE T1190**.
+> SQL injection enables attackers to interfere with database queries, retrieve hidden data, bypass authentication, and in severe cases execute OS-level commands. Maps to **OWASP A03:2021**, **CWE-89**, and **MITRE ATT&CK T1190**.
 
 | #   | Lab Title                                                                           | Difficulty   | Status      | Write-Up                                                                |
-| --- | ----------------------------------------------------------------------------------- | ------------ | ----------- | ----------------------------------------------------------------------- | --- | --- |
+| --- | ----------------------------------------------------------------------------------- | ------------ | ----------- | ----------------------------------------------------------------------- |
 | 01  | SQL injection vulnerability in WHERE clause allowing retrieval of hidden data       | Apprentice   | `[SOLVED]`  | [View](sql-injection/01-sqli-where-clause/README.md)                    |
 | 02  | SQL injection vulnerability allowing login bypass                                   | Apprentice   | `[SOLVED]`  | [View](sql-injection/02-sqli-login-bypass/README.md)                    |
-| 03  | SQL injection attack, querying the database type and version on Oracle              | Practitioner | `[SOLVED]`  | [View](sql-injection/03-sqli-union-oracle-version-disclosure/README.md) |     |
-| 04  | SQL injection attack, querying the database type and version on MySQL and Microsoft | Practitioner | `[SOLVED]`  | [View](sql-injection/04-sqli-union-mysql-version-enum/README.md)        |     | —   |
+| 03  | SQL injection attack, querying the database type and version on Oracle              | Practitioner | `[SOLVED]`  | [View](sql-injection/03-sqli-union-oracle-version-disclosure/README.md) |
+| 04  | SQL injection attack, querying the database type and version on MySQL and Microsoft | Practitioner | `[SOLVED]`  | [View](sql-injection/04-sqli-union-mysql-version-enum/README.md)        |
 | 05  | SQL injection attack, listing the database contents on non-Oracle databases         | Practitioner | `[PENDING]` | —                                                                       |
 | 06  | SQL injection attack, listing the database contents on Oracle                       | Practitioner | `[PENDING]` | —                                                                       |
 | 07  | SQL injection UNION attack, determining the number of columns returned by the query | Practitioner | `[PENDING]` | —                                                                       |
