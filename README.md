@@ -76,8 +76,11 @@ portswigger-web-security-writeups/
 │   │   ├── README.md                      ← Write-up (SOLVED)
 │   │   └── evidence/
 │   │       └── lab-solved.png
-│   └── 02-login-bypass/                   ← Upcoming
-│
+│   └── 02-login-bypass/                   ←  Write-up (SOLVED)
+│        ├── README.md                      
+│   │   └── evidence/
+│   │       └── lab-solved-administrator.jpeg
+            └── sqli-analysis-notes.jpeg
 ├── 02-authentication/
 ├── 03-path-traversal/
 ├── 04-os-command-injection/
@@ -116,7 +119,7 @@ portswigger-web-security-writeups/
 
 | # | Category | Difficulty Range | Labs | Completed | Status |
 |---|----------|-----------------|------|-----------|--------|
-| 01 | [SQL Injection](#01-sql-injection--18-labs) | Apprentice — Practitioner | 18 | 1 | ![](https://img.shields.io/badge/1%2F18-brightgreen) |
+| 01 | [SQL Injection](#01-sql-injection--18-labs) | Apprentice — Practitioner | 18 | 2 | ![](https://img.shields.io/badge/2%2F18-brightgreen) |
 | 02 | [Authentication](#02-authentication--14-labs) | Apprentice — Expert | 14 | 0 | ![](https://img.shields.io/badge/0%2F14-lightgrey) |
 | 03 | [Path Traversal](#03-path-traversal--6-labs) | Apprentice — Practitioner | 6 | 0 | ![](https://img.shields.io/badge/0%2F6-lightgrey) |
 | 04 | [OS Command Injection](#04-os-command-injection--5-labs) | Apprentice — Practitioner | 5 | 0 | ![](https://img.shields.io/badge/0%2F5-lightgrey) |
