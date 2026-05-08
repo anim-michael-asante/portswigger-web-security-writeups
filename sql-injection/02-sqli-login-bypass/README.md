@@ -262,16 +262,23 @@ Replace dynamic string concatenation in the SQL query with **parameterized queri
 
 ## Evidence
 
+# SQL Injection — Login Bypass
+
+## Evidence
+
 ### Screenshot 1 — SQL Injection Analysis & Payload Notes
 
-![SQL injection payload analysis showing query structure and administrator payload](evidence/sqli-analysis-notes.png)
-_Caption: Pre-exploitation query analysis. Demonstrates reasoning process — standard login query structure identified, comment operator `--` used to nullify the password condition and target the `administrator` account._
+![SQL injection payload analysis showing query structure and administrator payload](./evidence/sqli-analysis-notes.jpeg)
+
+> Caption: Pre-exploitation query analysis. The application’s login query structure was analyzed to identify injectable input handling. The payload used the SQL comment operator `--` to terminate the password condition and force authentication as the `administrator` account.
+
+---
 
 ### Screenshot 2 — Lab Solved — Authenticated as Administrator
 
-![PortSwigger lab marked as Solved with username administrator displayed on My Account page](evidence/lab-solved-administrator.png)
-_Caption: Post-exploitation confirmation. Lab status shows "Solved". The authenticated session displays "Your username is: administrator", confirming successful authentication bypass via SQL injection._
+![PortSwigger lab marked as Solved with username administrator displayed on My Account page](./evidence/lab-solved-administrator.jpeg)
 
+> Caption: Successful authentication bypass through SQL injection. The PortSwigger Web Security Academy lab is marked as "Solved", and the session confirms authenticated access to the `administrator` account.
 ---
 
 ## Remediation
