@@ -183,9 +183,9 @@ No automated scanners or external tools were required. The attack was completed 
 
 ### Screenshot — Lab Solved and Version String Extracted
 
-![Lab solved screenshot showing UNION SELECT payload in page title and MySQL version 8.0.42-0ubuntu0.20.04.1 at the bottom of the product listing](./evidence/lab-solved.jpeg)
+![Lab solved screenshot showing UNION SELECT payload reflected in the page title and the MySQL version string `8.0.42-0ubuntu0.20.04.1` rendered at the bottom of the product listing.](./evidence/lab-solved.jpeg)
 
-_Figure 1: The injected UNION SELECT payload is reflected in the page heading. The database version string `8.0.42-0ubuntu0.20.04.1` is rendered at the bottom of the product list, confirming successful extraction._
+> **Figure 1:** The injected `UNION SELECT` payload is reflected in the page heading. The database version string `8.0.42-0ubuntu0.20.04.1` appears at the bottom of the product list, confirming successful extraction of backend database version information through SQL injection.
 
 ---
 
