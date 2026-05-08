@@ -84,11 +84,11 @@ portswigger-web-security-writeups/
 |   └── 03-sqli-union-oracle-version-disclosure/
 │   |   ├── README.md
 │   |    └── evidence/
-│   |       └── lab-solved.jpeg
+│   |       └── lab-solved.png
 |   └── 04-sqli-union-mysql-version-enum/
 │       ├── README.md
 │       └── evidence/
-│           └── lab-solved.jpeg
+│           └── lab-solved.png
 │
 ├── 02-authentication/
 ├── 03-path-traversal/
