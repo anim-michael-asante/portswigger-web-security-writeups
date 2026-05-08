@@ -35,15 +35,15 @@ This writeup documents the exploitation of a SQL injection vulnerability in the 
 
 ## Scope and Objectives
 
-| Item | Detail |
-|---|---|
-| Platform | PortSwigger Web Security Academy |
-| Lab Title | SQL injection attack, querying the database type and version on Oracle |
-| Lab Tier | Apprentice |
-| Target URL | `https://<lab-id>.web-security-academy.net/filter?category=Accessories` |
-| In Scope | The `category` GET parameter in the product filter endpoint |
-| Out of Scope | All other application endpoints, authentication mechanisms, and user data |
-| Authorization | Fully authorized — isolated sandboxed lab environment |
+| Item          | Detail                                                                    |
+| ------------- | ------------------------------------------------------------------------- |
+| Platform      | PortSwigger Web Security Academy                                          |
+| Lab Title     | SQL injection attack, querying the database type and version on Oracle    |
+| Lab Tier      | Apprentice                                                                |
+| Target URL    | `https://<lab-id>.web-security-academy.net/filter?category=Accessories`   |
+| In Scope      | The `category` GET parameter in the product filter endpoint               |
+| Out of Scope  | All other application endpoints, authentication mechanisms, and user data |
+| Authorization | Fully authorized — isolated sandboxed lab environment                     |
 
 **Primary Objective:** Exploit the SQL injection vulnerability in the `category` parameter to extract and display the Oracle database version string using a UNION-based attack.
 
@@ -101,16 +101,16 @@ This injected a second row into the result set containing the Oracle database ve
 
 ### Finding F-01 — SQL Injection via Unsanitized Category Filter Parameter
 
-| Attribute | Detail |
-|---|---|
-| Finding ID | F-01 |
-| Severity | [CRITICAL] |
-| CVSS v3.1 Score | 9.8 |
-| CVSS v3.1 Vector | `CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H` |
-| CWE | CWE-89 — Improper Neutralization of Special Elements used in an SQL Command |
-| OWASP Category | A03:2021 — Injection |
-| MITRE ATT&CK TTP | T1190 — Exploit Public-Facing Application |
-| Affected Component | GET `/filter?category=` parameter |
+| Attribute          | Detail                                                                      |
+| ------------------ | --------------------------------------------------------------------------- |
+| Finding ID         | F-01                                                                        |
+| Severity           | [CRITICAL]                                                                  |
+| CVSS v3.1 Score    | 9.8                                                                         |
+| CVSS v3.1 Vector   | `CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H`                              |
+| CWE                | CWE-89 — Improper Neutralization of Special Elements used in an SQL Command |
+| OWASP Category     | A03:2021 — Injection                                                        |
+| MITRE ATT&CK TTP   | T1190 — Exploit Public-Facing Application                                   |
+| Affected Component | GET `/filter?category=` parameter                                           |
 
 **Description**
 
@@ -160,9 +160,9 @@ After remediation, inject the same payload. The application must return either a
 
 ## Risk Summary
 
-| ID | Title | Severity | CVSS v3.1 | Priority |
-|---|---|---|---|---|
-| F-01 | SQL Injection — Category Filter | [CRITICAL] | 9.8 | [IMMEDIATE] |
+| ID   | Title                           | Severity   | CVSS v3.1 | Priority    |
+| ---- | ------------------------------- | ---------- | --------- | ----------- |
+| F-01 | SQL Injection — Category Filter | [CRITICAL] | 9.8       | [IMMEDIATE] |
 
 ---
 
@@ -197,21 +197,21 @@ After remediation, inject the same payload. The application must return either a
 
 **MITRE ATT&CK Mapping**
 
-| Phase | Technique | ID |
-|---|---|---|
+| Phase          | Technique                         | ID    |
+| -------------- | --------------------------------- | ----- |
 | Initial Access | Exploit Public-Facing Application | T1190 |
-| Discovery | System Information Discovery | T1082 |
+| Discovery      | System Information Discovery      | T1082 |
 
 ---
 
 ## Tools and Environment
 
-| Tool / Resource | Version / Detail | Purpose |
-|---|---|---|
-| Browser (Chromium) | Latest stable | Manual request crafting and response observation |
-| PortSwigger Web Security Academy | Apprentice Lab | Authorized target environment |
-| Oracle Database (target) | Version disclosed via `v$version` | Backend DBMS |
-| Burp Suite Community (optional) | 2024.x | HTTP interception and parameter manipulation |
+| Tool / Resource                  | Version / Detail                  | Purpose                                          |
+| -------------------------------- | --------------------------------- | ------------------------------------------------ |
+| Browser (Chromium)               | Latest stable                     | Manual request crafting and response observation |
+| PortSwigger Web Security Academy | Apprentice Lab                    | Authorized target environment                    |
+| Oracle Database (target)         | Version disclosed via `v$version` | Backend DBMS                                     |
+| Burp Suite Community (optional)  | 2024.x                            | HTTP interception and parameter manipulation     |
 
 ---
 
@@ -219,9 +219,9 @@ After remediation, inject the same payload. The application must return either a
 
 ### Screenshot — Lab Solved
 
-![PortSwigger lab solved confirmation screen showing Oracle database version injected into product listing](./assets/lab-solved.png)
+![PortSwigger lab solved confirmation screen showing Oracle database version injected into product listing](sql-injection/03-sqli-union-oracle-version-disclosure/evidence/lab-solved.png)
 
-*Figure 1: Lab solved confirmation. The Oracle database `BANNER` string is rendered as a product listing item, confirming successful UNION-based SQL injection.*
+_Figure 1: Lab solved confirmation. The Oracle database `BANNER` string is rendered as a product listing item, confirming successful UNION-based SQL injection._
 
 ### Payload Used
 
@@ -260,12 +260,12 @@ ResultSet rs = stmt.executeQuery();
 
 **Secondary Controls**
 
-| Control | Detail |
-|---|---|
-| Input Validation | Whitelist acceptable `category` values at the application layer; reject any value not in the predefined set |
-| Least Privilege | The database user account used by the application must have SELECT-only access to required tables — no access to `v$version`, `ALL_TABLES`, or system views |
-| Error Handling | Suppress all verbose database error messages from HTTP responses; log internally only |
-| WAF Rule | Deploy a WAF rule to detect and block SQL injection patterns (`UNION`, `SELECT`, `--`, `v$version`) in GET parameters |
+| Control          | Detail                                                                                                                                                      |
+| ---------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Input Validation | Whitelist acceptable `category` values at the application layer; reject any value not in the predefined set                                                 |
+| Least Privilege  | The database user account used by the application must have SELECT-only access to required tables — no access to `v$version`, `ALL_TABLES`, or system views |
+| Error Handling   | Suppress all verbose database error messages from HTTP responses; log internally only                                                                       |
+| WAF Rule         | Deploy a WAF rule to detect and block SQL injection patterns (`UNION`, `SELECT`, `--`, `v$version`) in GET parameters                                       |
 
 **Retest Criteria**
 
@@ -291,16 +291,16 @@ SQL injection is a solved problem at the framework level. Parameterized queries 
 
 ## References
 
-| Reference | URL |
-|---|---|
-| PortSwigger — SQL Injection | https://portswigger.net/web-security/sql-injection |
-| PortSwigger — UNION Attacks | https://portswigger.net/web-security/sql-injection/union-attacks |
-| OWASP A03:2021 — Injection | https://owasp.org/Top10/A03_2021-Injection/ |
-| CWE-89 — SQL Injection | https://cwe.mitre.org/data/definitions/89.html |
-| MITRE ATT&CK T1190 | https://attack.mitre.org/techniques/T1190/ |
-| Oracle v$version Reference | https://docs.oracle.com/en/database/oracle/oracle-database/19/refrn/V-VERSION.html |
-| NIST SP 800-115 | https://csrc.nist.gov/publications/detail/sp/800/115/final |
-| CVSS v3.1 Calculator | https://nvd.nist.gov/vuln-metrics/cvss/v3-calculator |
+| Reference                   | URL                                                                                |
+| --------------------------- | ---------------------------------------------------------------------------------- |
+| PortSwigger — SQL Injection | https://portswigger.net/web-security/sql-injection                                 |
+| PortSwigger — UNION Attacks | https://portswigger.net/web-security/sql-injection/union-attacks                   |
+| OWASP A03:2021 — Injection  | https://owasp.org/Top10/A03_2021-Injection/                                        |
+| CWE-89 — SQL Injection      | https://cwe.mitre.org/data/definitions/89.html                                     |
+| MITRE ATT&CK T1190          | https://attack.mitre.org/techniques/T1190/                                         |
+| Oracle v$version Reference  | https://docs.oracle.com/en/database/oracle/oracle-database/19/refrn/V-VERSION.html |
+| NIST SP 800-115             | https://csrc.nist.gov/publications/detail/sp/800/115/final                         |
+| CVSS v3.1 Calculator        | https://nvd.nist.gov/vuln-metrics/cvss/v3-calculator                               |
 
 ---
 
@@ -316,9 +316,10 @@ Member, The Digital Frontline
 [![X](https://img.shields.io/badge/X-0x1aerixis-black?logo=x)](https://x.com/0x1aerixis)
 [![Discord](https://img.shields.io/badge/Discord-0x1aerixis-5865F2?logo=discord)](https://discord.com/users/0x1aerixis)
 
-> *"Built in the lab. Documented for the field."*
+> _"Built in the lab. Documented for the field."_
 
 ---
+
 > **Disclaimer:** All work documented in this repository was conducted in authorized, isolated
 > lab environments or sanctioned CTF platforms. No unauthorized systems were accessed.
 > This project is intended for educational and portfolio purposes only.

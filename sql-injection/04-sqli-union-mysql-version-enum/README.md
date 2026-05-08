@@ -34,16 +34,16 @@ This writeup documents the exploitation of a SQL injection vulnerability in a Po
 
 ## Scope and Objectives
 
-| Field | Detail |
-|---|---|
-| Platform | PortSwigger Web Security Academy |
-| Lab Title | SQL Injection — Querying Database Type and Version on MySQL and Microsoft |
-| Lab URL | `https://portswigger.net/web-security/sql-injection/examining-the-database/lab-querying-database-version-mysql-microsoft` |
-| Target Endpoint | `/filter?category=` |
-| Vulnerable Parameter | `category` (GET) |
-| In Scope | Web application category filter, database version enumeration |
-| Out of Scope | Authentication bypass, data exfiltration beyond version string, all other endpoints |
-| Objective | Extract and display the backend database version string via SQL injection |
+| Field                | Detail                                                                                                                    |
+| -------------------- | ------------------------------------------------------------------------------------------------------------------------- |
+| Platform             | PortSwigger Web Security Academy                                                                                          |
+| Lab Title            | SQL Injection — Querying Database Type and Version on MySQL and Microsoft                                                 |
+| Lab URL              | `https://portswigger.net/web-security/sql-injection/examining-the-database/lab-querying-database-version-mysql-microsoft` |
+| Target Endpoint      | `/filter?category=`                                                                                                       |
+| Vulnerable Parameter | `category` (GET)                                                                                                          |
+| In Scope             | Web application category filter, database version enumeration                                                             |
+| Out of Scope         | Authentication bypass, data exfiltration beyond version string, all other endpoints                                       |
+| Objective            | Extract and display the backend database version string via SQL injection                                                 |
 
 ---
 
@@ -77,16 +77,16 @@ Injected the finalized payload via the `category` parameter. The database versio
 
 ### Finding F-01 — SQL Injection via Unsanitized Category Filter Parameter
 
-| Field | Detail |
-|---|---|
-| Finding ID | F-01 |
-| Severity | [HIGH] |
-| CVSS v3.1 Score | 8.6 |
-| CVSS v3.1 Vector | `CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:N/A:N` |
-| CWE | CWE-89 — Improper Neutralization of Special Elements Used in an SQL Command |
-| OWASP Category | A03:2021 — Injection |
-| MITRE ATT&CK TTP | T1190 — Exploit Public-Facing Application |
-| Affected Component | `/filter?category=` (GET parameter) |
+| Field              | Detail                                                                      |
+| ------------------ | --------------------------------------------------------------------------- |
+| Finding ID         | F-01                                                                        |
+| Severity           | [HIGH]                                                                      |
+| CVSS v3.1 Score    | 8.6                                                                         |
+| CVSS v3.1 Vector   | `CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:N/A:N`                              |
+| CWE                | CWE-89 — Improper Neutralization of Special Elements Used in an SQL Command |
+| OWASP Category     | A03:2021 — Injection                                                        |
+| MITRE ATT&CK TTP   | T1190 — Exploit Public-Facing Application                                   |
+| Affected Component | `/filter?category=` (GET parameter)                                         |
 
 **Description**
 
@@ -115,7 +115,7 @@ https://0a3a00390406265380799e4600550023.web-security-academy.net/filter?categor
 Decoded payload:
 
 ```sql
-' UNION SELECT @@version, NULL-- 
+' UNION SELECT @@version, NULL--
 ```
 
 **Reproduction Steps**
@@ -153,7 +153,7 @@ This confirms the backend is running **MySQL 8.0.42** on an Ubuntu 20.04 host.
          |
          v
 [4] UNION SELECT Construction
-    ' UNION SELECT @@version, NULL-- 
+    ' UNION SELECT @@version, NULL--
          |
          v
 [5] Version Extraction
@@ -168,12 +168,12 @@ This confirms the backend is running **MySQL 8.0.42** on an Ubuntu 20.04 host.
 
 ## Tools and Environment
 
-| Tool / Resource | Purpose |
-|---|---|
-| Browser (Chromium) | Manual payload delivery via URL bar |
-| PortSwigger Web Security Academy | Isolated lab environment |
-| MySQL `@@version` system variable | Database version extraction |
-| OWASP Testing Guide OTG-INPVAL-005 | Methodology reference |
+| Tool / Resource                    | Purpose                             |
+| ---------------------------------- | ----------------------------------- |
+| Browser (Chromium)                 | Manual payload delivery via URL bar |
+| PortSwigger Web Security Academy   | Isolated lab environment            |
+| MySQL `@@version` system variable  | Database version extraction         |
+| OWASP Testing Guide OTG-INPVAL-005 | Methodology reference               |
 
 No automated scanners or external tools were required. The attack was completed manually using only the browser address bar.
 
@@ -183,9 +183,9 @@ No automated scanners or external tools were required. The attack was completed 
 
 ### Screenshot — Lab Solved and Version String Extracted
 
-![Lab solved screenshot showing UNION SELECT payload in page title and MySQL version 8.0.42-0ubuntu0.20.04.1 at the bottom of the product listing](./lab_4.png)
+![Lab solved screenshot showing UNION SELECT payload in page title and MySQL version 8.0.42-0ubuntu0.20.04.1 at the bottom of the product listing](sql-injection/04-sqli-union-mysql-version-enum/evidence/lab 4.png)
 
-*Figure 1: The injected UNION SELECT payload is reflected in the page heading. The database version string `8.0.42-0ubuntu0.20.04.1` is rendered at the bottom of the product list, confirming successful extraction.*
+_Figure 1: The injected UNION SELECT payload is reflected in the page heading. The database version string `8.0.42-0ubuntu0.20.04.1` is rendered at the bottom of the product list, confirming successful extraction._
 
 ---
 
@@ -254,15 +254,15 @@ The application database user must be restricted to only the permissions require
 
 ## References
 
-| Reference | Link |
-|---|---|
-| PortSwigger Lab | https://portswigger.net/web-security/sql-injection/examining-the-database/lab-querying-database-version-mysql-microsoft |
-| OWASP A03:2021 — Injection | https://owasp.org/Top10/A03_2021-Injection/ |
-| CWE-89 | https://cwe.mitre.org/data/definitions/89.html |
-| MITRE ATT&CK T1190 | https://attack.mitre.org/techniques/T1190/ |
-| OWASP Testing Guide OTG-INPVAL-005 | https://owasp.org/www-project-web-security-testing-guide/ |
-| CVSS v3.1 Calculator | https://nvd.nist.gov/vuln-metrics/cvss/v3-calculator |
-| MySQL 8.0 Release Notes | https://dev.mysql.com/doc/relnotes/mysql/8.0/en/ |
+| Reference                          | Link                                                                                                                    |
+| ---------------------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| PortSwigger Lab                    | https://portswigger.net/web-security/sql-injection/examining-the-database/lab-querying-database-version-mysql-microsoft |
+| OWASP A03:2021 — Injection         | https://owasp.org/Top10/A03_2021-Injection/                                                                             |
+| CWE-89                             | https://cwe.mitre.org/data/definitions/89.html                                                                          |
+| MITRE ATT&CK T1190                 | https://attack.mitre.org/techniques/T1190/                                                                              |
+| OWASP Testing Guide OTG-INPVAL-005 | https://owasp.org/www-project-web-security-testing-guide/                                                               |
+| CVSS v3.1 Calculator               | https://nvd.nist.gov/vuln-metrics/cvss/v3-calculator                                                                    |
+| MySQL 8.0 Release Notes            | https://dev.mysql.com/doc/relnotes/mysql/8.0/en/                                                                        |
 
 ---
 
@@ -278,9 +278,10 @@ Member, The Digital Frontline
 [![X](https://img.shields.io/badge/X-0x1aerixis-black?logo=x)](https://x.com/0x1aerixis)
 [![Discord](https://img.shields.io/badge/Discord-0x1aerixis-5865F2?logo=discord)](https://discord.com/users/0x1aerixis)
 
-> *"Built in the lab. Documented for the field."*
+> _"Built in the lab. Documented for the field."_
 
 ---
+
 > **Disclaimer:** All work documented in this repository was conducted in authorized, isolated
 > lab environments or sanctioned CTF platforms. No unauthorized systems were accessed.
 > This project is intended for educational and portfolio purposes only.
