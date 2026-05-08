@@ -219,7 +219,7 @@ After remediation, inject the same payload. The application must return either a
 
 ### Screenshot — Lab Solved
 
-![PortSwigger lab solved confirmation screen showing Oracle database version information injected into the product listing.](./evidence/lab-solved.jpeg)
+![PortSwigger lab solved confirmation screen showing Oracle database version information injected into the product listing.](./evidence/lab-solved.png)
 
 > **Figure 1:** Lab solved confirmation. The Oracle database `BANNER` value is rendered within the product listing, confirming successful `UNION SELECT` exploitation and backend version disclosure through SQL injection.
 
