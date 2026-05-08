@@ -167,7 +167,7 @@ portswigger-web-security-writeups/
 | # | Lab Title | Difficulty | Status | Write-Up |
 |---|-----------|------------|--------|----------|
 | 01 | SQL injection vulnerability in WHERE clause allowing retrieval of hidden data | Apprentice | `[SOLVED]` | [View](./01-sql-injection/01-where-clause-hidden-data/README.md) |
-| 02 | SQL injection vulnerability allowing login bypass | Apprentice | `[SOLVED]` | [View](./02-sqli-login-bypass/02-sqli-login-bypass/README.md) |
+| 02 | SQL injection vulnerability allowing login bypass | Apprentice | `[SOLVED]` | [View](./02-sqli-login-bypass/README.md) |
 | 03 | SQL injection attack, querying the database type and version on Oracle | Practitioner | `[PENDING]` | — |
 | 04 | SQL injection attack, querying the database type and version on MySQL and Microsoft | Practitioner | `[PENDING]` | — |
 | 05 | SQL injection attack, listing the database contents on non-Oracle databases | Practitioner | `[PENDING]` | — |
