@@ -7,7 +7,7 @@
 ![Category](https://img.shields.io/badge/category-Web%20Security-purple?style=flat-square)
 ![Year](https://img.shields.io/badge/year-2026-gray?style=flat-square)
 
-<h1>🗄️ SQL Injection — Listing Database Contents (Non-Oracle)</h1>
+<h1> SQL Injection — Listing Database Contents (Non-Oracle)</h1>
 <p><em>UNION-based schema enumeration and credential extraction via information_schema on a live PortSwigger lab</em></p>
 
 [PortSwigger Lab](https://portswigger.net/web-security/sql-injection) · [View Evidence](#7-evidence) · [Jump to Payloads](#5-attack-chain)
@@ -56,12 +56,12 @@ GET /filter?category=
 
 | # | Objective | Status |
 |---|---|---|
-| 1 | Identify the injection point and confirm exploitability | ✅ Completed |
-| 2 | Determine the number of columns returned by the query | ✅ Completed |
-| 3 | Enumerate all tables via `information_schema.tables` | ✅ Completed |
-| 4 | Identify columns within the target users table | ✅ Completed |
-| 5 | Extract all usernames and passwords from the table | ✅ Completed |
-| 6 | Authenticate as the `administrator` user to solve the lab | ✅ Completed |
+| 1 | Identify the injection point and confirm exploitability |  Completed |
+| 2 | Determine the number of columns returned by the query |  Completed |
+| 3 | Enumerate all tables via `information_schema.tables` |  Completed |
+| 4 | Identify columns within the target users table |  Completed |
+| 5 | Extract all usernames and passwords from the table |  Completed |
+| 6 | Authenticate as the `administrator` user to solve the lab |  Completed |
 
 **Out of Scope:** Any system other than the designated lab instance. No production systems were targeted or accessed.
 
