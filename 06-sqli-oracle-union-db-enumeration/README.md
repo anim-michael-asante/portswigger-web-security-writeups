@@ -231,14 +231,27 @@ Response: HTTP 200 — injected strings 'abc' and 'def' rendered in product list
 
 ## Evidence
 
-| File | Description |
-|---|---|
-| `lab-solved.png` | Lab completion confirmation screen |
-| `Admin cred.png` | Extracted administrator credentials from UNION SELECT output |
-| `password column.png` | Column enumeration result — USERNAME_LLCFHC and PASSWORD_UIDEPU confirmed |
-| `list of tables in the database.png` | all_tables UNION SELECT output — USERS_GCPDHZ identified |
+**Figure 1 — Database Table Enumeration (`all_tables` output)**
 
-> Screenshots are located in the `/evidence/` directory of this repository.
+![Listing Tables](evidence/Listing%20Tables.png)
+
+---
+
+**Figure 2 — Column Enumeration (`all_tab_columns` output)**
+
+![Listing password columns](evidence/Listing%20password%20columns.png)
+
+---
+
+**Figure 3 — Credential Extraction (administrator password)**
+
+![admin password](evidence/admin%20password.png)
+
+---
+
+**Figure 4 — Lab Solved**
+
+![lab-solved](evidence/lab-solved.png)
 
 ---
 
