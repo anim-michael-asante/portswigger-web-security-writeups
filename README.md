@@ -187,26 +187,26 @@ portswigger-web-security-writeups/
 
 > SQL injection enables attackers to interfere with database queries, retrieve hidden data, bypass authentication, and in severe cases execute OS-level commands. Maps to **OWASP A03:2021**, **CWE-89**, and **MITRE ATT&CK T1190**.
 
-| #   | Lab Title                                                                           | Difficulty   | Status      | Write-Up                                                                                              |
-| --- | ----------------------------------------------------------------------------------- | ------------ | ----------- | ----------------------------------------------------------------------------------------------------- |
-| 01  | SQL injection vulnerability in WHERE clause allowing retrieval of hidden data       | Apprentice   | `[SOLVED]`  | [View](01-sql-injection/01-where-clause-hidden-data/README.md)                                        |
-| 02  | SQL injection vulnerability allowing login bypass                                   | Apprentice   | `[SOLVED]`  | [View](01-sql-injection/02-sqli-login-bypass/README.md)                                               |
-| 03  | SQL injection attack, querying the database type and version on Oracle              | Practitioner | `[SOLVED]`  | [View](01-sql-injection/03-sqli-union-oracle-version-disclosure/README.md)                            |
-| 04  | SQL injection attack, querying the database type and version on MySQL and Microsoft | Practitioner | `[SOLVED]`  | [View](01-sql-injection/04-sqli-union-mysql-version-enum/README.md)                                   |
-| 05  | SQL injection attack, listing the database contents on non-Oracle databases         | Practitioner | `[SOLVED]`  | [View](01-sql-injection/05-sqli-union-db-enumeration/README.md)                                       |
-| 06  | SQL injection attack, listing the database contents on Oracle                       | Practitioner | `[SOLVED]`  | [View](01-sql-injection/06-sqli-oracle-union-db-enumeration/README.md)                                |
-| 07  | SQL injection UNION attack, determining the number of columns returned by the query | Practitioner | `[PENDING]` | —                                                                                                     |
-| 08  | SQL injection UNION attack, finding a column containing text                        | Practitioner | `[PENDING]` | —                                                                                                     |
-| 09  | SQL injection UNION attack, retrieving data from other tables                       | Practitioner | `[PENDING]` | —                                                                                                     |
-| 10  | SQL injection UNION attack, retrieving multiple values in a single column           | Practitioner | `[PENDING]` | —                                                                                                     |
-| 11  | Blind SQL injection with conditional responses                                      | Practitioner | `[PENDING]` | —                                                                                                     |
-| 12  | Blind SQL injection with conditional errors                                         | Practitioner | `[PENDING]` | —                                                                                                     |
-| 13  | Visible error-based SQL injection                                                   | Practitioner | `[PENDING]` | —                                                                                                     |
-| 14  | Blind SQL injection with time delays                                                | Practitioner | `[PENDING]` | —                                                                                                     |
-| 15  | Blind SQL injection with time delays and information retrieval                      | Practitioner | `[PENDING]` | —                                                                                                     |
-| 16  | Blind SQL injection with out-of-band interaction                                    | Practitioner | `[PENDING]` | —                                                                                                     |
-| 17  | Blind SQL injection with out-of-band data exfiltration                              | Practitioner | `[PENDING]` | —                                                                                                     |
-| 18  | SQL injection with filter bypass via XML encoding                                   | Practitioner | `[PENDING]` | —                                                                                                     |
+| #   | Lab Title                                                                           | Difficulty   | Status      | Write-Up                                                  |
+| --- | ----------------------------------------------------------------------------------- | ------------ | ----------- | --------------------------------------------------------- |
+| 01  | SQL injection vulnerability in WHERE clause allowing retrieval of hidden data       | Apprentice   | `[SOLVED]`  | [View](01-sqli-where-clause/README.md)                    |
+| 02  | SQL injection vulnerability allowing login bypass                                   | Apprentice   | `[SOLVED]`  | [View](02-sqli-login-bypass/README.md)                    |
+| 03  | SQL injection attack, querying the database type and version on Oracle              | Practitioner | `[SOLVED]`  | [View](03-sqli-union-oracle-version-disclosure/README.md) |
+| 04  | SQL injection attack, querying the database type and version on MySQL and Microsoft | Practitioner | `[SOLVED]`  | [View](04-sqli-union-mysql-version-enum/README.md)        |
+| 05  | SQL injection attack, listing the database contents on non-Oracle databases         | Practitioner | `[SOLVED]`  | [View](05-sqli-union-db-enumeration/README.md)            |
+| 06  | SQL injection attack, listing the database contents on Oracle                       | Practitioner | `[SOLVED]`  | [View](06-sqli-oracle-union-db-enumeration/README.md)     |
+| 07  | SQL injection UNION attack, determining the number of columns returned by the query | Practitioner | `[PENDING]` | —                                                         |
+| 08  | SQL injection UNION attack, finding a column containing text                        | Practitioner | `[PENDING]` | —                                                         |
+| 09  | SQL injection UNION attack, retrieving data from other tables                       | Practitioner | `[PENDING]` | —                                                         |
+| 10  | SQL injection UNION attack, retrieving multiple values in a single column           | Practitioner | `[PENDING]` | —                                                         |
+| 11  | Blind SQL injection with conditional responses                                      | Practitioner | `[PENDING]` | —                                                         |
+| 12  | Blind SQL injection with conditional errors                                         | Practitioner | `[PENDING]` | —                                                         |
+| 13  | Visible error-based SQL injection                                                   | Practitioner | `[PENDING]` | —                                                         |
+| 14  | Blind SQL injection with time delays                                                | Practitioner | `[PENDING]` | —                                                         |
+| 15  | Blind SQL injection with time delays and information retrieval                      | Practitioner | `[PENDING]` | —                                                         |
+| 16  | Blind SQL injection with out-of-band interaction                                    | Practitioner | `[PENDING]` | —                                                         |
+| 17  | Blind SQL injection with out-of-band data exfiltration                              | Practitioner | `[PENDING]` | —                                                         |
+| 18  | SQL injection with filter bypass via XML encoding                                   | Practitioner | `[PENDING]` | —                                                         |
 
 ---
 
