@@ -7,7 +7,7 @@
 ![Type](https://img.shields.io/badge/type-SQL%20Injection-red?style=flat-square)
 ![Technique](https://img.shields.io/badge/technique-UNION%20Attack-darkred?style=flat-square)
 
-<h1>🗄️ SQLi Lab 05 — Listing DB Contents (Non-Oracle)</h1>
+<h1>SQLi Lab 05 — Listing DB Contents (Non-Oracle)</h1>
 <p><em>UNION-based SQL injection to enumerate tables, columns, and credentials from information_schema.</em></p>
 
 [Writeup](#walkthrough) · [Payloads](#payloads) · [Key Takeaways](#key-takeaways)
@@ -43,15 +43,15 @@ This lab demonstrates a UNION-based SQL injection vulnerability in a product cat
 
 ## Lab Details
 
-| Field | Value |
-|---|---|
-| Platform | PortSwigger Web Security Academy |
-| Lab Number | 05 |
-| Category | SQL Injection |
-| Technique | UNION Attack |
-| Target DBMS | Non-Oracle (PostgreSQL / MySQL / MSSQL) |
-| Objective | Log in as `administrator` |
-| Vulnerability Point | `category` parameter in product filter |
+| Field               | Value                                   |
+| ------------------- | --------------------------------------- |
+| Platform            | PortSwigger Web Security Academy        |
+| Lab Number          | 05                                      |
+| Category            | SQL Injection                           |
+| Technique           | UNION Attack                            |
+| Target DBMS         | Non-Oracle (PostgreSQL / MySQL / MSSQL) |
+| Objective           | Log in as `administrator`               |
+| Vulnerability Point | `category` parameter in product filter  |
 
 ---
 
