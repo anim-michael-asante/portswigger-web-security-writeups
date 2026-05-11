@@ -2,7 +2,7 @@
 
 [![Platform](https://img.shields.io/badge/Platform-PortSwigger%20Web%20Security%20Academy-orange)](https://portswigger.net/web-security)
 [![Labs Total](https://img.shields.io/badge/Total%20Labs-263-blue)](https://portswigger.net/web-security/all-labs)
-[![Completed](https://img.shields.io/badge/Completed-6-brightgreen)](https://github.com/anim-michael-asante/portswigger-web-security-writeups)
+[![Completed](https://img.shields.io/badge/Completed-2-brightgreen)](https://github.com/anim-michael-asante/portswigger-web-security-writeups)
 [![Topics](https://img.shields.io/badge/Topics-30-purple)](https://portswigger.net/web-security/all-topics)
 [![OWASP](https://img.shields.io/badge/Standard-OWASP%20Top%2010%202021-red)](https://owasp.org/Top10/)
 [![MITRE](https://img.shields.io/badge/Framework-MITRE%20ATT%26CK-black)](https://attack.mitre.org/)
@@ -76,32 +76,18 @@ portswigger-web-security-writeups/
 │   │   ├── README.md
 │   │   └── evidence/
 │   │       └── lab-solved.png
-│   ├── 02-sqli-login-bypass/
-│   │   ├── README.md
-│   │   └── evidence/
-│   │       ├── lab-solved-administrator.jpeg
-│   │       └── sqli-analysis-notes.jpeg
-│   ├── 03-sqli-union-oracle-version-disclosure/
-│   │   ├── README.md
-│   │   └── evidence/
-│   │       └── lab-solved.png
-│   ├── 04-sqli-union-mysql-version-enum/
-│   │   ├── README.md
-│   │   └── evidence/
-│   │       └── lab-solved.png
-│   ├── 05-sqli-union-db-enumeration/
-│   │   ├── README.md
-│   │   └── evidence/
-│   │       ├── Listing Tables.png
-│   │       ├── Listing password columns.png
-│   │       ├── admin password.png
-│   │       └── lab-solved.png
-│   └── 06-sqli-oracle-union-db-enumeration/
+│   └── 02-sqli-login-bypass/
+│   |   ├── README.md
+│   |    └── evidence/
+│   |       └── lab-solved-administrator.jpeg
+│   |        └── sqli-analysis-notes.jpeg
+|   └── 03-sqli-union-oracle-version-disclosure/
+│   |   ├── README.md
+│   |    └── evidence/
+│   |       └── lab-solved.png
+|   └── 04-sqli-union-mysql-version-enum/
 │       ├── README.md
 │       └── evidence/
-│           ├── Listing Tables.png
-│           ├── Listing password columns.png
-│           ├── admin password.png
 │           └── lab-solved.png
 │
 ├── 02-authentication/
@@ -142,7 +128,7 @@ portswigger-web-security-writeups/
 
 | #   | Category                                                               | Difficulty Range          | Labs    | Completed | Status                                                |
 | --- | ---------------------------------------------------------------------- | ------------------------- | ------- | --------- | ----------------------------------------------------- |
-| 01  | [SQL Injection](#01-sql-injection--18-labs)                            | Apprentice — Practitioner | 18      | 6         | ![](https://img.shields.io/badge/6%2F18-brightgreen)  |
+| 01  | [SQL Injection](#01-sql-injection--18-labs)                            | Apprentice — Practitioner | 18      | 4         | ![](https://img.shields.io/badge/4%2F18-brightgreen)  |
 | 02  | [Authentication](#02-authentication--14-labs)                          | Apprentice — Expert       | 14      | 0         | ![](https://img.shields.io/badge/0%2F14-lightgrey)    |
 | 03  | [Path Traversal](#03-path-traversal--6-labs)                           | Apprentice — Practitioner | 6       | 0         | ![](https://img.shields.io/badge/0%2F6-lightgrey)     |
 | 04  | [OS Command Injection](#04-os-command-injection--5-labs)               | Apprentice — Practitioner | 5       | 0         | ![](https://img.shields.io/badge/0%2F5-lightgrey)     |
@@ -173,7 +159,7 @@ portswigger-web-security-writeups/
 | 29  | [JWT Attacks](#29-jwt-attacks--8-labs)                                 | Apprentice — Expert       | 8       | 0         | ![](https://img.shields.io/badge/0%2F8-lightgrey)     |
 | 30  | [Prototype Pollution](#30-prototype-pollution--10-labs)                | Apprentice — Expert       | 10      | 0         | ![](https://img.shields.io/badge/0%2F10-lightgrey)    |
 | 31  | [Essential Skills](#31-essential-skills--2-labs)                       | Practitioner              | 2       | 0         | ![](https://img.shields.io/badge/0%2F2-lightgrey)     |
-|     | **TOTAL**                                                              |                           | **263** | **6**     | ![](https://img.shields.io/badge/6%2F263-brightgreen) |
+|     | **TOTAL**                                                              |                           | **263** | **2**     | ![](https://img.shields.io/badge/2%2F263-brightgreen) |
 
 > `[SOLVED]` — Write-up published · `[IN PROGRESS]` — Active · `[PENDING]` — Not started
 
@@ -187,26 +173,26 @@ portswigger-web-security-writeups/
 
 > SQL injection enables attackers to interfere with database queries, retrieve hidden data, bypass authentication, and in severe cases execute OS-level commands. Maps to **OWASP A03:2021**, **CWE-89**, and **MITRE ATT&CK T1190**.
 
-| #   | Lab Title                                                                           | Difficulty   | Status      | Write-Up                                                                                              |
-| --- | ----------------------------------------------------------------------------------- | ------------ | ----------- | ----------------------------------------------------------------------------------------------------- |
-| 01  | SQL injection vulnerability in WHERE clause allowing retrieval of hidden data       | Apprentice   | `[SOLVED]`  | [View](01-sql-injection/01-where-clause-hidden-data/README.md)                                        |
-| 02  | SQL injection vulnerability allowing login bypass                                   | Apprentice   | `[SOLVED]`  | [View](01-sql-injection/02-sqli-login-bypass/README.md)                                               |
-| 03  | SQL injection attack, querying the database type and version on Oracle              | Practitioner | `[SOLVED]`  | [View](01-sql-injection/03-sqli-union-oracle-version-disclosure/README.md)                            |
-| 04  | SQL injection attack, querying the database type and version on MySQL and Microsoft | Practitioner | `[SOLVED]`  | [View](01-sql-injection/04-sqli-union-mysql-version-enum/README.md)                                   |
-| 05  | SQL injection attack, listing the database contents on non-Oracle databases         | Practitioner | `[SOLVED]`  | [View](01-sql-injection/05-sqli-union-db-enumeration/README.md)                                       |
-| 06  | SQL injection attack, listing the database contents on Oracle                       | Practitioner | `[SOLVED]`  | [View](01-sql-injection/06-sqli-oracle-union-db-enumeration/README.md)                                |
-| 07  | SQL injection UNION attack, determining the number of columns returned by the query | Practitioner | `[PENDING]` | —                                                                                                     |
-| 08  | SQL injection UNION attack, finding a column containing text                        | Practitioner | `[PENDING]` | —                                                                                                     |
-| 09  | SQL injection UNION attack, retrieving data from other tables                       | Practitioner | `[PENDING]` | —                                                                                                     |
-| 10  | SQL injection UNION attack, retrieving multiple values in a single column           | Practitioner | `[PENDING]` | —                                                                                                     |
-| 11  | Blind SQL injection with conditional responses                                      | Practitioner | `[PENDING]` | —                                                                                                     |
-| 12  | Blind SQL injection with conditional errors                                         | Practitioner | `[PENDING]` | —                                                                                                     |
-| 13  | Visible error-based SQL injection                                                   | Practitioner | `[PENDING]` | —                                                                                                     |
-| 14  | Blind SQL injection with time delays                                                | Practitioner | `[PENDING]` | —                                                                                                     |
-| 15  | Blind SQL injection with time delays and information retrieval                      | Practitioner | `[PENDING]` | —                                                                                                     |
-| 16  | Blind SQL injection with out-of-band interaction                                    | Practitioner | `[PENDING]` | —                                                                                                     |
-| 17  | Blind SQL injection with out-of-band data exfiltration                              | Practitioner | `[PENDING]` | —                                                                                                     |
-| 18  | SQL injection with filter bypass via XML encoding                                   | Practitioner | `[PENDING]` | —                                                                                                     |
+| #   | Lab Title                                                                           | Difficulty   | Status      | Write-Up                                                                |
+| --- | ----------------------------------------------------------------------------------- | ------------ | ----------- | ----------------------------------------------------------------------- |
+| 01  | SQL injection vulnerability in WHERE clause allowing retrieval of hidden data       | Apprentice   | `[SOLVED]`  | [View](sql-injection/01-sqli-where-clause/README.md)                    |
+| 02  | SQL injection vulnerability allowing login bypass                                   | Apprentice   | `[SOLVED]`  | [View](sql-injection/02-sqli-login-bypass/README.md)                    |
+| 03  | SQL injection attack, querying the database type and version on Oracle              | Practitioner | `[SOLVED]`  | [View](sql-injection/03-sqli-union-oracle-version-disclosure/README.md) |
+| 04  | SQL injection attack, querying the database type and version on MySQL and Microsoft | Practitioner | `[SOLVED]`  | [View](sql-injection/04-sqli-union-mysql-version-enum/README.md)        |
+| 05  | SQL injection attack, listing the database contents on non-Oracle databases         | Practitioner | `[PENDING]` | —                                                                       |
+| 06  | SQL injection attack, listing the database contents on Oracle                       | Practitioner | `[PENDING]` | —                                                                       |
+| 07  | SQL injection UNION attack, determining the number of columns returned by the query | Practitioner | `[PENDING]` | —                                                                       |
+| 08  | SQL injection UNION attack, finding a column containing text                        | Practitioner | `[PENDING]` | —                                                                       |
+| 09  | SQL injection UNION attack, retrieving data from other tables                       | Practitioner | `[PENDING]` | —                                                                       |
+| 10  | SQL injection UNION attack, retrieving multiple values in a single column           | Practitioner | `[PENDING]` | —                                                                       |
+| 11  | Blind SQL injection with conditional responses                                      | Practitioner | `[PENDING]` | —                                                                       |
+| 12  | Blind SQL injection with conditional errors                                         | Practitioner | `[PENDING]` | —                                                                       |
+| 13  | Visible error-based SQL injection                                                   | Practitioner | `[PENDING]` | —                                                                       |
+| 14  | Blind SQL injection with time delays                                                | Practitioner | `[PENDING]` | —                                                                       |
+| 15  | Blind SQL injection with time delays and information retrieval                      | Practitioner | `[PENDING]` | —                                                                       |
+| 16  | Blind SQL injection with out-of-band interaction                                    | Practitioner | `[PENDING]` | —                                                                       |
+| 17  | Blind SQL injection with out-of-band data exfiltration                              | Practitioner | `[PENDING]` | —                                                                       |
+| 18  | SQL injection with filter bypass via XML encoding                                   | Practitioner | `[PENDING]` | —                                                                       |
 
 ---
 
