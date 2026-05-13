@@ -236,7 +236,7 @@ The vulnerability is remediated when:
 
 ## Evidence
 
-sql-injection/08-sqli-union-finding-a-column-containing-text/evidence/lab-solved.png
+https://github.com/anim-michael-asante/portswigger-web-security-writeups/blob/main/sql-injection/08-sqli-union-finding-a-column-containing-text/evidence/lab-solved.png
 
 ### Column Count Confirmation
 
