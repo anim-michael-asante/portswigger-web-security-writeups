@@ -227,9 +227,8 @@ After remediation, inject `Pets'+UNION+SELECT+NULL,NULL,NULL--` via the `categor
 
 ## Evidence
 
-https://github.com/anim-michael-asante/portswigger-web-security-writeups/blob/main/sql-injection/07-sqli-union-column-count-null-probing/evidence/lab-solved.png
-
-| ID    | Artifact                  | Description                                                                                                      |
+![Lab Solved Screenshot](./evidence/lab-solved.png)
+| ID | Artifact | Description |
 | ----- | ------------------------- | ---------------------------------------------------------------------------------------------------------------- |
 | E-001 | `evidence/lab-solved.png` | Full browser screenshot confirming lab solved status and application response to three-column UNION NULL payload |
 
