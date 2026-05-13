@@ -35,16 +35,16 @@ This write-up documents the exploitation of a SQL injection vulnerability presen
 
 ## Scope & Objectives
 
-| Field | Details |
-|---|---|
-| Platform | PortSwigger Web Security Academy |
-| Lab Title | SQL Injection UNION Attack, Determining the Number of Columns Returned by the Query |
-| Target URL | `https://0ae600bf04351592826db01200640069.web-security-academy.net` |
-| Vulnerable Endpoint | `/filter?category=` |
-| Vulnerable Parameter | `category` |
-| Engagement Type | Authorized lab environment — isolated, sandboxed |
-| Out of Scope | Any system outside the designated PortSwigger lab instance |
-| Authorization | Implicit — PortSwigger Web Security Academy labs are publicly accessible training environments |
+| Field                | Details                                                                                        |
+| -------------------- | ---------------------------------------------------------------------------------------------- |
+| Platform             | PortSwigger Web Security Academy                                                               |
+| Lab Title            | SQL Injection UNION Attack, Determining the Number of Columns Returned by the Query            |
+| Target URL           | `https://0ae600bf04351592826db01200640069.web-security-academy.net`                            |
+| Vulnerable Endpoint  | `/filter?category=`                                                                            |
+| Vulnerable Parameter | `category`                                                                                     |
+| Engagement Type      | Authorized lab environment — isolated, sandboxed                                               |
+| Out of Scope         | Any system outside the designated PortSwigger lab instance                                     |
+| Authorization        | Implicit — PortSwigger Web Security Academy labs are publicly accessible training environments |
 
 **Primary Objective:** Determine the number of columns returned by the back-end SQL query by injecting a UNION SELECT payload containing NULL values until a valid response is returned.
 
@@ -76,16 +76,19 @@ UNION-based injection requires that the injected SELECT statement return the exa
 Payloads were injected incrementally:
 
 **Attempt 1 — 1 column (error):**
+
 ```
 /filter?category=Pets'+UNION+SELECT+NULL--
 ```
 
 **Attempt 2 — 2 columns (error):**
+
 ```
 /filter?category=Pets'+UNION+SELECT+NULL,NULL--
 ```
 
 **Attempt 3 — 3 columns (success):**
+
 ```
 /filter?category=Pets'+UNION+SELECT+NULL,NULL,NULL--
 ```
@@ -102,17 +105,17 @@ The absence of a SQL error and the presence of an injected row in the response b
 
 ### Finding F-001 — Unsanitized SQL Injection in Product Category Filter
 
-| Field | Details |
-|---|---|
-| Finding ID | F-001 |
-| Severity | [CRITICAL] |
-| CVSS v3.1 Score | 9.8 |
-| CVSS v3.1 Vector | `CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H` |
-| CWE | CWE-89 — Improper Neutralization of Special Elements used in an SQL Command |
-| OWASP Category | A03:2021 — Injection |
-| MITRE ATT&CK TTP | T1190 — Exploit Public-Facing Application |
-| Affected Component | `/filter` endpoint — `category` GET parameter |
-| Authentication Required | None |
+| Field                   | Details                                                                     |
+| ----------------------- | --------------------------------------------------------------------------- |
+| Finding ID              | F-001                                                                       |
+| Severity                | [CRITICAL]                                                                  |
+| CVSS v3.1 Score         | 9.8                                                                         |
+| CVSS v3.1 Vector        | `CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H`                              |
+| CWE                     | CWE-89 — Improper Neutralization of Special Elements used in an SQL Command |
+| OWASP Category          | A03:2021 — Injection                                                        |
+| MITRE ATT&CK TTP        | T1190 — Exploit Public-Facing Application                                   |
+| Affected Component      | `/filter` endpoint — `category` GET parameter                               |
+| Authentication Required | None                                                                        |
 
 **Description:**
 
@@ -162,9 +165,9 @@ After remediation, inject `Pets'+UNION+SELECT+NULL,NULL,NULL--` via the `categor
 
 ## Risk Summary Table
 
-| ID | Title | Severity | CVSS v3.1 | CWE | Priority |
-|---|---|---|---|---|---|
-| F-001 | SQL Injection in Product Category Filter | [CRITICAL] | 9.8 | CWE-89 | [IMMEDIATE] |
+| ID    | Title                                    | Severity   | CVSS v3.1 | CWE    | Priority    |
+| ----- | ---------------------------------------- | ---------- | --------- | ------ | ----------- |
+| F-001 | SQL Injection in Product Category Filter | [CRITICAL] | 9.8       | CWE-89 | [IMMEDIATE] |
 
 ---
 
@@ -201,20 +204,20 @@ After remediation, inject `Pets'+UNION+SELECT+NULL,NULL,NULL--` via the `categor
 
 **MITRE ATT&CK Mapping:**
 
-| Phase | Technique | ID |
-|---|---|---|
-| Initial Access | Exploit Public-Facing Application | T1190 |
-| Discovery | Query column structure via NULL probing | T1190 (sub-technique context) |
+| Phase          | Technique                               | ID                            |
+| -------------- | --------------------------------------- | ----------------------------- |
+| Initial Access | Exploit Public-Facing Application       | T1190                         |
+| Discovery      | Query column structure via NULL probing | T1190 (sub-technique context) |
 
 ---
 
 ## Tools & Environment
 
-| Tool | Version | Purpose |
-|---|---|---|
-| Burp Suite Community Edition | Latest | HTTP proxy, request interception and modification |
-| Chromium / Firefox | N/A | Lab browser interface |
-| PortSwigger Web Security Academy | N/A | Authorized target lab environment |
+| Tool                             | Version | Purpose                                           |
+| -------------------------------- | ------- | ------------------------------------------------- |
+| Burp Suite Community Edition     | Latest  | HTTP proxy, request interception and modification |
+| Chromium / Firefox               | N/A     | Lab browser interface                             |
+| PortSwigger Web Security Academy | N/A     | Authorized target lab environment                 |
 
 **Attack Machine:** Attacker-controlled browser with Burp Suite configured as an HTTP proxy on `127.0.0.1:8080`.
 
@@ -224,8 +227,8 @@ After remediation, inject `Pets'+UNION+SELECT+NULL,NULL,NULL--` via the `categor
 
 ## Evidence
 
-| ID | Artifact | Description |
-|---|---|---|
+| ID    | Artifact                  | Description                                                                                                      |
+| ----- | ------------------------- | ---------------------------------------------------------------------------------------------------------------- |
 | E-001 | `evidence/lab-solved.png` | Full browser screenshot confirming lab solved status and application response to three-column UNION NULL payload |
 
 > All evidence was captured within the PortSwigger Web Security Academy authorized lab environment. No external or production systems were accessed.
@@ -235,7 +238,7 @@ evidence/
 └── lab-solved.png     # Lab completion confirmation — HTTP 200, NULL row reflected, solved banner visible
 ```
 
----
+## sql-injection/07-sqli-union-column-count-null-probing/evidence/lab-solved.png
 
 ## Remediation Strategy
 
@@ -303,15 +306,15 @@ The database account used by the application should have only SELECT privileges 
 
 ## References
 
-| Source | Reference |
-|---|---|
-| PortSwigger Web Academy | [SQL Injection UNION Attacks](https://portswigger.net/web-security/sql-injection/union-attacks) |
-| OWASP | [A03:2021 — Injection](https://owasp.org/Top10/A03_2021-Injection/) |
-| OWASP Testing Guide | [OTG-INPVAL-005 — Testing for SQL Injection](https://owasp.org/www-project-web-security-testing-guide/) |
-| MITRE ATT&CK | [T1190 — Exploit Public-Facing Application](https://attack.mitre.org/techniques/T1190/) |
-| NIST NVD | [CWE-89 — SQL Injection](https://cwe.mitre.org/data/definitions/89.html) |
-| NIST | [CVSS v3.1 Calculator](https://nvd.nist.gov/vuln-metrics/cvss/v3-calculator) |
-| NIST | [SP 800-115 — Technical Guide to Information Security Testing](https://csrc.nist.gov/publications/detail/sp/800-115/final) |
+| Source                  | Reference                                                                                                                  |
+| ----------------------- | -------------------------------------------------------------------------------------------------------------------------- |
+| PortSwigger Web Academy | [SQL Injection UNION Attacks](https://portswigger.net/web-security/sql-injection/union-attacks)                            |
+| OWASP                   | [A03:2021 — Injection](https://owasp.org/Top10/A03_2021-Injection/)                                                        |
+| OWASP Testing Guide     | [OTG-INPVAL-005 — Testing for SQL Injection](https://owasp.org/www-project-web-security-testing-guide/)                    |
+| MITRE ATT&CK            | [T1190 — Exploit Public-Facing Application](https://attack.mitre.org/techniques/T1190/)                                    |
+| NIST NVD                | [CWE-89 — SQL Injection](https://cwe.mitre.org/data/definitions/89.html)                                                   |
+| NIST                    | [CVSS v3.1 Calculator](https://nvd.nist.gov/vuln-metrics/cvss/v3-calculator)                                               |
+| NIST                    | [SP 800-115 — Technical Guide to Information Security Testing](https://csrc.nist.gov/publications/detail/sp/800-115/final) |
 
 ---
 
@@ -326,9 +329,10 @@ BSc Cyber Security — University of Mines and Technology (UMaT), Tarkwa, Ghana
 [![X](https://img.shields.io/badge/X-0x1aerixis-black?logo=x)](https://x.com/0x1aerixis)
 [![Discord](https://img.shields.io/badge/Discord-0x1aerixis-5865F2?logo=discord)](https://discord.com/users/0x1aerixis)
 
-> *"Built in the lab. Documented for the field."*
+> _"Built in the lab. Documented for the field."_
 
 ---
+
 > **Disclaimer:** All work documented in this repository was conducted in authorized, isolated
 > lab environments or sanctioned CTF platforms. No unauthorized systems were accessed.
 > This project is intended for educational and portfolio purposes only.
