@@ -52,12 +52,12 @@ The lab was solved by logging in as `administrator`, confirming full credential 
 
 ### In Scope
 
-| Target                                                      | Description                                                  | Type             |
-| ----------------------------------------------------------- | ------------------------------------------------------------ | ---------------- |
-| `0aa100ca0444ed198105fc1d009b00e7.web-security-academy.net` | PortSwigger lab instance                                     | Web Application  |
-| `/login` endpoint (POST)                                    | Authentication form accepting username and password          | HTTP Endpoint    |
-| `TrackingId` cookie                                         | Analytics cookie parameter injected into a backend SQL query | Cookie Parameter |
-| `public.users` table                                        | Target table containing `username` and `password` columns    | Database Object  |
+| Target | Description | Type |
+|--------|-------------|------|
+| `0aa100ca0444ed198105fc1d009b00e7.web-security-academy.net` | PortSwigger lab instance | Web Application |
+| `/login` endpoint (POST) | Authentication form accepting username and password | HTTP Endpoint |
+| `TrackingId` cookie | Analytics cookie parameter injected into a backend SQL query | Cookie Parameter |
+| `public.users` table | Target table containing `username` and `password` columns | Database Object |
 
 ### Out of Scope
 
@@ -118,12 +118,12 @@ The recovered `administrator` credentials were submitted to the `/login` endpoin
 
 ### Framework Alignment
 
-| Phase                          | Framework Reference                       |
-| ------------------------------ | ----------------------------------------- |
+| Phase | Framework Reference |
+|-------|---------------------|
 | Injection point identification | OWASP Testing Guide v4.2 — OTG-INPVAL-005 |
-| Exploitation                   | PTES — Exploitation Phase                 |
-| Technique classification       | MITRE ATT&CK — T1190, T1552.001           |
-| Vulnerability classification   | CWE-89, OWASP A03:2021                    |
+| Exploitation | PTES — Exploitation Phase |
+| Technique classification | MITRE ATT&CK — T1190, T1552.001 |
+| Vulnerability classification | CWE-89, OWASP A03:2021 |
 
 ---
 
@@ -140,7 +140,6 @@ The recovered `administrator` credentials were submitted to the `/login` endpoin
 **CWE:** CWE-89 — Improper Neutralization of Special Elements used in an SQL Command
 **OWASP Category:** A03:2021 — Injection
 **MITRE ATT&CK TTPs:**
-
 - T1190 — Exploit Public-Facing Application
 - T1552.001 — Unsecured Credentials: Credentials In Files (post-extraction, CSV dump)
 
@@ -237,9 +236,9 @@ Table: users
 
 ## Risk Summary
 
-| ID   | Finding                                                | Severity | CVSS | Affected Component                    | Priority      |
-| ---- | ------------------------------------------------------ | -------- | ---- | ------------------------------------- | ------------- |
-| F-01 | Boolean-Based Blind SQL Injection in TrackingId Cookie | `[HIGH]` | 7.5  | `TrackingId` cookie — analytics query | `[IMMEDIATE]` |
+| ID | Finding | Severity | CVSS | Affected Component | Priority |
+|----|---------|----------|------|--------------------|----------|
+| F-01 | Boolean-Based Blind SQL Injection in TrackingId Cookie | `[HIGH]` | 7.5 | `TrackingId` cookie — analytics query | `[IMMEDIATE]` |
 
 ---
 
@@ -271,33 +270,33 @@ Table: users
 
 **MITRE ATT&CK Chain:**
 
-| Step | Tactic               | Technique                                           | ID        |
-| ---- | -------------------- | --------------------------------------------------- | --------- |
-| 1    | Initial Access       | Exploit Public-Facing Application                   | T1190     |
-| 2    | Collection           | Data from Information Repositories (DB enumeration) | T1213     |
-| 3    | Credential Access    | Unsecured Credentials                               | T1552.001 |
-| 4    | Privilege Escalation | Valid Accounts (administrator login)                | T1078     |
+| Step | Tactic | Technique | ID |
+|------|--------|-----------|-----|
+| 1 | Initial Access | Exploit Public-Facing Application | T1190 |
+| 2 | Collection | Data from Information Repositories (DB enumeration) | T1213 |
+| 3 | Credential Access | Unsecured Credentials | T1552.001 |
+| 4 | Privilege Escalation | Valid Accounts (administrator login) | T1078 |
 
 ---
 
 ## Tools & Environment
 
-| Tool                             | Version               | Purpose                                            |
-| -------------------------------- | --------------------- | -------------------------------------------------- |
-| Burp Suite Community Edition     | v2026.3.2             | HTTP proxy, request interception, cookie capture   |
-| SQLMap                           | Latest (Kali rolling) | Automated blind SQL injection and data extraction  |
-| Kali Linux                       | Rolling release       | Attacker operating environment                     |
-| Firefox (Kali)                   | Chromium 146          | Browser for lab interaction and login verification |
-| PortSwigger Web Security Academy | —                     | Authorized lab platform                            |
+| Tool | Version | Purpose |
+|------|---------|---------|
+| Burp Suite Community Edition | v2026.3.2 | HTTP proxy, request interception, cookie capture |
+| SQLMap | Latest (Kali rolling) | Automated blind SQL injection and data extraction |
+| Kali Linux | Rolling release | Attacker operating environment |
+| Firefox (Kali) | Chromium 146 | Browser for lab interaction and login verification |
+| PortSwigger Web Security Academy | — | Authorized lab platform |
 
 **Target Environment:**
 
-| Component            | Detail                                              |
-| -------------------- | --------------------------------------------------- |
-| Application          | PortSwigger Web Security Academy — Practitioner lab |
-| Backend DBMS         | PostgreSQL (confirmed by SQLMap fingerprinting)     |
-| Vulnerable Parameter | `TrackingId` cookie                                 |
-| Target Table         | `public.users` — columns: `username`, `password`    |
+| Component | Detail |
+|-----------|--------|
+| Application | PortSwigger Web Security Academy — Practitioner lab |
+| Backend DBMS | PostgreSQL (confirmed by SQLMap fingerprinting) |
+| Vulnerable Parameter | `TrackingId` cookie |
+| Target Table | `public.users` — columns: `username`, `password` |
 
 ---
 
@@ -306,21 +305,21 @@ Table: users
 ### E-01 — TrackingId Cookie Captured in Burp Suite
 
 ![Burp Suite intercepted POST /login request showing TrackingId and session cookies](evidence/burpsuite.png)
-_Caption: Burp Suite Community Edition v2026.3.2 intercepting the POST /login request. The TrackingId cookie value (`EEhrgu6COj4spjfV`) and session token are visible in the request headers. This parameter was identified as the injection point for the boolean-based blind SQL injection._
+*Caption: Burp Suite Community Edition v2026.3.2 intercepting the POST /login request. The TrackingId cookie value (`EEhrgu6COj4spjfV`) and session token are visible in the request headers. This parameter was identified as the injection point for the boolean-based blind SQL injection.*
 
 ---
 
 ### E-02 — SQLMap Extraction Output — users Table Dumped
 
 ![SQLMap terminal output confirming PostgreSQL DBMS and dumping users table with plaintext credentials](evidence/password-captured.png)
-_Caption: SQLMap output confirming the backend DBMS as PostgreSQL via boolean-based blind inference. The tool enumerated 3 entries from `public.users`, recovering plaintext credentials for administrator (`ju5sl7dscs68gdmwsniv`), carlos, and wiener. The injected payload and extraction timestamps are visible in the log._
+*Caption: SQLMap output confirming the backend DBMS as PostgreSQL via boolean-based blind inference. The tool enumerated 3 entries from `public.users`, recovering plaintext credentials for administrator (`ju5sl7dscs68gdmwsniv`), carlos, and wiener. The injected payload and extraction timestamps are visible in the log.*
 
 ---
 
 ### E-03 — Lab Solved — Authenticated as Administrator
 
 ![Web Security Academy lab page marked as Solved with administrator account active in My Account view](evidence/lab-solved.png)
-_Caption: Successful authentication as `administrator` using the extracted credential. The lab banner displays "Congratulations, you solved the lab!" and the account page confirms `Your username is: administrator`. URL: `/my-account?id=administrator`._
+*Caption: Successful authentication as `administrator` using the extracted credential. The lab banner displays "Congratulations, you solved the lab!" and the account page confirms `Your username is: administrator`. URL: `/my-account?id=administrator`.*
 
 ---
 
@@ -410,17 +409,17 @@ The analytics query account should not have SELECT access to the `users` table. 
 
 ## References
 
-| Resource                                                          | URL                                                                                |
-| ----------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
-| OWASP Testing Guide v4.2 — SQL Injection (OTG-INPVAL-005)         | https://owasp.org/www-project-web-security-testing-guide/                          |
-| OWASP A03:2021 — Injection                                        | https://owasp.org/Top10/A03_2021-Injection/                                        |
-| CWE-89 — SQL Injection                                            | https://cwe.mitre.org/data/definitions/89.html                                     |
-| MITRE ATT&CK — T1190 Exploit Public-Facing Application            | https://attack.mitre.org/techniques/T1190/                                         |
-| MITRE ATT&CK — T1552.001 Credentials In Files                     | https://attack.mitre.org/techniques/T1552/001/                                     |
-| CVSS v3.1 Calculator — F-01 Vector                                | https://nvd.nist.gov/vuln-metrics/cvss/v3-calculator                               |
-| PortSwigger Lab — Blind SQL Injection with Conditional Responses  | https://portswigger.net/web-security/sql-injection/blind/lab-conditional-responses |
-| SQLMap Documentation                                              | https://sqlmap.org/                                                                |
-| NIST SP 800-115 — Technical Guide to Information Security Testing | https://csrc.nist.gov/publications/detail/sp/800-115/final                         |
+| Resource | URL |
+|----------|-----|
+| OWASP Testing Guide v4.2 — SQL Injection (OTG-INPVAL-005) | https://owasp.org/www-project-web-security-testing-guide/ |
+| OWASP A03:2021 — Injection | https://owasp.org/Top10/A03_2021-Injection/ |
+| CWE-89 — SQL Injection | https://cwe.mitre.org/data/definitions/89.html |
+| MITRE ATT&CK — T1190 Exploit Public-Facing Application | https://attack.mitre.org/techniques/T1190/ |
+| MITRE ATT&CK — T1552.001 Credentials In Files | https://attack.mitre.org/techniques/T1552/001/ |
+| CVSS v3.1 Calculator — F-01 Vector | https://nvd.nist.gov/vuln-metrics/cvss/v3-calculator |
+| PortSwigger Lab — Blind SQL Injection with Conditional Responses | https://portswigger.net/web-security/sql-injection/blind/lab-conditional-responses |
+| SQLMap Documentation | https://sqlmap.org/ |
+| NIST SP 800-115 — Technical Guide to Information Security Testing | https://csrc.nist.gov/publications/detail/sp/800-115/final |
 
 ---
 
@@ -435,7 +434,7 @@ BSc Cyber Security — University of Mines and Technology (UMaT), Tarkwa, Ghana
 [![X](https://img.shields.io/badge/X-0x1aerixis-black?logo=x)](https://x.com/0x1aerixis)
 [![Discord](https://img.shields.io/badge/Discord-0x1aerixis-5865F2?logo=discord)](https://discord.com/users/0x1aerixis)
 
-> _"Built in the lab. Documented for the field."_
+> *"Built in the lab. Documented for the field."*
 
 ---
 

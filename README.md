@@ -1,7 +1,7 @@
 <div align="center">
 
 [![Platform](https://img.shields.io/badge/Platform-PortSwigger%20Web%20Security%20Academy-orange?style=flat-square)](https://portswigger.net/web-security)
-[![Labs Completed](https://img.shields.io/badge/Completed-8%2F263-brightgreen?style=flat-square)](https://github.com/anim-michael-asante/portswigger-web-security-writeups)
+[![Labs Completed](https://img.shields.io/badge/Completed-11%2F263-brightgreen?style=flat-square)](https://github.com/anim-michael-asante/portswigger-web-security-writeups)
 [![Topics](https://img.shields.io/badge/Topics-31-purple?style=flat-square)](https://portswigger.net/web-security/all-topics)
 [![OWASP](https://img.shields.io/badge/Standard-OWASP%20Top%2010%202021-red?style=flat-square)](https://owasp.org/Top10/)
 [![MITRE](https://img.shields.io/badge/Framework-MITRE%20ATT%26CK-black?style=flat-square)](https://attack.mitre.org/)
@@ -90,40 +90,40 @@ This repository exists for three reasons:
 
 ## Progress Tracker
 
-| #   | Category                                                               | Difficulty Range          | Labs    | Completed | Status                                                                  |
-| --- | ---------------------------------------------------------------------- | ------------------------- | ------- | --------- | ----------------------------------------------------------------------- |
-| 01  | [SQL Injection](#01-sql-injection--18-labs)                            | Apprentice — Practitioner | 18      | 8         | ![](https://img.shields.io/badge/8%2F18-brightgreen?style=flat-square)  |
-| 02  | [Authentication](#02-authentication--14-labs)                          | Apprentice — Expert       | 14      | 0         | ![](https://img.shields.io/badge/0%2F14-lightgrey?style=flat-square)    |
-| 03  | [Path Traversal](#03-path-traversal--6-labs)                           | Apprentice — Practitioner | 6       | 0         | ![](https://img.shields.io/badge/0%2F6-lightgrey?style=flat-square)     |
-| 04  | [OS Command Injection](#04-os-command-injection--5-labs)               | Apprentice — Practitioner | 5       | 0         | ![](https://img.shields.io/badge/0%2F5-lightgrey?style=flat-square)     |
-| 05  | [Business Logic](#05-business-logic-vulnerabilities--11-labs)          | Apprentice — Expert       | 11      | 0         | ![](https://img.shields.io/badge/0%2F11-lightgrey?style=flat-square)    |
-| 06  | [Information Disclosure](#06-information-disclosure--5-labs)           | Apprentice — Practitioner | 5       | 0         | ![](https://img.shields.io/badge/0%2F5-lightgrey?style=flat-square)     |
-| 07  | [Access Control](#07-access-control-vulnerabilities--13-labs)          | Apprentice — Practitioner | 13      | 0         | ![](https://img.shields.io/badge/0%2F13-lightgrey?style=flat-square)    |
-| 08  | [File Upload](#08-file-upload-vulnerabilities--7-labs)                 | Apprentice — Expert       | 7       | 0         | ![](https://img.shields.io/badge/0%2F7-lightgrey?style=flat-square)     |
-| 09  | [Race Conditions](#09-race-conditions--6-labs)                         | Apprentice — Expert       | 6       | 0         | ![](https://img.shields.io/badge/0%2F6-lightgrey?style=flat-square)     |
-| 10  | [SSRF](#10-server-side-request-forgery-ssrf--7-labs)                   | Apprentice — Expert       | 7       | 0         | ![](https://img.shields.io/badge/0%2F7-lightgrey?style=flat-square)     |
-| 11  | [XXE Injection](#11-xml-external-entity-xxe-injection--9-labs)         | Apprentice — Expert       | 9       | 0         | ![](https://img.shields.io/badge/0%2F9-lightgrey?style=flat-square)     |
-| 12  | [NoSQL Injection](#12-nosql-injection--4-labs)                         | Apprentice — Practitioner | 4       | 0         | ![](https://img.shields.io/badge/0%2F4-lightgrey?style=flat-square)     |
-| 13  | [API Testing](#13-api-testing--5-labs)                                 | Apprentice — Practitioner | 5       | 0         | ![](https://img.shields.io/badge/0%2F5-lightgrey?style=flat-square)     |
-| 14  | [Web Cache Deception](#14-web-cache-deception--5-labs)                 | Apprentice — Expert       | 5       | 0         | ![](https://img.shields.io/badge/0%2F5-lightgrey?style=flat-square)     |
-| 15  | [Cross-Site Scripting](#15-cross-site-scripting-xss--30-labs)          | Apprentice — Expert       | 30      | 0         | ![](https://img.shields.io/badge/0%2F30-lightgrey?style=flat-square)    |
-| 16  | [CSRF](#16-cross-site-request-forgery-csrf--12-labs)                   | Apprentice — Expert       | 12      | 0         | ![](https://img.shields.io/badge/0%2F12-lightgrey?style=flat-square)    |
-| 17  | [CORS](#17-cross-origin-resource-sharing-cors--3-labs)                 | Apprentice — Practitioner | 3       | 0         | ![](https://img.shields.io/badge/0%2F3-lightgrey?style=flat-square)     |
-| 18  | [Clickjacking](#18-clickjacking--5-labs)                               | Apprentice — Practitioner | 5       | 0         | ![](https://img.shields.io/badge/0%2F5-lightgrey?style=flat-square)     |
-| 19  | [DOM-Based Vulnerabilities](#19-dom-based-vulnerabilities--7-labs)     | Apprentice — Expert       | 7       | 0         | ![](https://img.shields.io/badge/0%2F7-lightgrey?style=flat-square)     |
-| 20  | [WebSockets](#20-websockets--3-labs)                                   | Apprentice — Practitioner | 3       | 0         | ![](https://img.shields.io/badge/0%2F3-lightgrey?style=flat-square)     |
-| 21  | [Insecure Deserialization](#21-insecure-deserialization--10-labs)      | Apprentice — Expert       | 10      | 0         | ![](https://img.shields.io/badge/0%2F10-lightgrey?style=flat-square)    |
-| 22  | [Web LLM Attacks](#22-web-llm-attacks--7-labs)                         | Apprentice — Practitioner | 7       | 0         | ![](https://img.shields.io/badge/0%2F7-lightgrey?style=flat-square)     |
-| 23  | [GraphQL API Vulnerabilities](#23-graphql-api-vulnerabilities--5-labs) | Apprentice — Practitioner | 5       | 0         | ![](https://img.shields.io/badge/0%2F5-lightgrey?style=flat-square)     |
-| 24  | [SSTI](#24-server-side-template-injection--7-labs)                     | Practitioner — Expert     | 7       | 0         | ![](https://img.shields.io/badge/0%2F7-lightgrey?style=flat-square)     |
-| 25  | [Web Cache Poisoning](#25-web-cache-poisoning--13-labs)                | Practitioner — Expert     | 13      | 0         | ![](https://img.shields.io/badge/0%2F13-lightgrey?style=flat-square)    |
-| 26  | [HTTP Host Header Attacks](#26-http-host-header-attacks--7-labs)       | Apprentice — Expert       | 7       | 0         | ![](https://img.shields.io/badge/0%2F7-lightgrey?style=flat-square)     |
-| 27  | [HTTP Request Smuggling](#27-http-request-smuggling--22-labs)          | Practitioner — Expert     | 22      | 0         | ![](https://img.shields.io/badge/0%2F22-lightgrey?style=flat-square)    |
-| 28  | [OAuth Authentication](#28-oauth-authentication--6-labs)               | Apprentice — Expert       | 6       | 0         | ![](https://img.shields.io/badge/0%2F6-lightgrey?style=flat-square)     |
-| 29  | [JWT Attacks](#29-jwt-attacks--8-labs)                                 | Apprentice — Expert       | 8       | 0         | ![](https://img.shields.io/badge/0%2F8-lightgrey?style=flat-square)     |
-| 30  | [Prototype Pollution](#30-prototype-pollution--10-labs)                | Apprentice — Expert       | 10      | 0         | ![](https://img.shields.io/badge/0%2F10-lightgrey?style=flat-square)    |
-| 31  | [Essential Skills](#31-essential-skills--2-labs)                       | Practitioner              | 2       | 0         | ![](https://img.shields.io/badge/0%2F2-lightgrey?style=flat-square)     |
-|     | **TOTAL**                                                              |                           | **263** | **8**     | ![](https://img.shields.io/badge/8%2F263-brightgreen?style=flat-square) |
+| #   | Category                                                               | Difficulty Range          | Labs    | Completed | Status                                                                   |
+| --- | ---------------------------------------------------------------------- | ------------------------- | ------- | --------- | ------------------------------------------------------------------------ |
+| 01  | [SQL Injection](#01-sql-injection--18-labs)                            | Apprentice — Practitioner | 18      | 11        | ![](https://img.shields.io/badge/11%2F18-brightgreen?style=flat-square)  |
+| 02  | [Authentication](#02-authentication--14-labs)                          | Apprentice — Expert       | 14      | 0         | ![](https://img.shields.io/badge/0%2F14-lightgrey?style=flat-square)     |
+| 03  | [Path Traversal](#03-path-traversal--6-labs)                           | Apprentice — Practitioner | 6       | 0         | ![](https://img.shields.io/badge/0%2F6-lightgrey?style=flat-square)      |
+| 04  | [OS Command Injection](#04-os-command-injection--5-labs)               | Apprentice — Practitioner | 5       | 0         | ![](https://img.shields.io/badge/0%2F5-lightgrey?style=flat-square)      |
+| 05  | [Business Logic](#05-business-logic-vulnerabilities--11-labs)          | Apprentice — Expert       | 11      | 0         | ![](https://img.shields.io/badge/0%2F11-lightgrey?style=flat-square)     |
+| 06  | [Information Disclosure](#06-information-disclosure--5-labs)           | Apprentice — Practitioner | 5       | 0         | ![](https://img.shields.io/badge/0%2F5-lightgrey?style=flat-square)      |
+| 07  | [Access Control](#07-access-control-vulnerabilities--13-labs)          | Apprentice — Practitioner | 13      | 0         | ![](https://img.shields.io/badge/0%2F13-lightgrey?style=flat-square)     |
+| 08  | [File Upload](#08-file-upload-vulnerabilities--7-labs)                 | Apprentice — Expert       | 7       | 0         | ![](https://img.shields.io/badge/0%2F7-lightgrey?style=flat-square)      |
+| 09  | [Race Conditions](#09-race-conditions--6-labs)                         | Apprentice — Expert       | 6       | 0         | ![](https://img.shields.io/badge/0%2F6-lightgrey?style=flat-square)      |
+| 10  | [SSRF](#10-server-side-request-forgery-ssrf--7-labs)                   | Apprentice — Expert       | 7       | 0         | ![](https://img.shields.io/badge/0%2F7-lightgrey?style=flat-square)      |
+| 11  | [XXE Injection](#11-xml-external-entity-xxe-injection--9-labs)         | Apprentice — Expert       | 9       | 0         | ![](https://img.shields.io/badge/0%2F9-lightgrey?style=flat-square)      |
+| 12  | [NoSQL Injection](#12-nosql-injection--4-labs)                         | Apprentice — Practitioner | 4       | 0         | ![](https://img.shields.io/badge/0%2F4-lightgrey?style=flat-square)      |
+| 13  | [API Testing](#13-api-testing--5-labs)                                 | Apprentice — Practitioner | 5       | 0         | ![](https://img.shields.io/badge/0%2F5-lightgrey?style=flat-square)      |
+| 14  | [Web Cache Deception](#14-web-cache-deception--5-labs)                 | Apprentice — Expert       | 5       | 0         | ![](https://img.shields.io/badge/0%2F5-lightgrey?style=flat-square)      |
+| 15  | [Cross-Site Scripting](#15-cross-site-scripting-xss--30-labs)          | Apprentice — Expert       | 30      | 0         | ![](https://img.shields.io/badge/0%2F30-lightgrey?style=flat-square)     |
+| 16  | [CSRF](#16-cross-site-request-forgery-csrf--12-labs)                   | Apprentice — Expert       | 12      | 0         | ![](https://img.shields.io/badge/0%2F12-lightgrey?style=flat-square)     |
+| 17  | [CORS](#17-cross-origin-resource-sharing-cors--3-labs)                 | Apprentice — Practitioner | 3       | 0         | ![](https://img.shields.io/badge/0%2F3-lightgrey?style=flat-square)      |
+| 18  | [Clickjacking](#18-clickjacking--5-labs)                               | Apprentice — Practitioner | 5       | 0         | ![](https://img.shields.io/badge/0%2F5-lightgrey?style=flat-square)      |
+| 19  | [DOM-Based Vulnerabilities](#19-dom-based-vulnerabilities--7-labs)     | Apprentice — Expert       | 7       | 0         | ![](https://img.shields.io/badge/0%2F7-lightgrey?style=flat-square)      |
+| 20  | [WebSockets](#20-websockets--3-labs)                                   | Apprentice — Practitioner | 3       | 0         | ![](https://img.shields.io/badge/0%2F3-lightgrey?style=flat-square)      |
+| 21  | [Insecure Deserialization](#21-insecure-deserialization--10-labs)      | Apprentice — Expert       | 10      | 0         | ![](https://img.shields.io/badge/0%2F10-lightgrey?style=flat-square)     |
+| 22  | [Web LLM Attacks](#22-web-llm-attacks--7-labs)                         | Apprentice — Practitioner | 7       | 0         | ![](https://img.shields.io/badge/0%2F7-lightgrey?style=flat-square)      |
+| 23  | [GraphQL API Vulnerabilities](#23-graphql-api-vulnerabilities--5-labs) | Apprentice — Practitioner | 5       | 0         | ![](https://img.shields.io/badge/0%2F5-lightgrey?style=flat-square)      |
+| 24  | [SSTI](#24-server-side-template-injection--7-labs)                     | Practitioner — Expert     | 7       | 0         | ![](https://img.shields.io/badge/0%2F7-lightgrey?style=flat-square)      |
+| 25  | [Web Cache Poisoning](#25-web-cache-poisoning--13-labs)                | Practitioner — Expert     | 13      | 0         | ![](https://img.shields.io/badge/0%2F13-lightgrey?style=flat-square)     |
+| 26  | [HTTP Host Header Attacks](#26-http-host-header-attacks--7-labs)       | Apprentice — Expert       | 7       | 0         | ![](https://img.shields.io/badge/0%2F7-lightgrey?style=flat-square)      |
+| 27  | [HTTP Request Smuggling](#27-http-request-smuggling--22-labs)          | Practitioner — Expert     | 22      | 0         | ![](https://img.shields.io/badge/0%2F22-lightgrey?style=flat-square)     |
+| 28  | [OAuth Authentication](#28-oauth-authentication--6-labs)               | Apprentice — Expert       | 6       | 0         | ![](https://img.shields.io/badge/0%2F6-lightgrey?style=flat-square)      |
+| 29  | [JWT Attacks](#29-jwt-attacks--8-labs)                                 | Apprentice — Expert       | 8       | 0         | ![](https://img.shields.io/badge/0%2F8-lightgrey?style=flat-square)      |
+| 30  | [Prototype Pollution](#30-prototype-pollution--10-labs)                | Apprentice — Expert       | 10      | 0         | ![](https://img.shields.io/badge/0%2F10-lightgrey?style=flat-square)     |
+| 31  | [Essential Skills](#31-essential-skills--2-labs)                       | Practitioner              | 2       | 0         | ![](https://img.shields.io/badge/0%2F2-lightgrey?style=flat-square)      |
+|     | **TOTAL**                                                              |                           | **263** | **11**    | ![](https://img.shields.io/badge/11%2F263-brightgreen?style=flat-square) |
 
 > `[SOLVED]` — Write-up published &nbsp;·&nbsp; `[IN PROGRESS]` — Active &nbsp;·&nbsp; `[PENDING]` — Not started
 
@@ -151,7 +151,10 @@ portswigger-web-security-writeups/
 │   ├── 05-sqli-union-db-enumeration/
 │   ├── 06-sqli-oracle-union-db-enumeration/
 │   ├── 07-sqli-union-column-count-null-probing/
-│   └── 08-sqli-union-finding-a-column-containing-text/
+│   ├── 08-sqli-union-finding-a-column-containing-text/
+│   ├── 09-sqli-union-data-extraction/
+│   ├── 10-sqli-union-multiple-values-single-column/
+│   └── 11-sqli-blind-boolean-conditional-response-trackingid-cookie/
 │
 ├── 02-authentication/
 ├── 03-path-traversal/
@@ -215,9 +218,9 @@ SQL injection enables attackers to interfere with database queries, retrieve hid
 | 06  | SQL injection attack, listing the database contents on Oracle                       | Practitioner | `[SOLVED]`  | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/blob/main/sql-injection/06-sqli-oracle-union-db-enumeration/README.md)            |
 | 07  | SQL injection UNION attack, determining the number of columns returned by the query | Practitioner | `[SOLVED]`  | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/blob/main/sql-injection/07-sqli-union-column-count-null-probing/README.md)        |
 | 08  | SQL injection UNION attack, finding a column containing text                        | Practitioner | `[SOLVED]`  | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/blob/main/sql-injection/08-sqli-union-finding-a-column-containing-text/README.md) |
-| 09  | SQL injection UNION attack, retrieving data from other tables                       | Practitioner | `[PENDING]` | —                                                                                                                                                                 |
-| 10  | SQL injection UNION attack, retrieving multiple values in a single column           | Practitioner | `[PENDING]` | —                                                                                                                                                                 |
-| 11  | Blind SQL injection with conditional responses                                      | Practitioner | `[PENDING]` | —                                                                                                                                                                 |
+| 09  | SQL injection UNION attack, retrieving data from other tables                       | Practitioner | `[SOLVED]`  | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/tree/main/sql-injection/09-sqli-union-data-extraction/README.md)                  |
+| 10  | SQL injection UNION attack, retrieving multiple values in a single column           | Practitioner | `[SOLVED]`  | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/blob/main/sql-injection/10-sqli-union-multiple-values-single-column/README.md)    |
+| 11  | Blind SQL injection with conditional responses                                      | Practitioner | `[SOLVED]`  | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/blob/main/sql-injection/README.md)                                                |
 | 12  | Blind SQL injection with conditional errors                                         | Practitioner | `[PENDING]` | —                                                                                                                                                                 |
 | 13  | Visible error-based SQL injection                                                   | Practitioner | `[PENDING]` | —                                                                                                                                                                 |
 | 14  | Blind SQL injection with time delays                                                | Practitioner | `[PENDING]` | —                                                                                                                                                                 |

