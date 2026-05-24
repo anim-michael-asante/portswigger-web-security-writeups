@@ -249,7 +249,7 @@ Finding is remediated when:
 
 ### Single String-Compatible Column Confirmed and Credentials Extracted
 
-![UNION SELECT with NULL and string literal confirming single string-compatible column and concatenated credential output](evidence/cred-details)
+![UNION SELECT with NULL and string literal confirming single string-compatible column and concatenated credential output](evidence/cred-details.png)
 *Caption: Payload `UNION SELECT NULL,'abc'--` confirmed only the second column accepts string data. Follow-up payload `UNION SELECT NULL,username||'~'||password FROM users--` returned all user credentials concatenated in the format `username~password` within the product listing response.*
 
 ### Lab Completion — Administrator Login

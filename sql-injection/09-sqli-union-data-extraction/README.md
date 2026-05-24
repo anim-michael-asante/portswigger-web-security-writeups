@@ -256,7 +256,7 @@ Finding is remediated when:
 
 ### Column Enumeration and String Type Confirmation
 
-![UNION SELECT with string literals abc and def confirming two string-compatible columns](evidence/cred-found)
+![UNION SELECT with string literals abc and def confirming two string-compatible columns](evidence/cred-found.png)
 *Caption: UNION payload `UNION SELECT 'abc','def'--` returned both injected string values in the product listing response, confirming a two-column, string-compatible query structure.*
 
 ### Credential Extraction and Lab Completion
