@@ -92,7 +92,7 @@ This repository exists for three reasons:
 
 | #   | Category                                                               | Difficulty Range          | Labs    | Completed | Status                                                                   |
 | --- | ---------------------------------------------------------------------- | ------------------------- | ------- | --------- | ------------------------------------------------------------------------ |
-| 01  | [SQL Injection](#01-sql-injection--18-labs)                            | Apprentice — Practitioner | 18      | 11        | ![](https://img.shields.io/badge/11%2F18-brightgreen?style=flat-square)  |
+| 01  | [SQL Injection](#01-sql-injection--18-labs)                            | Apprentice — Practitioner | 18      | 12        | ![](https://img.shields.io/badge/12%2F18-brightgreen?style=flat-square)  |
 | 02  | [Authentication](#02-authentication--14-labs)                          | Apprentice — Expert       | 14      | 0         | ![](https://img.shields.io/badge/0%2F14-lightgrey?style=flat-square)     |
 | 03  | [Path Traversal](#03-path-traversal--6-labs)                           | Apprentice — Practitioner | 6       | 0         | ![](https://img.shields.io/badge/0%2F6-lightgrey?style=flat-square)      |
 | 04  | [OS Command Injection](#04-os-command-injection--5-labs)               | Apprentice — Practitioner | 5       | 0         | ![](https://img.shields.io/badge/0%2F5-lightgrey?style=flat-square)      |
@@ -155,7 +155,7 @@ portswigger-web-security-writeups/
 │   ├── 09-sqli-union-data-extraction/
 │   ├── 10-sqli-union-multiple-values-single-column/
 │   └── 11-sqli-blind-boolean-conditional-response-trackingid-cookie/
-│
+│   └── 12-sqli-blind-conditional-errors/
 ├── 02-authentication/
 ├── 03-path-traversal/
 ├── 04-os-command-injection/
@@ -221,7 +221,7 @@ SQL injection enables attackers to interfere with database queries, retrieve hid
 | 09  | SQL injection UNION attack, retrieving data from other tables                       | Practitioner | `[SOLVED]`  | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/tree/main/sql-injection/09-sqli-union-data-extraction/README.md)                  |
 | 10  | SQL injection UNION attack, retrieving multiple values in a single column           | Practitioner | `[SOLVED]`  | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/blob/main/sql-injection/10-sqli-union-multiple-values-single-column/README.md)    |
 | 11  | Blind SQL injection with conditional responses                                      | Practitioner | `[SOLVED]`  | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/blob/main/sql-injection/README.md)                                                |
-| 12  | Blind SQL injection with conditional errors                                         | Practitioner | `[PENDING]` | —                                                                                                                                                                 |
+| 12  | Blind SQL injection with conditional errors                                         | Practitioner | `[SOLVED]`  | [View] (https://github.com/anim-michael-asante/portswigger-web-security-writeups/tree/main/sql-injection/12-sqli-blind-conditional-errors) —                      |
 | 13  | Visible error-based SQL injection                                                   | Practitioner | `[PENDING]` | —                                                                                                                                                                 |
 | 14  | Blind SQL injection with time delays                                                | Practitioner | `[PENDING]` | —                                                                                                                                                                 |
 | 15  | Blind SQL injection with time delays and information retrieval                      | Practitioner | `[PENDING]` | —                                                                                                                                                                 |
