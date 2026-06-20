@@ -118,11 +118,49 @@ portswigger-web-security-writeups/
 │   │   └── evidence/
 │   │       ├── lab-solved-administrator.jpeg
 │   │       └── sqli-analysis-notes.jpeg
-│   └── [... remaining labs follow the same pattern]
-│
+│   ├── 03-sqli-union-oracle-version-disclosure/
+│   ├── 04-sqli-union-mysql-version-enum/
+│   ├── 05-sqli-union-db-enumeration/
+│   ├── 06-sqli-oracle-union-db-enumeration/
+│   ├── 07-sqli-union-column-count-null-probing/
+│   ├── 08-sqli-union-finding-a-column-containing-text/
+│   ├── 09-sqli-union-data-extraction/
+│   ├── 10-sqli-union-multiple-values-single-column/
+│   └── 11-sqli-blind-boolean-conditional-response-trackingid-cookie/
+│   └── 12-sqli-blind-conditional-errors/
+│   └── 13-sqli-visible-error-based/
+│   └── 14-sqli-blind-time-based-pg-sleep/
+│   └── 15-sqli-blind-time-based-password-extraction/
+│   └── 16-sqli-blind-oob-dns-interaction/
 ├── 02-authentication/
 ├── 03-path-traversal/
-├── [... 04 through 31 follow the same pattern]
+├── 04-os-command-injection/
+├── 05-business-logic/
+├── 06-information-disclosure/
+├── 07-access-control/
+├── 08-file-upload/
+├── 09-race-conditions/
+├── 10-ssrf/
+├── 11-xxe-injection/
+├── 12-nosql-injection/
+├── 13-api-testing/
+├── 14-web-cache-deception/
+├── 15-cross-site-scripting/
+├── 16-csrf/
+├── 17-cors/
+├── 18-clickjacking/
+├── 19-dom-based/
+├── 20-websockets/
+├── 21-insecure-deserialization/
+├── 22-web-llm-attacks/
+├── 23-graphql/
+├── 24-ssti/
+├── 25-web-cache-poisoning/
+├── 26-http-host-header/
+├── 27-http-request-smuggling/
+├── 28-oauth/
+├── 29-jwt/
+├── 30-prototype-pollution/
 └── 31-essential-skills/
 ```
 
@@ -133,8 +171,6 @@ Each solved lab directory contains:
 ├── README.md       ← Write-up: scope, methodology, findings, CVSS, PoC, remediation
 └── evidence/       ← Screenshots and terminal output confirming lab completion
 ```
-
----
 
 ## Server-Side Topics
 
