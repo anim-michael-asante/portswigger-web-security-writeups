@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 <div align="center">
 
 [![Platform](https://img.shields.io/badge/Platform-PortSwigger%20Web%20Security%20Academy-orange?style=flat-square)](https://portswigger.net/web-security)
