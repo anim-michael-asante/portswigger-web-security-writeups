@@ -163,7 +163,7 @@ portswigger-web-security-writeups/
 ├── 30-prototype-pollution/
 └── 31-essential-skills/
 ```
-```
+
 
 Each solved lab directory contains:
 
@@ -173,7 +173,7 @@ Each solved lab directory contains:
 └── evidence/       ← Screenshots and terminal output confirming lab completion
 ```
 
----
+
 
 ## Server-Side Topics
 
