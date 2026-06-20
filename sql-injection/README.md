@@ -1,7 +1,5 @@
-<div align="center">
-
 [![Platform](https://img.shields.io/badge/Platform-PortSwigger%20Web%20Security%20Academy-orange?style=flat-square)](https://portswigger.net/web-security)
-[![Labs Completed](https://img.shields.io/badge/Completed-16%2F263-brightgreen?style=flat-square)](https://github.com/anim-michael-asante/portswigger-web-security-writeups)
+[![Labs Completed](https://img.shields.io/badge/Completed-17%2F263-brightgreen?style=flat-square)](https://github.com/anim-michael-asante/portswigger-web-security-writeups)
 [![Topics](https://img.shields.io/badge/Topics-31-purple?style=flat-square)](https://portswigger.net/web-security/all-topics)
 [![OWASP](https://img.shields.io/badge/Standard-OWASP%20Top%2010%202021-red?style=flat-square)](https://owasp.org/Top10/)
 [![MITRE](https://img.shields.io/badge/Framework-MITRE%20ATT%26CK-black?style=flat-square)](https://attack.mitre.org/)
@@ -10,18 +8,17 @@
 
 # PortSwigger Web Security Academy — Write-Ups
 
-_Structured, evidence-driven write-ups for every lab across 31 web security topic areas._
+Structured, evidence-driven write-ups for every completed lab across 31 web security topic areas.
+Each write-up follows a penetration testing report format: scope, methodology, CVSS v3.1 findings, proof-of-concept, and remediation strategy.
 
-[Browse Write-Ups](#server-side-topics) · [Track Progress](#progress-tracker) · [View Standards](#standards-and-frameworks)
-
-</div>
+[Browse Write-Ups](#server-side-topics) · [Track Progress](#progress-tracker) · [Standards Used](#standards-and-frameworks)
 
 ---
 
 ## Table of Contents
 
 - [Overview](#overview)
-- [Why This Repository](#why-this-repository)
+- [Repository Purpose](#repository-purpose)
 - [Progress Tracker](#progress-tracker)
 - [Repository Structure](#repository-structure)
 - [Server-Side Topics](#server-side-topics)
@@ -37,26 +34,22 @@ _Structured, evidence-driven write-ups for every lab across 31 web security topi
 
 This repository documents hands-on exploitation of real-world web vulnerability classes through the [PortSwigger Web Security Academy](https://portswigger.net/web-security) — 263 labs across 31 topic areas spanning server-side, client-side, and advanced attack techniques.
 
-Each write-up follows an industry-standard penetration testing report format: scope, methodology, technical findings with CVSS v3.1 scoring, proof-of-concept, and remediation strategy. The repository is organised by vulnerability category, with each lab in its own subdirectory containing a `README.md` and an `evidence/` folder.
+Each write-up is structured as a technical deliverable: scope, methodology, findings with CVSS v3.1 scoring, proof-of-concept, and remediation. The repository is organised by vulnerability category. Each lab subdirectory contains a `README.md` write-up and an `evidence/` folder with supporting screenshots.
 
-Coverage spans the full OWASP Top 10 (2021) and maps findings to MITRE ATT&CK, CWE, and NIST SP 800-115 throughout.
+Coverage spans the full OWASP Top 10 (2021) with findings mapped to MITRE ATT&CK, CWE, and NIST SP 800-115 throughout.
 
 ---
 
-## Why This Repository
+## Repository Purpose
 
-The PortSwigger Web Security Academy is the closest freely available proxy for real-world web application penetration testing. Labs are built on production-representative frameworks with genuine vulnerability chains — not toy examples.
+**Portfolio evidence.**
+Each write-up is structured as a deliverable a junior penetration tester would produce for a client — scope, methodology, findings, CVSS score, PoC, remediation. Recruiters and hiring managers can evaluate both technical depth and communication quality from any single write-up.
 
-This repository exists for three reasons:
+**BSCP preparation.**
+The Burp Suite Certified Practitioner exam requires timed, unaided exploitation across the same 31 topic areas. This repository builds the structured thinking and tool fluency required to perform under exam conditions.
 
-**1. Portfolio evidence.**
-Each write-up is structured as a deliverable a junior pentester would produce for a client — scope, methodology, findings, CVSS score, PoC, remediation. Recruiters and hiring managers can read any write-up and evaluate both technical depth and communication quality.
-
-**2. BSCP preparation.**
-The Burp Suite Certified Practitioner exam requires timed, unaided exploitation across the same 31 topic areas. This repository builds the muscle memory and structured thinking required to pass under exam conditions.
-
-**3. Structured learning.**
-Writing forces full understanding. A lab is not complete until the exploitation steps, root cause, CWE, and remediation can be explained in writing without referencing the solution.
+**Structured learning.**
+A lab is not considered complete until the exploitation steps, root cause, CWE mapping, and remediation can be articulated in writing without referencing the solution.
 
 ---
 
@@ -64,7 +57,7 @@ Writing forces full understanding. A lab is not complete until the exploitation 
 
 | # | Category | Difficulty Range | Total | Done | Status |
 |---|---|---|:---:|:---:|---|
-| 01 | [SQL Injection](#01-sql-injection--18-labs) | Apprentice — Practitioner | 18 | 16 | ![](https://img.shields.io/badge/16%2F18-brightgreen?style=flat-square) |
+| 01 | [SQL Injection](#01-sql-injection--18-labs) | Apprentice — Practitioner | 18 | 17 | ![](https://img.shields.io/badge/17%2F18-brightgreen?style=flat-square) |
 | 02 | [Authentication](#02-authentication--14-labs) | Apprentice — Expert | 14 | 0 | ![](https://img.shields.io/badge/0%2F14-lightgrey?style=flat-square) |
 | 03 | [Path Traversal](#03-path-traversal--6-labs) | Apprentice — Practitioner | 6 | 0 | ![](https://img.shields.io/badge/0%2F6-lightgrey?style=flat-square) |
 | 04 | [OS Command Injection](#04-os-command-injection--5-labs) | Apprentice — Practitioner | 5 | 0 | ![](https://img.shields.io/badge/0%2F5-lightgrey?style=flat-square) |
@@ -95,7 +88,7 @@ Writing forces full understanding. A lab is not complete until the exploitation 
 | 29 | [JWT Attacks](#29-jwt-attacks--8-labs) | Apprentice — Expert | 8 | 0 | ![](https://img.shields.io/badge/0%2F8-lightgrey?style=flat-square) |
 | 30 | [Prototype Pollution](#30-prototype-pollution--10-labs) | Apprentice — Expert | 10 | 0 | ![](https://img.shields.io/badge/0%2F10-lightgrey?style=flat-square) |
 | 31 | [Essential Skills](#31-essential-skills--2-labs) | Practitioner | 2 | 0 | ![](https://img.shields.io/badge/0%2F2-lightgrey?style=flat-square) |
-| | **TOTAL** | | **263** | **16** | ![](https://img.shields.io/badge/16%2F263-brightgreen?style=flat-square) |
+| | **TOTAL** | | **263** | **17** | ![](https://img.shields.io/badge/17%2F263-brightgreen?style=flat-square) |
 
 > **Status key:** `[SOLVED]` — Write-up published &nbsp;·&nbsp; `[IN PROGRESS]` — Active &nbsp;·&nbsp; `[PENDING]` — Not started
 
@@ -109,7 +102,7 @@ portswigger-web-security-writeups/
 ├── .gitignore
 │
 ├── 01-sql-injection/
-│   ├── 01-where-clause-hidden-data/
+│   ├── 01-sqli-where-clause/
 │   │   ├── README.md
 │   │   └── evidence/
 │   │       └── lab-solved.png
@@ -122,15 +115,14 @@ portswigger-web-security-writeups/
 │
 ├── 02-authentication/
 ├── 03-path-traversal/
-├── [... 04 through 31 follow the same pattern]
-└── 31-essential-skills/
+└── [... 04 through 31 follow the same pattern]
 ```
 
 Each solved lab directory contains:
 
 ```
 <lab-slug>/
-├── README.md       ← Write-up: scope, methodology, findings, CVSS, PoC, remediation
+├── README.md       ← Write-up: scope, methodology, findings, CVSS v3.1, PoC, remediation
 └── evidence/       ← Screenshots and terminal output confirming lab completion
 ```
 
@@ -142,9 +134,9 @@ Each solved lab directory contains:
 
 ### 01. SQL Injection — 18 Labs
 
-SQL injection enables attackers to interfere with database queries to retrieve hidden data, bypass authentication, and in some configurations execute OS-level commands.
+SQL injection enables attackers to interfere with application database queries to retrieve hidden data, bypass authentication, and in certain configurations execute operating system commands.
 
-**Classification:** OWASP A03:2021 · CWE-89 · MITRE ATT&CK T1190
+**Classification:** OWASP A03:2021 — Injection · CWE-89 · MITRE ATT&CK T1190
 
 | # | Lab Title | Difficulty | Status | Write-Up |
 |:---:|---|:---:|:---:|:---:|
@@ -156,15 +148,15 @@ SQL injection enables attackers to interfere with database queries to retrieve h
 | 06 | SQL injection attack, listing the database contents on Oracle | Practitioner | `[SOLVED]` | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/blob/main/sql-injection/06-sqli-oracle-union-db-enumeration/README.md) |
 | 07 | SQL injection UNION attack, determining the number of columns returned by the query | Practitioner | `[SOLVED]` | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/blob/main/sql-injection/07-sqli-union-column-count-null-probing/README.md) |
 | 08 | SQL injection UNION attack, finding a column containing text | Practitioner | `[SOLVED]` | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/blob/main/sql-injection/08-sqli-union-finding-a-column-containing-text/README.md) |
-| 09 | SQL injection UNION attack, retrieving data from other tables | Practitioner | `[SOLVED]` | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/tree/main/sql-injection/09-sqli-union-data-extraction/README.md) |
+| 09 | SQL injection UNION attack, retrieving data from other tables | Practitioner | `[SOLVED]` | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/blob/main/sql-injection/09-sqli-union-data-extraction/README.md) |
 | 10 | SQL injection UNION attack, retrieving multiple values in a single column | Practitioner | `[SOLVED]` | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/blob/main/sql-injection/10-sqli-union-multiple-values-single-column/README.md) |
-| 11 | Blind SQL injection with conditional responses | Practitioner | `[SOLVED]` | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/blob/main/sql-injection/README.md) |
-| 12 | Blind SQL injection with conditional errors | Practitioner | `[SOLVED]` | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/tree/main/sql-injection/12-sqli-blind-conditional-errors) |
-| 13 | Visible error-based SQL injection | Practitioner | `[SOLVED]` | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/tree/main/sql-injection/13-sqli-visible-error-based) |
-| 14 | Blind SQL injection with time delays | Practitioner | `[SOLVED]` | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/tree/main/sql-injection/14-sqli-blind-time-based-pg-sleep) |
-| 15 | Blind SQL injection with time delays and information retrieval | Practitioner | `[SOLVED]` | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/tree/main/sql-injection/15-sqli-blind-time-based-password-extraction) |
-| 16 | Blind SQL injection with out-of-band interaction | Practitioner | `[SOLVED]` | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/tree/main/sql-injection/16-sqli-blind-oob-dns-interaction) |
-| 17 | Blind SQL injection with out-of-band data exfiltration | Practitioner | `[PENDING]` | — |
+| 11 | Blind SQL injection with conditional responses | Practitioner | `[SOLVED]` | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/blob/main/sql-injection/11-sqli-blind-conditional-responses/README.md) |
+| 12 | Blind SQL injection with conditional errors | Practitioner | `[SOLVED]` | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/blob/main/sql-injection/12-sqli-blind-conditional-errors/README.md) |
+| 13 | Visible error-based SQL injection | Practitioner | `[SOLVED]` | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/blob/main/sql-injection/13-sqli-visible-error-based/README.md) |
+| 14 | Blind SQL injection with time delays | Practitioner | `[SOLVED]` | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/blob/main/sql-injection/14-sqli-blind-time-based-pg-sleep/README.md) |
+| 15 | Blind SQL injection with time delays and information retrieval | Practitioner | `[SOLVED]` | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/blob/main/sql-injection/15-sqli-blind-time-based-password-extraction/README.md) |
+| 16 | Blind SQL injection with out-of-band interaction | Practitioner | `[SOLVED]` | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/blob/main/sql-injection/16-sqli-blind-oob-dns-interaction/README.md) |
+| 17 | Blind SQL injection with out-of-band data exfiltration | Practitioner | `[SOLVED]` | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/blob/main/sql-injection/17-sqli-blind-oob-data-exfiltration/README.md) |
 | 18 | SQL injection with filter bypass via XML encoding | Practitioner | `[PENDING]` | — |
 
 ---
@@ -173,7 +165,7 @@ SQL injection enables attackers to interfere with database queries to retrieve h
 
 Authentication vulnerabilities allow attackers to bypass login controls, enumerate valid usernames, brute-force credentials, and hijack sessions through flawed multi-factor logic.
 
-**Classification:** OWASP A07:2021 · CWE-287 · MITRE ATT&CK T1110
+**Classification:** OWASP A07:2021 — Identification and Authentication Failures · CWE-287 · MITRE ATT&CK T1110
 
 | # | Lab Title | Difficulty | Status | Write-Up |
 |:---:|---|:---:|:---:|:---:|
@@ -196,9 +188,9 @@ Authentication vulnerabilities allow attackers to bypass login controls, enumera
 
 ### 03. Path Traversal — 6 Labs
 
-Path traversal allows attackers to read arbitrary files on the server filesystem, including credentials, configuration files, and application source code, by manipulating file path parameters.
+Path traversal allows attackers to read arbitrary files on the server filesystem — including credentials, configuration files, and application source code — by manipulating file path parameters.
 
-**Classification:** OWASP A01:2021 · CWE-22 · MITRE ATT&CK T1083
+**Classification:** OWASP A01:2021 — Broken Access Control · CWE-22 · MITRE ATT&CK T1083
 
 | # | Lab Title | Difficulty | Status | Write-Up |
 |:---:|---|:---:|:---:|:---:|
@@ -215,7 +207,7 @@ Path traversal allows attackers to read arbitrary files on the server filesystem
 
 OS command injection enables arbitrary system command execution on the host server, typically resulting in full system compromise, data exfiltration, or lateral movement.
 
-**Classification:** OWASP A03:2021 · CWE-78 · MITRE ATT&CK T1059
+**Classification:** OWASP A03:2021 — Injection · CWE-78 · MITRE ATT&CK T1059
 
 | # | Lab Title | Difficulty | Status | Write-Up |
 |:---:|---|:---:|:---:|:---:|
@@ -229,9 +221,9 @@ OS command injection enables arbitrary system command execution on the host serv
 
 ### 05. Business Logic Vulnerabilities — 11 Labs
 
-Business logic flaws arise from improper enforcement of application workflow assumptions, enabling price manipulation, privilege escalation, and workflow bypass that standard vulnerability scanners cannot detect.
+Business logic flaws arise from improper enforcement of application workflow assumptions, enabling price manipulation, privilege escalation, and workflow bypass that automated scanners cannot detect.
 
-**Classification:** OWASP A04:2021 · CWE-840
+**Classification:** OWASP A04:2021 — Insecure Design · CWE-840
 
 | # | Lab Title | Difficulty | Status | Write-Up |
 |:---:|---|:---:|:---:|:---:|
@@ -251,9 +243,9 @@ Business logic flaws arise from improper enforcement of application workflow ass
 
 ### 06. Information Disclosure — 5 Labs
 
-Information disclosure vulnerabilities expose sensitive data — credentials, internal paths, source code, server configuration — to unauthorised parties through error messages, backup files, or debug interfaces.
+Information disclosure vulnerabilities expose sensitive data — credentials, internal paths, source code, server configuration — through error messages, backup files, or debug interfaces.
 
-**Classification:** OWASP A02:2021 · CWE-200
+**Classification:** OWASP A02:2021 — Cryptographic Failures · CWE-200
 
 | # | Lab Title | Difficulty | Status | Write-Up |
 |:---:|---|:---:|:---:|:---:|
@@ -269,7 +261,7 @@ Information disclosure vulnerabilities expose sensitive data — credentials, in
 
 Access control flaws allow users to act outside their intended permissions, enabling horizontal and vertical privilege escalation, IDOR exploitation, and administrative function access.
 
-**Classification:** OWASP A01:2021 · CWE-284 · MITRE ATT&CK T1078
+**Classification:** OWASP A01:2021 — Broken Access Control · CWE-284 · MITRE ATT&CK T1078
 
 | # | Lab Title | Difficulty | Status | Write-Up |
 |:---:|---|:---:|:---:|:---:|
@@ -291,9 +283,9 @@ Access control flaws allow users to act outside their intended permissions, enab
 
 ### 08. File Upload Vulnerabilities — 7 Labs
 
-File upload flaws allow attackers to upload and execute malicious files, enabling remote code execution, web shell deployment, and full server compromise through insufficient validation or content-type controls.
+File upload flaws allow attackers to upload and execute malicious files, enabling remote code execution, web shell deployment, and full server compromise through insufficient file validation or content-type controls.
 
-**Classification:** OWASP A04:2021 · CWE-434 · MITRE ATT&CK T1505.003
+**Classification:** OWASP A04:2021 — Insecure Design · CWE-434 · MITRE ATT&CK T1505.003
 
 | # | Lab Title | Difficulty | Status | Write-Up |
 |:---:|---|:---:|:---:|:---:|
@@ -311,7 +303,7 @@ File upload flaws allow attackers to upload and execute malicious files, enablin
 
 Race conditions occur when an application processes concurrent requests in an unpredictable order, enabling limit bypass, double-spending, and authentication circumvention through sub-millisecond timing exploitation.
 
-**Classification:** OWASP A04:2021 · CWE-362 · MITRE ATT&CK T1499
+**Classification:** OWASP A04:2021 — Insecure Design · CWE-362 · MITRE ATT&CK T1499
 
 | # | Lab Title | Difficulty | Status | Write-Up |
 |:---:|---|:---:|:---:|:---:|
@@ -328,7 +320,7 @@ Race conditions occur when an application processes concurrent requests in an un
 
 SSRF vulnerabilities allow attackers to induce the server to issue HTTP requests to unintended destinations, enabling access to internal services, cloud metadata APIs, and back-end systems unreachable from the internet.
 
-**Classification:** OWASP A10:2021 · CWE-918 · MITRE ATT&CK T1090
+**Classification:** OWASP A10:2021 — Server-Side Request Forgery · CWE-918 · MITRE ATT&CK T1090
 
 | # | Lab Title | Difficulty | Status | Write-Up |
 |:---:|---|:---:|:---:|:---:|
@@ -346,7 +338,7 @@ SSRF vulnerabilities allow attackers to induce the server to issue HTTP requests
 
 XXE injection enables attackers to interfere with XML processing to retrieve server-side files, perform SSRF, and in certain configurations achieve remote code execution through maliciously crafted XML documents.
 
-**Classification:** OWASP A05:2021 · CWE-611 · MITRE ATT&CK T1190
+**Classification:** OWASP A05:2021 — Security Misconfiguration · CWE-611 · MITRE ATT&CK T1190
 
 | # | Lab Title | Difficulty | Status | Write-Up |
 |:---:|---|:---:|:---:|:---:|
@@ -366,7 +358,7 @@ XXE injection enables attackers to interfere with XML processing to retrieve ser
 
 NoSQL injection allows attackers to manipulate query logic through operator injection, enabling authentication bypass, arbitrary data extraction, and field enumeration against document-based databases.
 
-**Classification:** OWASP A03:2021 · CWE-943
+**Classification:** OWASP A03:2021 — Injection · CWE-943
 
 | # | Lab Title | Difficulty | Status | Write-Up |
 |:---:|---|:---:|:---:|:---:|
@@ -397,7 +389,7 @@ API testing vulnerabilities include exposed documentation, mass assignment, para
 
 Web cache deception tricks caching infrastructure into storing sensitive, user-specific responses under publicly accessible URLs, enabling credential and session token theft without active user interaction.
 
-**Classification:** OWASP A05:2021 · CWE-525
+**Classification:** OWASP A05:2021 — Security Misconfiguration · CWE-525
 
 | # | Lab Title | Difficulty | Status | Write-Up |
 |:---:|---|:---:|:---:|:---:|
@@ -417,7 +409,7 @@ Web cache deception tricks caching infrastructure into storing sensitive, user-s
 
 XSS enables injection of malicious scripts into pages viewed by other users, enabling session hijacking, credential theft, keylogging, and chained CSRF attacks across reflected, stored, and DOM-based delivery mechanisms.
 
-**Classification:** OWASP A03:2021 · CWE-79 · MITRE ATT&CK T1059.007
+**Classification:** OWASP A03:2021 — Injection · CWE-79 · MITRE ATT&CK T1059.007
 
 | # | Lab Title | Difficulty | Status | Write-Up |
 |:---:|---|:---:|:---:|:---:|
@@ -458,7 +450,7 @@ XSS enables injection of malicious scripts into pages viewed by other users, ena
 
 CSRF tricks authenticated users into unknowingly submitting malicious requests, enabling account takeover, state-changing actions, and privilege escalation without requiring stolen credentials.
 
-**Classification:** OWASP A01:2021 · CWE-352 · MITRE ATT&CK T1185
+**Classification:** OWASP A01:2021 — Broken Access Control · CWE-352 · MITRE ATT&CK T1185
 
 | # | Lab Title | Difficulty | Status | Write-Up |
 |:---:|---|:---:|:---:|:---:|
@@ -481,7 +473,7 @@ CSRF tricks authenticated users into unknowingly submitting malicious requests, 
 
 Misconfigured CORS policies allow malicious cross-origin sites to issue authenticated requests on behalf of users, exposing sensitive data, API keys, and account actions.
 
-**Classification:** OWASP A01:2021 · CWE-942
+**Classification:** OWASP A01:2021 — Broken Access Control · CWE-942
 
 | # | Lab Title | Difficulty | Status | Write-Up |
 |:---:|---|:---:|:---:|:---:|
@@ -495,7 +487,7 @@ Misconfigured CORS policies allow malicious cross-origin sites to issue authenti
 
 Clickjacking embeds victim pages in invisible iframes, deceiving users into performing unintended actions including credential submission, fund transfers, and account modification on the underlying application.
 
-**Classification:** OWASP A04:2021 · CWE-1021
+**Classification:** OWASP A04:2021 — Insecure Design · CWE-1021
 
 | # | Lab Title | Difficulty | Status | Write-Up |
 |:---:|---|:---:|:---:|:---:|
@@ -511,7 +503,7 @@ Clickjacking embeds victim pages in invisible iframes, deceiving users into perf
 
 DOM-based vulnerabilities arise when client-side JavaScript processes attacker-controlled data and passes it to a dangerous sink without sanitisation, enabling XSS, open redirection, and cookie manipulation entirely within the browser.
 
-**Classification:** OWASP A03:2021 · CWE-79 · MITRE ATT&CK T1059.007
+**Classification:** OWASP A03:2021 — Injection · CWE-79 · MITRE ATT&CK T1059.007
 
 | # | Lab Title | Difficulty | Status | Write-Up |
 |:---:|---|:---:|:---:|:---:|
@@ -529,7 +521,7 @@ DOM-based vulnerabilities arise when client-side JavaScript processes attacker-c
 
 WebSocket vulnerabilities include live message manipulation, cross-site WebSocket hijacking, and handshake tampering that expose real-time application data and enable persistent session abuse.
 
-**Classification:** OWASP A01:2021 · CWE-345
+**Classification:** OWASP A01:2021 — Broken Access Control · CWE-345
 
 | # | Lab Title | Difficulty | Status | Write-Up |
 |:---:|---|:---:|:---:|:---:|
@@ -547,7 +539,7 @@ WebSocket vulnerabilities include live message manipulation, cross-site WebSocke
 
 Insecure deserialization enables object injection, gadget chain exploitation, and remote code execution by allowing applications to process attacker-controlled serialized data without integrity checking.
 
-**Classification:** OWASP A08:2021 · CWE-502 · MITRE ATT&CK T1059
+**Classification:** OWASP A08:2021 — Software and Data Integrity Failures · CWE-502 · MITRE ATT&CK T1059
 
 | # | Lab Title | Difficulty | Status | Write-Up |
 |:---:|---|:---:|:---:|:---:|
@@ -600,9 +592,9 @@ GraphQL vulnerabilities include introspection exposure, IDOR through query manip
 
 ### 24. Server-Side Template Injection — 7 Labs
 
-SSTI occurs when user input is unsafely embedded into server-side templates, enabling template expression evaluation and in most confirmed cases full remote code execution on the underlying host.
+SSTI occurs when user input is unsafely embedded into server-side templates, enabling template expression evaluation and in confirmed cases full remote code execution on the underlying host.
 
-**Classification:** OWASP A03:2021 · CWE-94 · MITRE ATT&CK T1059
+**Classification:** OWASP A03:2021 — Injection · CWE-94 · MITRE ATT&CK T1059
 
 | # | Lab Title | Difficulty | Status | Write-Up |
 |:---:|---|:---:|:---:|:---:|
@@ -620,7 +612,7 @@ SSTI occurs when user input is unsafely embedded into server-side templates, ena
 
 Web cache poisoning manipulates unkeyed request components to store and serve malicious responses to other users, enabling persistent XSS and targeted content injection delivered at cache scale.
 
-**Classification:** OWASP A05:2021 · CWE-444
+**Classification:** OWASP A05:2021 — Security Misconfiguration · CWE-444
 
 | # | Lab Title | Difficulty | Status | Write-Up |
 |:---:|---|:---:|:---:|:---:|
@@ -644,7 +636,7 @@ Web cache poisoning manipulates unkeyed request components to store and serve ma
 
 HTTP Host header attacks exploit applications that trust the Host header for routing or URL generation, enabling password reset poisoning, web cache poisoning, SSRF, and authentication bypass.
 
-**Classification:** OWASP A03:2021 · CWE-20
+**Classification:** OWASP A03:2021 — Injection · CWE-20
 
 | # | Lab Title | Difficulty | Status | Write-Up |
 |:---:|---|:---:|:---:|:---:|
@@ -662,7 +654,7 @@ HTTP Host header attacks exploit applications that trust the Host header for rou
 
 HTTP request smuggling exploits parsing discrepancies between front-end and back-end systems to smuggle malicious requests past security controls, enabling request hijacking, access control bypass, and cache poisoning.
 
-**Classification:** OWASP A04:2021 · CWE-444 · MITRE ATT&CK T1190
+**Classification:** OWASP A04:2021 — Insecure Design · CWE-444 · MITRE ATT&CK T1190
 
 | # | Lab Title | Difficulty | Status | Write-Up |
 |:---:|---|:---:|:---:|:---:|
@@ -695,7 +687,7 @@ HTTP request smuggling exploits parsing discrepancies between front-end and back
 
 OAuth implementation flaws allow attackers to hijack authorization flows, steal access tokens, force account linking via CSRF, and in some configurations perform SSRF through dynamic client registration.
 
-**Classification:** OWASP A07:2021 · CWE-601 · MITRE ATT&CK T1550
+**Classification:** OWASP A07:2021 — Identification and Authentication Failures · CWE-601 · MITRE ATT&CK T1550
 
 | # | Lab Title | Difficulty | Status | Write-Up |
 |:---:|---|:---:|:---:|:---:|
@@ -712,7 +704,7 @@ OAuth implementation flaws allow attackers to hijack authorization flows, steal 
 
 JWT attacks exploit weak or absent signature verification, allowing attackers to forge tokens with arbitrary claims, escalate privileges, and bypass authentication by manipulating header parameters or brute-forcing signing secrets.
 
-**Classification:** OWASP A07:2021 · CWE-347 · MITRE ATT&CK T1550.001
+**Classification:** OWASP A07:2021 — Identification and Authentication Failures · CWE-347 · MITRE ATT&CK T1550.001
 
 | # | Lab Title | Difficulty | Status | Write-Up |
 |:---:|---|:---:|:---:|:---:|
@@ -731,7 +723,7 @@ JWT attacks exploit weak or absent signature verification, allowing attackers to
 
 Prototype pollution injects properties into JavaScript's Object prototype through unsafe merge or recursive copy operations, enabling client-side XSS, server-side privilege escalation, and remote code execution via polluted gadget chains.
 
-**Classification:** OWASP A03:2021 · CWE-1321 · MITRE ATT&CK T1059.007
+**Classification:** OWASP A03:2021 — Injection · CWE-1321 · MITRE ATT&CK T1059.007
 
 | # | Lab Title | Difficulty | Status | Write-Up |
 |:---:|---|:---:|:---:|:---:|
@@ -750,7 +742,7 @@ Prototype pollution injects properties into JavaScript's Object prototype throug
 
 ### 31. Essential Skills — 2 Labs
 
-Essential skills labs develop the foundational recon and scanning techniques required to identify and exploit unknown vulnerabilities under timed exam conditions, directly replicating the BSCP exam environment.
+Essential skills labs develop the foundational reconnaissance and scanning techniques required to identify and exploit unknown vulnerabilities under timed exam conditions, directly replicating the BSCP exam environment.
 
 **Classification:** BSCP Exam Readiness
 
@@ -769,7 +761,7 @@ All write-ups reference one or more of the following industry standards for clas
 |---|---|
 | [OWASP Testing Guide v4.2](https://owasp.org/www-project-web-security-testing-guide/) | Vulnerability classification and testing methodology |
 | [OWASP Top 10 (2021)](https://owasp.org/Top10/) | Risk categorisation |
-| [NIST SP 800-115](https://csrc.nist.gov/publications/detail/sp/800-115/final) | Technical guide to security testing and assessment |
+| [NIST SP 800-115](https://csrc.nist.gov/publications/detail/sp/800-115/final) | Technical guide to information security testing and assessment |
 | [PTES](http://www.pentest-standard.org/) | Penetration testing execution standard |
 | [MITRE ATT&CK](https://attack.mitre.org/) | Adversary tactic and technique mapping |
 | [CVSS v3.1](https://www.first.org/cvss/v3.1/specification-document) | Vulnerability severity scoring |
@@ -784,8 +776,8 @@ All write-ups reference one or more of the following industry standards for clas
 | [Burp Suite Community / Pro](https://portswigger.net/burp) | Primary HTTP interception, scanning, and exploitation proxy |
 | [PortSwigger Web Security Academy](https://portswigger.net/web-security) | Target lab environment |
 | Firefox / Chromium | Browser-based payload delivery and response observation |
-| Python 3 | Scripted exploitation and payload generation where applicable |
-| SQLMap | SQL injection automation and confirmation (selected labs) |
+| Python 3 | Scripted exploitation and payload generation |
+| SQLMap | SQL injection automation and verification (selected labs) |
 | jwt_tool | JWT manipulation, cracking, and injection |
 | Burp Collaborator / OAST | Out-of-band interaction detection |
 | curl / httpie | Low-level HTTP request crafting |
@@ -797,11 +789,11 @@ All write-ups reference one or more of the following industry standards for clas
 **Michael Asante Anim** | `0x1aerixis`
 BSc Cyber Security — University of Mines and Technology (UMaT), Tarkwa, Ghana
 
-[![GitHub](https://img.shields.io/badge/GitHub-anim--michael--asante-black?style=flat-square&logo=github)](https://github.com/anim-michael-asante)
-[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat-square&logo=linkedin)](https://linkedin.com/in/michael-asante-anim)
-[![TryHackMe](https://img.shields.io/badge/TryHackMe-0x1aerixis-red?style=flat-square&logo=tryhackme)](https://tryhackme.com/p/0x1aerixis)
-[![X](https://img.shields.io/badge/X-0x1aerixis-black?style=flat-square&logo=x)](https://x.com/0x1aerixis)
-[![Discord](https://img.shields.io/badge/Discord-0x1aerixis-5865F2?style=flat-square&logo=discord)](https://discord.com/users/0x1aerixis)
+[![GitHub](https://img.shields.io/badge/GitHub-anim--michael--asante-black?logo=github)](https://github.com/anim-michael-asante)
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?logo=linkedin)](https://linkedin.com/in/michael-asante-anim)
+[![TryHackMe](https://img.shields.io/badge/TryHackMe-0x1aerixis-red?logo=tryhackme)](https://tryhackme.com/p/0x1aerixis)
+[![X](https://img.shields.io/badge/X-0x1aerixis-black?logo=x)](https://x.com/0x1aerixis)
+[![Discord](https://img.shields.io/badge/Discord-0x1aerixis-5865F2?logo=discord)](https://discord.com/users/0x1aerixis)
 
 > *"Built in the lab. Documented for the field."*
 
