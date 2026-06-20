@@ -92,7 +92,7 @@ This repository exists for three reasons:
 
 | #   | Category                                                               | Difficulty Range          | Labs    | Completed | Status                                                                   |
 | --- | ---------------------------------------------------------------------- | ------------------------- | ------- | --------- | ------------------------------------------------------------------------ |
-| 01  | [SQL Injection](#01-sql-injection--18-labs)                            | Apprentice — Practitioner | 18      | 13        | ![](https://img.shields.io/badge/13%2F18-brightgreen?style=flat-square)  |
+| 01  | [SQL Injection](#01-sql-injection--18-labs)                            | Apprentice — Practitioner | 18      | 16        | ![](https://img.shields.io/badge/13%2F18-brightgreen?style=flat-square)  |
 | 02  | [Authentication](#02-authentication--14-labs)                          | Apprentice — Expert       | 14      | 0         | ![](https://img.shields.io/badge/0%2F14-lightgrey?style=flat-square)     |
 | 03  | [Path Traversal](#03-path-traversal--6-labs)                           | Apprentice — Practitioner | 6       | 0         | ![](https://img.shields.io/badge/0%2F6-lightgrey?style=flat-square)      |
 | 04  | [OS Command Injection](#04-os-command-injection--5-labs)               | Apprentice — Practitioner | 5       | 0         | ![](https://img.shields.io/badge/0%2F5-lightgrey?style=flat-square)      |
@@ -123,7 +123,7 @@ This repository exists for three reasons:
 | 29  | [JWT Attacks](#29-jwt-attacks--8-labs)                                 | Apprentice — Expert       | 8       | 0         | ![](https://img.shields.io/badge/0%2F8-lightgrey?style=flat-square)      |
 | 30  | [Prototype Pollution](#30-prototype-pollution--10-labs)                | Apprentice — Expert       | 10      | 0         | ![](https://img.shields.io/badge/0%2F10-lightgrey?style=flat-square)     |
 | 31  | [Essential Skills](#31-essential-skills--2-labs)                       | Practitioner              | 2       | 0         | ![](https://img.shields.io/badge/0%2F2-lightgrey?style=flat-square)      |
-|     | **TOTAL**                                                              |                           | **263** | **13**    | ![](https://img.shields.io/badge/13%2F263-brightgreen?style=flat-square) |
+|     | **TOTAL**                                                              |                           | **263** | **16**    | ![](https://img.shields.io/badge/13%2F263-brightgreen?style=flat-square) |
 
 > `[SOLVED]` — Write-up published &nbsp;·&nbsp; `[IN PROGRESS]` — Active &nbsp;·&nbsp; `[PENDING]` — Not started
 
@@ -157,6 +157,9 @@ portswigger-web-security-writeups/
 │   └── 11-sqli-blind-boolean-conditional-response-trackingid-cookie/
 │   └── 12-sqli-blind-conditional-errors/
 │   └── 13-sqli-visible-error-based/
+│   └── 14-sqli-blind-time-based-pg-sleep/
+│   └── 15-sqli-blind-time-based-password-extraction/
+│   └── 16-sqli-blind-oob-dns-interaction/
 ├── 02-authentication/
 ├── 03-path-traversal/
 ├── 04-os-command-injection/
@@ -210,7 +213,7 @@ SQL injection enables attackers to interfere with database queries, retrieve hid
 **OWASP A03:2021** · **CWE-89** · **MITRE ATT&CK T1190**
 
 | #   | Lab Title                                                                           | Difficulty   | Status      | Write-Up                                                                                                                                                          |
-| --- | ----------------------------------------------------------------------------------- | ------------ | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| --- | ----------------------------------------------------------------------------------- | ------------ | ----------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------- | --- | --- |
 | 01  | SQL injection vulnerability in WHERE clause allowing retrieval of hidden data       | Apprentice   | `[SOLVED]`  | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/blob/main/sql-injection/01-sqli-where-clause/README.md)                           |
 | 02  | SQL injection vulnerability allowing login bypass                                   | Apprentice   | `[SOLVED]`  | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/blob/main/sql-injection/02-sqli-login-bypass/README.md)                           |
 | 03  | SQL injection attack, querying the database type and version on Oracle              | Practitioner | `[SOLVED]`  | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/blob/main/sql-injection/03-sqli-union-oracle-version-disclosure/README.md)        |
@@ -224,9 +227,9 @@ SQL injection enables attackers to interfere with database queries, retrieve hid
 | 11  | Blind SQL injection with conditional responses                                      | Practitioner | `[SOLVED]`  | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/blob/main/sql-injection/README.md)                                                |
 | 12  | Blind SQL injection with conditional errors                                         | Practitioner | `[SOLVED]`  | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/tree/main/sql-injection/12-sqli-blind-conditional-errors) —                       |
 | 13  | Visible error-based SQL injection                                                   | Practitioner | `[SOLVED]`  | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/tree/main/sql-injection/13-sqli-visible-error-based)                              |
-| 14  | Blind SQL injection with time delays                                                | Practitioner | `[PENDING]` | —                                                                                                                                                                 |
-| 15  | Blind SQL injection with time delays and information retrieval                      | Practitioner | `[PENDING]` | —                                                                                                                                                                 |
-| 16  | Blind SQL injection with out-of-band interaction                                    | Practitioner | `[PENDING]` | —                                                                                                                                                                 |
+| 14  | Blind SQL injection with time delays                                                | Practitioner | `[SOLVED]`  | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/tree/main/sql-injection/14-sqli-blind-time-based-pg-sleep)                        |     |     |
+| 15  | Blind SQL injection with time delays and information retrieval                      | Practitioner | `[SOLVED]`  | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/tree/main/sql-injection/15-sqli-blind-time-based-password-extraction)             |     |
+| 16  | Blind SQL injection with out-of-band interaction                                    | Practitioner | `[SOLVED]`  | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/tree/main/sql-injection/16-sqli-blind-oob-dns-interaction)                        |     |
 | 17  | Blind SQL injection with out-of-band data exfiltration                              | Practitioner | `[PENDING]` | —                                                                                                                                                                 |
 | 18  | SQL injection with filter bypass via XML encoding                                   | Practitioner | `[PENDING]` | —                                                                                                                                                                 |
 
