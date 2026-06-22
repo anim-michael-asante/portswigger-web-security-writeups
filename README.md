@@ -66,7 +66,7 @@ Writing forces full understanding. A lab is not complete until the exploitation 
 | --- | ----------------------------------------------------------------------------- | ------------------------- | :-----: | :----: | ------------------------------------------------------------------------ |
 | 01  | [SQL Injection](#01-sql-injection--18-labs)                                   | Apprentice — Practitioner |   18    |   16   | ![](https://img.shields.io/badge/16%2F18-brightgreen?style=flat-square)  |
 | 02  | [Authentication](#02-authentication--14-labs)                                 | Apprentice — Expert       |   14    |   0    | ![](https://img.shields.io/badge/0%2F14-lightgrey?style=flat-square)     |
-| 03  | [Path Traversal](#03-path-traversal--6-labs)                                  | Apprentice — Practitioner |    6    |   3    | ![](https://img.shields.io/badge/3%2F6-lightgrey?style=flat-square)      |
+| 03  | [Path Traversal](#03-path-traversal--6-labs)                                  | Apprentice — Practitioner |    6    |   3    | ![](https://img.shields.io/badge/3%2F6-brightgreen?style=flat-square)    |
 | 04  | [OS Command Injection](#04-os-command-injection--5-labs)                      | Apprentice — Practitioner |    5    |   0    | ![](https://img.shields.io/badge/0%2F5-lightgrey?style=flat-square)      |
 | 05  | [Business Logic Vulnerabilities](#05-business-logic-vulnerabilities--11-labs) | Apprentice — Expert       |   11    |   0    | ![](https://img.shields.io/badge/0%2F11-lightgrey?style=flat-square)     |
 | 06  | [Information Disclosure](#06-information-disclosure--5-labs)                  | Apprentice — Practitioner |    5    |   0    | ![](https://img.shields.io/badge/0%2F5-lightgrey?style=flat-square)      |
