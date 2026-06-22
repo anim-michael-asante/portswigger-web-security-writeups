@@ -66,7 +66,7 @@ Writing forces full understanding. A lab is not complete until the exploitation 
 | --- | ----------------------------------------------------------------------------- | ------------------------- | :-----: | :----: | ------------------------------------------------------------------------ |
 | 01  | [SQL Injection](#01-sql-injection--18-labs)                                   | Apprentice — Practitioner |   18    |   16   | ![](https://img.shields.io/badge/16%2F18-brightgreen?style=flat-square)  |
 | 02  | [Authentication](#02-authentication--14-labs)                                 | Apprentice — Expert       |   14    |   0    | ![](https://img.shields.io/badge/0%2F14-lightgrey?style=flat-square)     |
-| 03  | [Path Traversal](#03-path-traversal--6-labs)                                  | Apprentice — Practitioner |    6    |   0    | ![](https://img.shields.io/badge/0%2F6-lightgrey?style=flat-square)      |
+| 03  | [Path Traversal](#03-path-traversal--6-labs)                                  | Apprentice — Practitioner |    6    |   3    | ![](https://img.shields.io/badge/3%2F6-lightgrey?style=flat-square)      |
 | 04  | [OS Command Injection](#04-os-command-injection--5-labs)                      | Apprentice — Practitioner |    5    |   0    | ![](https://img.shields.io/badge/0%2F5-lightgrey?style=flat-square)      |
 | 05  | [Business Logic Vulnerabilities](#05-business-logic-vulnerabilities--11-labs) | Apprentice — Expert       |   11    |   0    | ![](https://img.shields.io/badge/0%2F11-lightgrey?style=flat-square)     |
 | 06  | [Information Disclosure](#06-information-disclosure--5-labs)                  | Apprentice — Practitioner |    5    |   0    | ![](https://img.shields.io/badge/0%2F5-lightgrey?style=flat-square)      |
@@ -95,7 +95,7 @@ Writing forces full understanding. A lab is not complete until the exploitation 
 | 29  | [JWT Attacks](#29-jwt-attacks--8-labs)                                        | Apprentice — Expert       |    8    |   0    | ![](https://img.shields.io/badge/0%2F8-lightgrey?style=flat-square)      |
 | 30  | [Prototype Pollution](#30-prototype-pollution--10-labs)                       | Apprentice — Expert       |   10    |   0    | ![](https://img.shields.io/badge/0%2F10-lightgrey?style=flat-square)     |
 | 31  | [Essential Skills](#31-essential-skills--2-labs)                              | Practitioner              |    2    |   0    | ![](https://img.shields.io/badge/0%2F2-lightgrey?style=flat-square)      |
-|     | **TOTAL**                                                                     |                           | **263** | **16** | ![](https://img.shields.io/badge/16%2F263-brightgreen?style=flat-square) |
+|     | **TOTAL**                                                                     |                           | **263** | **19** | ![](https://img.shields.io/badge/16%2F263-brightgreen?style=flat-square) |
 
 > **Status key:** `[SOLVED]` — Write-up published &nbsp;·&nbsp; `[IN PROGRESS]` — Active &nbsp;·&nbsp; `[PENDING]` — Not started
 
@@ -134,6 +134,21 @@ portswigger-web-security-writeups/
 │   └── 16-sqli-blind-oob-dns-interaction/
 ├── 02-authentication/
 ├── 03-path-traversal/
+|       01-lab-file-path-traversal-simple-case/
+│        ├── README.md
+│        └── evidence/
+│        └── 01-burp-repeater-exploit.png
+│        └── 02-lab-solved-confirmation.png
+|       02-lab-file-path-traversal-traversal-sequences-blocked-with-absolute-path-bypass/
+│        ├── README.md
+│        └── evidence/
+│        └── 01-burp-repeater-exploit.png
+│        └── 02-lab-solved-confirmation.png
+|       03-lab-traversal-sequences-stripped-non-recursively/
+│        ├── README.md
+│        └── evidence/
+│        └── exploitation.png
+│        └── lab-solved.png
 ├── 04-os-command-injection/
 ├── 05-business-logic/
 ├── 06-information-disclosure/
@@ -236,14 +251,14 @@ Path traversal allows attackers to read arbitrary files on the server filesystem
 
 **Classification:** OWASP A01:2021 · CWE-22 · MITRE ATT&CK T1083
 
-|  #  | Lab Title                                                                     |  Difficulty  |   Status    | Write-Up |
-| :-: | ----------------------------------------------------------------------------- | :----------: | :---------: | :------: |
-| 01  | File path traversal, simple case                                              |  Apprentice  | `[PENDING]` |    —     |
-| 02  | File path traversal, traversal sequences blocked with absolute path bypass    | Practitioner | `[PENDING]` |    —     |
-| 03  | File path traversal, traversal sequences stripped non-recursively             | Practitioner | `[PENDING]` |    —     |
-| 04  | File path traversal, traversal sequences stripped with superfluous URL-decode | Practitioner | `[PENDING]` |    —     |
-| 05  | File path traversal, validation of start of path                              | Practitioner | `[PENDING]` |    —     |
-| 06  | File path traversal, validation of file extension with null byte bypass       | Practitioner | `[PENDING]` |    —     |
+|  #  | Lab Title                                                                     |  Difficulty  |   Status    |                                                                                                Write-Up                                                                                                |
+| :-: | ----------------------------------------------------------------------------- | :----------: | :---------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| 01  | File path traversal, simple case                                              |  Apprentice  | `[SOLVED]`  |                      [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/blob/main/Path%20Traversal/01-lab-file-path-traversal-simple-case/README.md)                      |
+| 02  | File path traversal, traversal sequences blocked with absolute path bypass    | Practitioner | `[SOLVED]`  | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/blob/main/Path%20Traversal/02-lab-file-path-traversal-traversal-sequences-blocked-with-absolute-path-bypass/README.md) |
+| 03  | File path traversal, traversal sequences stripped non-recursively             | Practitioner | `[SOLVED]`  |               [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/blob/main/Path%20Traversal/03-lab-traversal-sequences-stripped-non-recursively/README.md)                |
+| 04  | File path traversal, traversal sequences stripped with superfluous URL-decode | Practitioner | `[PENDING]` |                                                                                                   —                                                                                                    |
+| 05  | File path traversal, validation of start of path                              | Practitioner | `[PENDING]` |                                                                                                   —                                                                                                    |
+| 06  | File path traversal, validation of file extension with null byte bypass       | Practitioner | `[PENDING]` |                                                                                                   —                                                                                                    |
 
 ---
 
