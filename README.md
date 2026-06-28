@@ -71,7 +71,7 @@ Writing forces full understanding. A lab is not complete until the exploitation 
 | 05  | [Business Logic Vulnerabilities](#05-business-logic-vulnerabilities--11-labs) | Apprentice — Expert       |   11    |   0    | ![](https://img.shields.io/badge/0%2F11-lightgrey?style=flat-square)     |
 | 06  | [Information Disclosure](#06-information-disclosure--5-labs)                  | Apprentice — Practitioner |    5    |   0    | ![](https://img.shields.io/badge/0%2F5-lightgrey?style=flat-square)      |
 | 07  | [Access Control Vulnerabilities](#07-access-control-vulnerabilities--13-labs) | Apprentice — Practitioner |   13    |   0    | ![](https://img.shields.io/badge/0%2F13-lightgrey?style=flat-square)     |
-| 08  | [File Upload Vulnerabilities](#08-file-upload-vulnerabilities--7-labs)        | Apprentice — Expert       |    7    |   0    | ![](https://img.shields.io/badge/0%2F7-lightgrey?style=flat-square)      |
+| 08  | [File Upload Vulnerabilities](#08-file-upload-vulnerabilities--7-labs)        | Apprentice — Expert       |    7    |   3    | ![](https://img.shields.io/badge/3%2F7-lightgrey?style=flat-square)      |
 | 09  | [Race Conditions](#09-race-conditions--6-labs)                                | Apprentice — Expert       |    6    |   0    | ![](https://img.shields.io/badge/0%2F6-lightgrey?style=flat-square)      |
 | 10  | [SSRF](#10-server-side-request-forgery-ssrf--7-labs)                          | Apprentice — Expert       |    7    |   0    | ![](https://img.shields.io/badge/0%2F7-lightgrey?style=flat-square)      |
 | 11  | [XXE Injection](#11-xml-external-entity-xxe-injection--9-labs)                | Apprentice — Expert       |    9    |   0    | ![](https://img.shields.io/badge/0%2F9-lightgrey?style=flat-square)      |
@@ -95,7 +95,7 @@ Writing forces full understanding. A lab is not complete until the exploitation 
 | 29  | [JWT Attacks](#29-jwt-attacks--8-labs)                                        | Apprentice — Expert       |    8    |   0    | ![](https://img.shields.io/badge/0%2F8-lightgrey?style=flat-square)      |
 | 30  | [Prototype Pollution](#30-prototype-pollution--10-labs)                       | Apprentice — Expert       |   10    |   0    | ![](https://img.shields.io/badge/0%2F10-lightgrey?style=flat-square)     |
 | 31  | [Essential Skills](#31-essential-skills--2-labs)                              | Practitioner              |    2    |   0    | ![](https://img.shields.io/badge/0%2F2-lightgrey?style=flat-square)      |
-|     | **TOTAL**                                                                     |                           | **263** | **22** | ![](https://img.shields.io/badge/22%2F263-brightgreen?style=flat-square) |
+|     | **TOTAL**                                                                     |                           | **263** | **25** | ![](https://img.shields.io/badge/22%2F263-brightgreen?style=flat-square) |
 
 > **Status key:** `[SOLVED]` — Write-up published &nbsp;·&nbsp; `[IN PROGRESS]` — Active &nbsp;·&nbsp; `[PENDING]` — Not started
 
@@ -168,7 +168,25 @@ portswigger-web-security-writeups/
 ├── 05-business-logic/
 ├── 06-information-disclosure/
 ├── 07-access-control/
-├── 08-file-upload/
+├── 08-file-upload-vulnerabilities/
+|       01-file-upload-rce-web-shell/
+│        ├── README.md
+│        ├── exploit.php
+│        └── evidence/
+│        └── flag.png
+│        └── lab-solved.png
+|        02-file-upload-content-type-bypass/
+│        ├── README.md
+│        ├── exploit.php
+│        └── evidence/
+│        └── flag.png
+│        └── lab-solved.png
+|        03-file-upload-path-traversal-bypass/
+│        ├── README.md
+│        ├── exploit.php
+│        └── evidence/
+│        └── flag.png
+│        └── lab-solved.png
 ├── 09-race-conditions/
 ├── 10-ssrf/
 ├── 11-xxe-injection/
@@ -361,15 +379,15 @@ File upload flaws allow attackers to upload and execute malicious files, enablin
 
 **Classification:** OWASP A04:2021 · CWE-434 · MITRE ATT&CK T1505.003
 
-|  #  | Lab Title                                            |  Difficulty  |   Status    | Write-Up |
-| :-: | ---------------------------------------------------- | :----------: | :---------: | :------: |
-| 01  | Remote code execution via web shell upload           |  Apprentice  | `[PENDING]` |    —     |
-| 02  | Web shell upload via Content-Type restriction bypass |  Apprentice  | `[PENDING]` |    —     |
-| 03  | Web shell upload via path traversal                  | Practitioner | `[PENDING]` |    —     |
-| 04  | Web shell upload via extension blacklist bypass      | Practitioner | `[PENDING]` |    —     |
-| 05  | Web shell upload via obfuscated file extension       | Practitioner | `[PENDING]` |    —     |
-| 06  | Remote code execution via polyglot web shell upload  | Practitioner | `[PENDING]` |    —     |
-| 07  | Web shell upload via race condition                  |    Expert    | `[PENDING]` |    —     |
+|  #  | Lab Title                                            |  Difficulty  |   Status    |                                                                             Write-Up                                                                              |
+| :-: | ---------------------------------------------------- | :----------: | :---------: | :---------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| 01  | Remote code execution via web shell upload           |  Apprentice  | `[SOLVED]`  | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/blob/main/File%20upload%20vulnerabilities/01-file-upload-rce-web-shell/README.md) |
+| 02  | Web shell upload via Content-Type restriction bypass |  Apprentice  | `[SOLVED]`  |   [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/tree/main/File%20upload%20vulnerabilities/02-file-upload-content-type-bypass)   |
+| 03  | Web shell upload via path traversal                  | Practitioner | `[SOLVED]`  |   [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/tree/main/File%20upload%20vulnerabilities/02-file-upload-content-type-bypass)   |
+| 04  | Web shell upload via extension blacklist bypass      | Practitioner | `[PENDING]` |                                                                                 —                                                                                 |
+| 05  | Web shell upload via obfuscated file extension       | Practitioner | `[PENDING]` |                                                                                 —                                                                                 |
+| 06  | Remote code execution via polyglot web shell upload  | Practitioner | `[PENDING]` |                                                                                 —                                                                                 |
+| 07  | Web shell upload via race condition                  |    Expert    | `[PENDING]` |                                                                                 —                                                                                 |
 
 ---
 
