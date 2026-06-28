@@ -71,7 +71,7 @@ Writing forces full understanding. A lab is not complete until the exploitation 
 | 05  | [Business Logic Vulnerabilities](#05-business-logic-vulnerabilities--11-labs) | Apprentice — Expert       |   11    |   0    | ![](https://img.shields.io/badge/0%2F11-lightgrey?style=flat-square)     |
 | 06  | [Information Disclosure](#06-information-disclosure--5-labs)                  | Apprentice — Practitioner |    5    |   0    | ![](https://img.shields.io/badge/0%2F5-lightgrey?style=flat-square)      |
 | 07  | [Access Control Vulnerabilities](#07-access-control-vulnerabilities--13-labs) | Apprentice — Practitioner |   13    |   0    | ![](https://img.shields.io/badge/0%2F13-lightgrey?style=flat-square)     |
-| 08  | [File Upload Vulnerabilities](#08-file-upload-vulnerabilities--7-labs)        | Apprentice — Expert       |    7    |   3    | ![](https://img.shields.io/badge/3%2F7-lightgrey?style=flat-square)      |
+| 08  | [File Upload Vulnerabilities](#08-file-upload-vulnerabilities--7-labs)        | Apprentice — Expert       |    7    |   3    | ![](https://img.shields.io/badge/3%2F7-brightgreen?style=flat-square)    |
 | 09  | [Race Conditions](#09-race-conditions--6-labs)                                | Apprentice — Expert       |    6    |   0    | ![](https://img.shields.io/badge/0%2F6-lightgrey?style=flat-square)      |
 | 10  | [SSRF](#10-server-side-request-forgery-ssrf--7-labs)                          | Apprentice — Expert       |    7    |   0    | ![](https://img.shields.io/badge/0%2F7-lightgrey?style=flat-square)      |
 | 11  | [XXE Injection](#11-xml-external-entity-xxe-injection--9-labs)                | Apprentice — Expert       |    9    |   0    | ![](https://img.shields.io/badge/0%2F9-lightgrey?style=flat-square)      |
