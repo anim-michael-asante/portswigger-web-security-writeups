@@ -1,4 +1,4 @@
-# 07-lab-web-shell-upload-via-extension-blacklist-bypass
+# 04-lab-web-shell-upload-via-extension-blacklist-bypass
 
 > PortSwigger Web Security Academy — File Upload Vulnerabilities: Web Shell Upload via Extension Blacklist Bypass. Demonstrates how an Apache `.htaccess` misconfiguration permits server-side PHP execution through a custom file extension, bypassing a `.php` extension blacklist.
 
