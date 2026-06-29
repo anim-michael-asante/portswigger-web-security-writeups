@@ -1,7 +1,7 @@
 <div align="center">
 
 <p align="center">
-  <img src="repo-image.png" alt="PortSwigger Web Security Writeups" width="50%">
+  <img src="repo-image.png" alt="PortSwigger Web Security Writeups" width="70%">
 </p>
 
 </br>
