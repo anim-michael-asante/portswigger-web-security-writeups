@@ -1,7 +1,5 @@
 <div align="center">
-<p align="center">
-  <img src="repo-image.png" alt="PortSwigger Web Security Writeups" width="100%">
-</p>
+
 [![Platform](https://img.shields.io/badge/Platform-PortSwigger%20Web%20Security%20Academy-orange?style=flat-square)](https://portswigger.net/web-security)
 [![Labs Completed](https://img.shields.io/badge/Completed-16%2F263-brightgreen?style=flat-square)](https://github.com/anim-michael-asante/portswigger-web-security-writeups)
 [![Topics](https://img.shields.io/badge/Topics-31-purple?style=flat-square)](https://portswigger.net/web-security/all-topics)
