@@ -868,11 +868,12 @@ All write-ups reference one or more of the following industry standards for clas
 | [Burp Suite Community / Pro](https://portswigger.net/burp)               | Primary HTTP interception, scanning, and exploitation proxy   |
 | [PortSwigger Web Security Academy](https://portswigger.net/web-security) | Target lab environment                                        |
 | Firefox / Chromium                                                       | Browser-based payload delivery and response observation       |
-| Python 3                                                                 | Scripted exploitation and payload generation where applicable |
+| [Python 3] (https://www.python.org/downloads/)                           | Scripted exploitation and payload generation where applicable |
 | SQLMap                                                                   | SQL injection automation and confirmation (selected labs)     |
 | jwt_tool                                                                 | JWT manipulation, cracking, and injection                     |
 | Burp Collaborator / OAST                                                 | Out-of-band interaction detection                             |
 | curl / httpie                                                            | Low-level HTTP request crafting                               |
+| PHP                                                                      | Scripted exploitation and payload generation where applicable |
 
 ---
 
