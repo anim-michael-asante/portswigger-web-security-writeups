@@ -166,7 +166,7 @@ Re-attempt upload with a null-byte-obfuscated filename and confirm the server ei
 
 ## Evidence
 
-![Burp Suite Repeater showing the GET request to the truncated filename exploit.php returning the exfiltrated secret in the response body](evidence/flag-response.png)
+![Burp Suite Repeater showing the GET request to the truncated filename exploit.php returning the exfiltrated secret in the response body](evidence/flag.png)
 *Caption: `GET /files/avatars/exploit.php` response in Burp Repeater, confirming server-side execution of the uploaded PHP file and exfiltration of the target file's contents.*
 
 ![PortSwigger Web Security Academy lab status confirming the lab was solved](evidence/lab-solved.png)
