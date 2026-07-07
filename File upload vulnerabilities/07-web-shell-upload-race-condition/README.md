@@ -2,11 +2,12 @@
 ![Difficulty](https://img.shields.io/badge/Difficulty-Expert-red)
 ![Status](https://img.shields.io/badge/Lab%20Status-Solved-brightgreen)
 ![Category](https://img.shields.io/badge/Category-File%20Upload%20%2F%20Race%20Condition-blue)
-![CVSS](https://img.shields.io/badge/CVSS%20v3.1-8.5%20(HIGH)-orange)
+![CVSS](<https://img.shields.io/badge/CVSS%20v3.1-8.5%20(HIGH)-orange>)
 
 # Web Shell Upload via Race Condition (TOCTOU)
 
 ## Table of Contents
+
 1. [Overview](#overview)
 2. [Scope & Objectives](#scope--objectives)
 3. [Methodology](#methodology)
@@ -35,10 +36,12 @@ protected file from the server before deletion occurred.
 ## Scope & Objectives
 
 **In Scope**
+
 - `POST /my-account/avatar` (authenticated avatar upload endpoint)
 - `GET /files/avatars/<filename>` (public avatar retrieval endpoint)
 
 **Out of Scope**
+
 - All other application functionality unrelated to the avatar upload/validation pipeline
 - Infrastructure, network layer, and third-party services
 
@@ -72,16 +75,16 @@ assumptions about operation ordering.
 
 ### Finding 1 — Race Condition Enabling Unrestricted File Upload and Remote Code Execution
 
-| Field | Detail |
-|---|---|
-| **ID** | F-01 |
-| **Severity** | `[HIGH]` |
-| **CVSS v3.1 Score** | 8.5 |
-| **CVSS v3.1 Vector** | `CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:U/C:H/I:H/A:H` |
-| **CWE** | CWE-367: Time-of-check Time-of-use (TOCTOU) Race Condition |
-| **OWASP Category** | A04:2021 – Insecure Design |
-| **MITRE ATT&CK TTP** | T1190 – Exploit Public-Facing Application; T1505.003 – Server Software Component: Web Shell |
-| **Affected Component** | `POST /my-account/avatar` upload handler and asynchronous file-validation process |
+| Field                  | Detail                                                                                      |
+| ---------------------- | ------------------------------------------------------------------------------------------- |
+| **ID**                 | F-01                                                                                        |
+| **Severity**           | `[HIGH]`                                                                                    |
+| **CVSS v3.1 Score**    | 8.5                                                                                         |
+| **CVSS v3.1 Vector**   | `CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:U/C:H/I:H/A:H`                                              |
+| **CWE**                | CWE-367: Time-of-check Time-of-use (TOCTOU) Race Condition                                  |
+| **OWASP Category**     | A04:2021 – Insecure Design                                                                  |
+| **MITRE ATT&CK TTP**   | T1190 – Exploit Public-Facing Application; T1505.003 – Server Software Component: Web Shell |
+| **Affected Component** | `POST /my-account/avatar` upload handler and asynchronous file-validation process           |
 
 **Description**
 The avatar upload handler wrote uploaded files directly to a publicly reachable directory
@@ -104,11 +107,13 @@ this pattern.
 **Proof of Concept**
 
 `exploit.php` payload:
+
 ```php
 <?php echo file_get_contents('/home/carlos/secret'); ?>
 ```
 
 **Reproduction Steps**
+
 1. Authenticate as a low-privileged user and confirm the avatar upload rejects non-image files.
 2. Capture a legitimate `POST /my-account/avatar` request and a `GET /files/avatars/<file>`
    request in Burp Proxy.
@@ -155,29 +160,39 @@ file is servable.
 
 ## Tools & Environment
 
-| Tool | Purpose |
-|---|---|
-| Burp Suite (Proxy, Repeater) | Request interception, manual verification, Content-Length recalculation |
-| Turbo Intruder (BApp) | Precision request racing via gated concurrent connections |
-| PHP | Web shell payload for file read primitive |
-| PortSwigger Web Security Academy | Isolated, authorized lab environment |
+| Tool                             | Purpose                                                                 |
+| -------------------------------- | ----------------------------------------------------------------------- |
+| Burp Suite (Proxy, Repeater)     | Request interception, manual verification, Content-Length recalculation |
+| Turbo Intruder (BApp)            | Precision request racing via gated concurrent connections               |
+| PHP                              | Web shell payload for file read primitive                               |
+| PortSwigger Web Security Academy | Isolated, authorized lab environment                                    |
 
 ## Evidence
 
-| Evidence | Description |
-|---|---|
-| `evidence/lab-solved.jpeg` | Lab status confirmed as Solved following secret submission |
-| `evidence/flag.jpeg` | Turbo Intruder results table showing a `200 OK` response on a gated `GET /files/avatars/exploit.php` request, with the extracted secret visible in the response body |
-| `exploit.php` | Malicious payload used to read `/home/carlos/secret` |
-| `race_condition_attack.py` | Turbo Intruder Python script used to execute the gated race attack |
+### Lab Solved Confirmation
+
+![Lab solved confirmation showing status changed to Solved](evidence/lab-solved.jpeg)
+_Figure 1: Lab status confirmed as Solved following secret submission._
+
+### Race Condition Exploitation Result
+
+![Turbo Intruder results showing 200 OK response with secret extracted](evidence/flag.jpeg)
+_Figure 2: Turbo Intruder results table showing a gated GET request to /files/avatars/exploit.php returning a 200 OK with the extracted secret in the response body._
+
+| Evidence                   | Description                                                                                                                                                          |
+| -------------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `evidence/lab-solved.png`  | Lab status confirmed as Solved following secret submission                                                                                                           |
+| `evidence/flag.png`        | Turbo Intruder results table showing a `200 OK` response on a gated `GET /files/avatars/exploit.php` request, with the extracted secret visible in the response body |
+| `exploit.php`              | Malicious payload used to read `/home/carlos/secret`                                                                                                                 |
+| `race_condition_attack.py` | Turbo Intruder Python script used to execute the gated race attack                                                                                                   |
 
 ## Remediation Strategy
 
-| Priority | Action |
-|---|---|
-| `[IMMEDIATE]` | Validate file type, content, and malware-scan results **before** the file is written to any publicly accessible path. Stage uploads in a non-web-accessible quarantine location. |
+| Priority       | Action                                                                                                                                                                                    |
+| -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `[IMMEDIATE]`  | Validate file type, content, and malware-scan results **before** the file is written to any publicly accessible path. Stage uploads in a non-web-accessible quarantine location.          |
 | `[SHORT-TERM]` | Generate a random, unpredictable filename on upload rather than preserving attacker-controlled filenames, reducing the ability to reference the file directly even if briefly accessible. |
-| `[PLANNED]` | Perform all validation and file-move operations within a single atomic operation or transaction to eliminate any TOCTOU window between check and use. |
+| `[PLANNED]`    | Perform all validation and file-move operations within a single atomic operation or transaction to eliminate any TOCTOU window between check and use.                                     |
 
 ## Lessons Learned
 
@@ -209,9 +224,10 @@ BSc Cyber Security — University of Mines and Technology (UMaT), Tarkwa, Ghana
 [![X](https://img.shields.io/badge/X-0x1aerixis-black?logo=x)](https://x.com/0x1aerixis)
 [![Discord](https://img.shields.io/badge/Discord-0x1aerixis-5865F2?logo=discord)](https://discord.com/users/0x1aerixis)
 
-> *"Built in the lab. Documented for the field."*
+> _"Built in the lab. Documented for the field."_
 
 ---
+
 > **Disclaimer:** All work documented in this repository was conducted in authorized, isolated
 > lab environments or sanctioned CTF platforms. No unauthorized systems were accessed.
 > This project is intended for educational and portfolio purposes only.
