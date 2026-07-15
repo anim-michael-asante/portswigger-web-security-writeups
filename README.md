@@ -82,7 +82,7 @@ Writing forces full understanding. A lab is not complete until the exploitation 
 | 10  | [SSRF](#10-server-side-request-forgery-ssrf--7-labs)                          | Apprentice — Expert       |    7    |   0    | ![](https://img.shields.io/badge/0%2F7-lightgrey?style=flat-square)      |
 | 11  | [XXE Injection](#11-xml-external-entity-xxe-injection--9-labs)                | Apprentice — Expert       |    9    |   0    | ![](https://img.shields.io/badge/0%2F9-lightgrey?style=flat-square)      |
 | 12  | [NoSQL Injection](#12-nosql-injection--4-labs)                                | Apprentice — Practitioner |    4    |   0    | ![](https://img.shields.io/badge/0%2F4-lightgrey?style=flat-square)      |
-| 13  | [API Testing](#13-api-testing--5-labs)                                        | Apprentice — Practitioner |    5    |   2    | ![](https://img.shields.io/badge/2%2F5-brightgreen?style=flat-square)    |
+| 13  | [API Testing](#13-api-testing--5-labs)                                        | Apprentice — Practitioner |    5    |   4    | ![](https://img.shields.io/badge/4%2F5-brightgreen?style=flat-square)    |
 | 14  | [Web Cache Deception](#14-web-cache-deception--5-labs)                        | Apprentice — Expert       |    5    |   0    | ![](https://img.shields.io/badge/0%2F5-lightgrey?style=flat-square)      |
 | 15  | [Cross-Site Scripting (XSS)](#15-cross-site-scripting-xss--30-labs)           | Apprentice — Expert       |   30    |   0    | ![](https://img.shields.io/badge/0%2F30-lightgrey?style=flat-square)     |
 | 16  | [CSRF](#16-cross-site-request-forgery-csrf--12-labs)                          | Apprentice — Expert       |   12    |   0    | ![](https://img.shields.io/badge/0%2F12-lightgrey?style=flat-square)     |
@@ -101,7 +101,7 @@ Writing forces full understanding. A lab is not complete until the exploitation 
 | 29  | [JWT Attacks](#29-jwt-attacks--8-labs)                                        | Apprentice — Expert       |    8    |   0    | ![](https://img.shields.io/badge/0%2F8-lightgrey?style=flat-square)      |
 | 30  | [Prototype Pollution](#30-prototype-pollution--10-labs)                       | Apprentice — Expert       |   10    |   0    | ![](https://img.shields.io/badge/0%2F10-lightgrey?style=flat-square)     |
 | 31  | [Essential Skills](#31-essential-skills--2-labs)                              | Practitioner              |    2    |   0    | ![](https://img.shields.io/badge/0%2F2-lightgrey?style=flat-square)      |
-|     | **TOTAL**                                                                     |                           | **263** | **31** | ![](https://img.shields.io/badge/31%2F263-brightgreen?style=flat-square) |
+|     | **TOTAL**                                                                     |                           | **263** | **33** | ![](https://img.shields.io/badge/31%2F263-brightgreen?style=flat-square) |
 
 > **Status key:** `[SOLVED]` — Write-up published &nbsp;·&nbsp; `[IN PROGRESS]` — Active &nbsp;·&nbsp; `[PENDING]` — Not started
 
@@ -226,7 +226,18 @@ portswigger-web-security-writeups/
 │        ├── README.md
 │        └── evidence/
 │        └── exposed-apis.png
-│        └── lab-solved.png          ├01-lab-exploiting-api-endpoint-using-documentation/
+│        └── lab-solved.png          ├02-lab-finding-and-exploiting-unused-api-endpoint//
+│        ├── README.md
+│        └── evidence/
+│        └── exploitation.png
+│        └── lab-solved.png
+│        └── lab-solved.png          ├
+03-lab-mass-assignment/
+│        ├── README.md
+│        └── evidence/
+│        └── exploitation.png
+│        └── lab-solved.png
+│        └── lab-solved.png          ├04-lab-server-side-parameter-pollution-query-string/
 │        ├── README.md
 │        └── evidence/
 │        └── exploitation.png
@@ -506,13 +517,13 @@ API testing vulnerabilities include exposed documentation, mass assignment, para
 
 **Classification:** OWASP A01:2021 / A04:2021
 
-|  #  | Lab Title                                                    |  Difficulty  |   Status    |                                                                               Write-Up                                                                                |
-| :-: | ------------------------------------------------------------ | :----------: | :---------: | :-------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-| 01  | Exploiting an API endpoint using documentation               |  Apprentice  | `[SOLVED]`  | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/blob/main/API%20testing/01-lab-exploiting-api-endpoint-using-documentation/README.md) |
-| 02  | Exploiting unused API endpoint                               |  Apprentice  | `[SOLVED]`  | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/blob/main/API%20testing/02-lab-finding-and-exploiting-unused-api-endpoint/README.md)  |
-| 03  | Finding and exploiting an unused API endpoint                | Practitioner | `[PENDING]` |                                                                                   —                                                                                   |
-| 04  | Exploiting a mass assignment vulnerability                   | Practitioner | `[PENDING]` |                                                                                   —                                                                                   |
-| 05  | Exploiting server-side parameter pollution in a query string | Practitioner | `[PENDING]` |                                                                                   —                                                                                   |
+|  #  | Lab Title                                                    |  Difficulty  |   Status    |                                                                                Write-Up                                                                                |
+| :-: | ------------------------------------------------------------ | :----------: | :---------: | :--------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| 01  | Exploiting an API endpoint using documentation               |  Apprentice  | `[SOLVED]`  | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/blob/main/API%20testing/01-lab-exploiting-api-endpoint-using-documentation/README.md)  |
+| 02  | Exploiting unused API endpoint                               |  Apprentice  | `[SOLVED]`  |  [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/blob/main/API%20testing/02-lab-finding-and-exploiting-unused-api-endpoint/README.md)  |
+| 03  | Finding and exploiting an unused API endpoint                | Practitioner | `[SOLVED]`  |               [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/blob/main/API%20testing/03-lab-mass-assignment/README.md)                |
+| 04  | Exploiting a mass assignment vulnerability                   | Practitioner | `[SOLVED]`  | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/blob/main/API%20testing/04-lab-server-side-parameter-pollution-query-string/README.md) |
+| 05  | Exploiting server-side parameter pollution in a query string | Practitioner | `[PENDING]` |                                                                                   —                                                                                    |
 
 ---
 
