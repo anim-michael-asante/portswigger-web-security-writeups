@@ -71,7 +71,7 @@ Writing forces full understanding. A lab is not complete until the exploitation 
 | #   | Category                                                                      | Difficulty Range          |  Total  |  Done  | Status                                                                   |
 | --- | ----------------------------------------------------------------------------- | ------------------------- | :-----: | :----: | ------------------------------------------------------------------------ |
 | 01  | [SQL Injection](#01-sql-injection--18-labs)                                   | Apprentice — Practitioner |   18    |   16   | ![](https://img.shields.io/badge/16%2F18-brightgreen?style=flat-square)  |
-| 02  | [Authentication](#02-authentication--14-labs)                                 | Apprentice — Expert       |   14    |   0    | ![](https://img.shields.io/badge/0%2F14-lightgrey?style=flat-square)     |
+| 02  | [Authentication](#02-authentication--14-labs)                                 | Apprentice — Expert       |   14    |   1    | ![](https://img.shields.io/badge/1%2F14-lightgrey?style=flat-square)     |
 | 03  | [Path Traversal](#03-path-traversal--6-labs)                                  | Apprentice — Practitioner |    6    |   6    | ![](https://img.shields.io/badge/6%2F6-brightgreen?style=flat-square)    |
 | 04  | [OS Command Injection](#04-os-command-injection--5-labs)                      | Apprentice — Practitioner |    5    |   0    | ![](https://img.shields.io/badge/0%2F5-lightgrey?style=flat-square)      |
 | 05  | [Business Logic Vulnerabilities](#05-business-logic-vulnerabilities--11-labs) | Apprentice — Expert       |   11    |   0    | ![](https://img.shields.io/badge/0%2F11-lightgrey?style=flat-square)     |
@@ -101,7 +101,7 @@ Writing forces full understanding. A lab is not complete until the exploitation 
 | 29  | [JWT Attacks](#29-jwt-attacks--8-labs)                                        | Apprentice — Expert       |    8    |   0    | ![](https://img.shields.io/badge/0%2F8-lightgrey?style=flat-square)      |
 | 30  | [Prototype Pollution](#30-prototype-pollution--10-labs)                       | Apprentice — Expert       |   10    |   0    | ![](https://img.shields.io/badge/0%2F10-lightgrey?style=flat-square)     |
 | 31  | [Essential Skills](#31-essential-skills--2-labs)                              | Practitioner              |    2    |   0    | ![](https://img.shields.io/badge/0%2F2-lightgrey?style=flat-square)      |
-|     | **TOTAL**                                                                     |                           | **263** | **33** | ![](https://img.shields.io/badge/31%2F263-brightgreen?style=flat-square) |
+|     | **TOTAL**                                                                     |                           | **263** | **34** | ![](https://img.shields.io/badge/34%2F263-brightgreen?style=flat-square) |
 
 > **Status key:** `[SOLVED]` — Write-up published &nbsp;·&nbsp; `[IN PROGRESS]` — Active &nbsp;·&nbsp; `[PENDING]` — Not started
 
@@ -139,6 +139,12 @@ portswigger-web-security-writeups/
 │   └── 15-sqli-blind-time-based-password-extraction/
 │   └── 16-sqli-blind-oob-dns-interaction/
 ├── 02-authentication/
+├── 01-lab-username-enumeration-via-different-responses/
+│   │   ├── README.md
+│   │   └── evidence/
+│   │       └── bruteforce-password.png
+│   │       └──  bruteforce-username.png
+│   │       └── lab-solved.png
 ├── 03-path-traversal/
 |       01-lab-file-path-traversal-simple-case/
 │        ├── README.md
@@ -309,22 +315,22 @@ Authentication vulnerabilities allow attackers to bypass login controls, enumera
 
 **Classification:** OWASP A07:2021 · CWE-287 · MITRE ATT&CK T1110
 
-|  #  | Lab Title                                                       |  Difficulty  |   Status    | Write-Up |
-| :-: | --------------------------------------------------------------- | :----------: | :---------: | :------: |
-| 01  | Username enumeration via different responses                    |  Apprentice  | `[PENDING]` |    —     |
-| 02  | 2FA simple bypass                                               |  Apprentice  | `[PENDING]` |    —     |
-| 03  | Password reset broken logic                                     |  Apprentice  | `[PENDING]` |    —     |
-| 04  | Username enumeration via subtly different responses             | Practitioner | `[PENDING]` |    —     |
-| 05  | Username enumeration via response timing                        | Practitioner | `[PENDING]` |    —     |
-| 06  | Broken brute-force protection, IP block                         | Practitioner | `[PENDING]` |    —     |
-| 07  | Username enumeration via account lock                           | Practitioner | `[PENDING]` |    —     |
-| 08  | 2FA broken logic                                                | Practitioner | `[PENDING]` |    —     |
-| 09  | Brute-forcing a stay-logged-in cookie                           | Practitioner | `[PENDING]` |    —     |
-| 10  | Offline password cracking                                       | Practitioner | `[PENDING]` |    —     |
-| 11  | Password reset poisoning via middleware                         | Practitioner | `[PENDING]` |    —     |
-| 12  | Password brute-force via password change                        | Practitioner | `[PENDING]` |    —     |
-| 13  | Broken brute-force protection, multiple credentials per request |    Expert    | `[PENDING]` |    —     |
-| 14  | 2FA bypass using a brute-force attack                           |    Expert    | `[PENDING]` |    —     |
+|  #  | Lab Title                                                       |  Difficulty  |   Status    |                                                                           Write-Up                                                                            |
+| :-: | --------------------------------------------------------------- | :----------: | :---------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| 01  | Username enumeration via different responses                    |  Apprentice  | `[SOLVED]`  | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/tree/main/Authentication/01-lab-username-enumeration-via-different-responses) |
+| 02  | 2FA simple bypass                                               |  Apprentice  | `[PENDING]` |                                                                               —                                                                               |
+| 03  | Password reset broken logic                                     |  Apprentice  | `[PENDING]` |                                                                               —                                                                               |
+| 04  | Username enumeration via subtly different responses             | Practitioner | `[PENDING]` |                                                                               —                                                                               |
+| 05  | Username enumeration via response timing                        | Practitioner | `[PENDING]` |                                                                               —                                                                               |
+| 06  | Broken brute-force protection, IP block                         | Practitioner | `[PENDING]` |                                                                               —                                                                               |
+| 07  | Username enumeration via account lock                           | Practitioner | `[PENDING]` |                                                                               —                                                                               |
+| 08  | 2FA broken logic                                                | Practitioner | `[PENDING]` |                                                                               —                                                                               |
+| 09  | Brute-forcing a stay-logged-in cookie                           | Practitioner | `[PENDING]` |                                                                               —                                                                               |
+| 10  | Offline password cracking                                       | Practitioner | `[PENDING]` |                                                                               —                                                                               |
+| 11  | Password reset poisoning via middleware                         | Practitioner | `[PENDING]` |                                                                               —                                                                               |
+| 12  | Password brute-force via password change                        | Practitioner | `[PENDING]` |                                                                               —                                                                               |
+| 13  | Broken brute-force protection, multiple credentials per request |    Expert    | `[PENDING]` |                                                                               —                                                                               |
+| 14  | 2FA bypass using a brute-force attack                           |    Expert    | `[PENDING]` |                                                                               —                                                                               |
 
 ---
 
