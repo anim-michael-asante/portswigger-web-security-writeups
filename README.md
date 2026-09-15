@@ -68,23 +68,23 @@ Writing forces full understanding. A lab is not complete until the exploitation 
 
 ## Progress Tracker
 
-| # | Category | Total | Done | Status |
-| --- | --- | :---: | :---: | --- |
-| 01 | [SQL Injection](#01-sql-injection--18-labs) | 18 | 16 | 16 completed |
-| 02 | [Authentication](#02-authentication--14-labs) | 14 | 2 | 2 completed |
-| 03 | [Path Traversal](#03-path-traversal--6-labs) | 6 | 6 | 6 completed |
-| 04 | [OS Command Injection](#04-os-command-injection--3-labs) | 3 | 3 | 3 completed |
-| 05 | [Business Logic Vulnerabilities](#05-business-logic-vulnerabilities--11-labs) | 11 | 0 | Pending |
-| 06 | [Information Disclosure](#06-information-disclosure--5-labs) | 5 | 0 | Pending |
-| 07 | [Access Control Vulnerabilities](#07-access-control-vulnerabilities--13-labs) | 13 | 0 | Pending |
-| 08 | [File Upload Vulnerabilities](#08-file-upload-vulnerabilities--7-labs) | 7 | 7 | 7 completed |
-| 09 | [Race Conditions](#09-race-conditions--6-labs) | 6 | 0 | Pending |
-| 10 | [SSRF](#10-server-side-request-forgery-ssrf--7-labs) | 7 | 0 | Pending |
-| 11 | [XXE Injection](#11-xml-external-entity-xxe-injection--9-labs) | 9 | 0 | Pending |
-| 12 | [NoSQL Injection](#12-nosql-injection--4-labs) | 4 | 0 | Pending |
-| 13 | [API Testing](#13-api-testing--5-labs) | 5 | 4 | 4 completed |
-| 14-31 | Additional PortSwigger topics | 148 | 0 | Pending |
-| | **TOTAL** | **256** | **38** | **38 completed** |
+| #     | Category                                                                      |  Total  |  Done  | Status           |
+| ----- | ----------------------------------------------------------------------------- | :-----: | :----: | ---------------- |
+| 01    | [SQL Injection](#01-sql-injection--18-labs)                                   |   18    |   16   | 16 completed     |
+| 02    | [Authentication](#02-authentication--14-labs)                                 |   14    |   2    | 2 completed      |
+| 03    | [Path Traversal](#03-path-traversal--6-labs)                                  |    6    |   6    | 6 completed      |
+| 04    | [OS Command Injection](#04-os-command-injection--3-labs)                      |    3    |   3    | 3 completed      |
+| 05    | [Business Logic Vulnerabilities](#05-business-logic-vulnerabilities--11-labs) |   11    |   0    | Pending          |
+| 06    | [Information Disclosure](#06-information-disclosure--5-labs)                  |    5    |   0    | Pending          |
+| 07    | [Access Control Vulnerabilities](#07-access-control-vulnerabilities--13-labs) |   13    |   0    | Pending          |
+| 08    | [File Upload Vulnerabilities](#08-file-upload-vulnerabilities--7-labs)        |    7    |   7    | 7 completed      |
+| 09    | [Race Conditions](#09-race-conditions--6-labs)                                |    6    |   0    | Pending          |
+| 10    | [SSRF](#10-server-side-request-forgery-ssrf--7-labs)                          |    7    |   0    | Pending          |
+| 11    | [XXE Injection](#11-xml-external-entity-xxe-injection--9-labs)                |    9    |   0    | Pending          |
+| 12    | [NoSQL Injection](#12-nosql-injection--4-labs)                                |    4    |   0    | Pending          |
+| 13    | [API Testing](#13-api-testing--5-labs)                                        |    5    |   4    | 4 completed      |
+| 14-31 | Additional PortSwigger topics                                                 |   148   |   0    | Pending          |
+|       | **TOTAL**                                                                     | **256** | **38** | **38 completed** |
 
 > **Status key:** `[SOLVED]` means a write-up is published. `[PENDING]` means the lab is planned but not yet documented in this repository.
 
@@ -256,10 +256,10 @@ OS command injection enables arbitrary system command execution on the host serv
 
 **Classification:** OWASP A03:2021 · CWE-78 · MITRE ATT&CK T1059
 
-|  #  | Lab Title                                          | Difficulty |  Status   | Write-Up |
-| :-: | -------------------------------------------------- | :--------: | :-------: | :------: |
-| 01  | OS command injection, simple case                  | Apprentice | `[SOLVED]` | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/blob/main/OS%20command%20injection/01-os-command-injection-simple-case/README.md) |
-| 02  | Blind OS command injection with time delays        | Practitioner | `[SOLVED]` | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/blob/main/OS%20command%20injection/02-blind-os-command-injection-time-delays/README.md) |
+|  #  | Lab Title                                          |  Difficulty  |   Status   |                                                                                    Write-Up                                                                                    |
+| :-: | -------------------------------------------------- | :----------: | :--------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| 01  | OS command injection, simple case                  |  Apprentice  | `[SOLVED]` |       [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/blob/main/OS%20command%20injection/01-os-command-injection-simple-case/README.md)        |
+| 02  | Blind OS command injection with time delays        | Practitioner | `[SOLVED]` |    [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/blob/main/OS%20command%20injection/02-blind-os-command-injection-time-delays/README.md)     |
 | 03  | Blind OS command injection with output redirection | Practitioner | `[SOLVED]` | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/blob/main/OS%20command%20injection/03-blind-os-command-injection-output-redirection/README.md) |
 
 ---
@@ -833,7 +833,6 @@ All write-ups reference one or more of the following industry standards for clas
 ## Author
 
 **Michael Asante Anim** | `0x1aerixis`
-BSc Cyber Security — University of Mines and Technology (UMaT), Tarkwa, Ghana
 
 [![GitHub](https://img.shields.io/badge/GitHub-anim--michael--asante-black?style=flat-square&logo=github)](https://github.com/anim-michael-asante)
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?style=flat-square&logo=linkedin)](https://linkedin.com/in/michael-asante-anim)
