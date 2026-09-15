@@ -41,7 +41,7 @@ _Structured, evidence-driven write-ups for the labs currently contained in this 
 
 ## Overview
 
-This repository documents hands-on exploitation of real-world web vulnerability classes through the [PortSwigger Web Security Academy](https://portswigger.net/web-security) — 263 labs across 31 topic areas spanning server-side, client-side, and advanced attack techniques.
+This repository documents hands-on exploitation of real-world web vulnerability classes through the [PortSwigger Web Security Academy](https://portswigger.net/web-security) — 256 labs across 31 topic areas spanning server-side, client-side, and advanced attack techniques.
 
 Each write-up follows an industry-standard penetration testing report format: scope, methodology, technical findings with CVSS v3.1 scoring, proof-of-concept, and remediation strategy. The repository is organised by vulnerability category, with each lab in its own subdirectory containing a `README.md` and an `evidence/` folder.
 
@@ -68,44 +68,25 @@ Writing forces full understanding. A lab is not complete until the exploitation 
 
 ## Progress Tracker
 
-| #   | Category                                                                      | Difficulty Range          |  Total  |  Done  | Status                                                                   |
-| --- | ----------------------------------------------------------------------------- | ------------------------- | :-----: | :----: | ------------------------------------------------------------------------ |
-| 01  | [SQL Injection](#01-sql-injection--18-labs)                                   | Apprentice — Practitioner |   18    |   16   | ![](https://img.shields.io/badge/16%2F18-brightgreen?style=flat-square)  |
-| 02  | [Authentication](#02-authentication--14-labs)                                 | Apprentice — Expert       |   14    |   2    | ![](https://img.shields.io/badge/2%2F14-brightgreen?style=flat-square)   |
-| 03  | [Path Traversal](#03-path-traversal--6-labs)                                  | Apprentice — Practitioner |    6    |   6    | ![](https://img.shields.io/badge/6%2F6-brightgreen?style=flat-square)    |
-| 04  | [OS Command Injection](#04-os-command-injection--5-labs)                      | Apprentice — Practitioner |    5    |   3    | ![](https://img.shields.io/badge/3%2F5-brightgreen?style=flat-square)    |
-| 05  | [Business Logic Vulnerabilities](#05-business-logic-vulnerabilities--11-labs) | Apprentice — Expert       |   11    |   0    | ![](https://img.shields.io/badge/0%2F11-lightgrey?style=flat-square)     |
-| 06  | [Information Disclosure](#06-information-disclosure--5-labs)                  | Apprentice — Practitioner |    5    |   0    | ![](https://img.shields.io/badge/0%2F5-lightgrey?style=flat-square)      |
-| 07  | [Access Control Vulnerabilities](#07-access-control-vulnerabilities--13-labs) | Apprentice — Practitioner |   13    |   0    | ![](https://img.shields.io/badge/0%2F13-lightgrey?style=flat-square)     |
-| 08  | [File Upload Vulnerabilities](#08-file-upload-vulnerabilities--7-labs)        | Apprentice — Expert       |    7    |   7    | ![](https://img.shields.io/badge/7%2F7-brightgreen?style=flat-square)    |
-| 09  | [Race Conditions](#09-race-conditions--6-labs)                                | Apprentice — Expert       |    6    |   0    | ![](https://img.shields.io/badge/0%2F6-lightgrey?style=flat-square)      |
-| 10  | [SSRF](#10-server-side-request-forgery-ssrf--7-labs)                          | Apprentice — Expert       |    7    |   0    | ![](https://img.shields.io/badge/0%2F7-lightgrey?style=flat-square)      |
-| 11  | [XXE Injection](#11-xml-external-entity-xxe-injection--9-labs)                | Apprentice — Expert       |    9    |   0    | ![](https://img.shields.io/badge/0%2F9-lightgrey?style=flat-square)      |
-| 12  | [NoSQL Injection](#12-nosql-injection--4-labs)                                | Apprentice — Practitioner |    4    |   0    | ![](https://img.shields.io/badge/0%2F4-lightgrey?style=flat-square)      |
-| 13  | [API Testing](#13-api-testing--5-labs)                                        | Apprentice — Practitioner |    5    |   4    | ![](https://img.shields.io/badge/4%2F5-brightgreen?style=flat-square)    |
-| 14  | [Web Cache Deception](#14-web-cache-deception--5-labs)                        | Apprentice — Expert       |    5    |   0    | ![](https://img.shields.io/badge/0%2F5-lightgrey?style=flat-square)      |
-| 15  | [Cross-Site Scripting (XSS)](#15-cross-site-scripting-xss--30-labs)           | Apprentice — Expert       |   30    |   0    | ![](https://img.shields.io/badge/0%2F30-lightgrey?style=flat-square)     |
-| 16  | [CSRF](#16-cross-site-request-forgery-csrf--12-labs)                          | Apprentice — Expert       |   12    |   0    | ![](https://img.shields.io/badge/0%2F12-lightgrey?style=flat-square)     |
-| 17  | [CORS](#17-cross-origin-resource-sharing-cors--3-labs)                        | Apprentice — Practitioner |    3    |   0    | ![](https://img.shields.io/badge/0%2F3-lightgrey?style=flat-square)      |
-| 18  | [Clickjacking](#18-clickjacking--5-labs)                                      | Apprentice — Practitioner |    5    |   0    | ![](https://img.shields.io/badge/0%2F5-lightgrey?style=flat-square)      |
-| 19  | [DOM-Based Vulnerabilities](#19-dom-based-vulnerabilities--7-labs)            | Apprentice — Expert       |    7    |   0    | ![](https://img.shields.io/badge/0%2F7-lightgrey?style=flat-square)      |
-| 20  | [WebSockets](#20-websockets--3-labs)                                          | Apprentice — Practitioner |    3    |   0    | ![](https://img.shields.io/badge/0%2F3-lightgrey?style=flat-square)      |
-| 21  | [Insecure Deserialization](#21-insecure-deserialization--10-labs)             | Apprentice — Expert       |   10    |   0    | ![](https://img.shields.io/badge/0%2F10-lightgrey?style=flat-square)     |
-| 22  | [Web LLM Attacks](#22-web-llm-attacks--7-labs)                                | Apprentice — Practitioner |    7    |   0    | ![](https://img.shields.io/badge/0%2F7-lightgrey?style=flat-square)      |
-| 23  | [GraphQL API Vulnerabilities](#23-graphql-api-vulnerabilities--5-labs)        | Apprentice — Practitioner |    5    |   0    | ![](https://img.shields.io/badge/0%2F5-lightgrey?style=flat-square)      |
-| 24  | [Server-Side Template Injection](#24-server-side-template-injection--7-labs)  | Practitioner — Expert     |    7    |   0    | ![](https://img.shields.io/badge/0%2F7-lightgrey?style=flat-square)      |
-| 25  | [Web Cache Poisoning](#25-web-cache-poisoning--13-labs)                       | Practitioner — Expert     |   13    |   0    | ![](https://img.shields.io/badge/0%2F13-lightgrey?style=flat-square)     |
-| 26  | [HTTP Host Header Attacks](#26-http-host-header-attacks--7-labs)              | Apprentice — Expert       |    7    |   0    | ![](https://img.shields.io/badge/0%2F7-lightgrey?style=flat-square)      |
-| 27  | [HTTP Request Smuggling](#27-http-request-smuggling--22-labs)                 | Practitioner — Expert     |   22    |   0    | ![](https://img.shields.io/badge/0%2F22-lightgrey?style=flat-square)     |
-| 28  | [OAuth Authentication](#28-oauth-authentication--6-labs)                      | Apprentice — Expert       |    6    |   0    | ![](https://img.shields.io/badge/0%2F6-lightgrey?style=flat-square)      |
-| 29  | [JWT Attacks](#29-jwt-attacks--8-labs)                                        | Apprentice — Expert       |    8    |   0    | ![](https://img.shields.io/badge/0%2F8-lightgrey?style=flat-square)      |
-| 30  | [Prototype Pollution](#30-prototype-pollution--10-labs)                       | Apprentice — Expert       |   10    |   0    | ![](https://img.shields.io/badge/0%2F10-lightgrey?style=flat-square)     |
-| 31  | [Essential Skills](#31-essential-skills--2-labs)                              | Practitioner              |    2    |   0    | ![](https://img.shields.io/badge/0%2F2-lightgrey?style=flat-square)      |
-|     | **TOTAL**                                                                     |                           | **263** | **38** | ![](https://img.shields.io/badge/38%2F263-brightgreen?style=flat-square) |
+| # | Category | Total | Done | Status |
+| --- | --- | :---: | :---: | --- |
+| 01 | [SQL Injection](#01-sql-injection--18-labs) | 18 | 16 | 16 completed |
+| 02 | [Authentication](#02-authentication--14-labs) | 14 | 2 | 2 completed |
+| 03 | [Path Traversal](#03-path-traversal--6-labs) | 6 | 6 | 6 completed |
+| 04 | [OS Command Injection](#04-os-command-injection--3-labs) | 3 | 3 | 3 completed |
+| 05 | [Business Logic Vulnerabilities](#05-business-logic-vulnerabilities--11-labs) | 11 | 0 | Pending |
+| 06 | [Information Disclosure](#06-information-disclosure--5-labs) | 5 | 0 | Pending |
+| 07 | [Access Control Vulnerabilities](#07-access-control-vulnerabilities--13-labs) | 13 | 0 | Pending |
+| 08 | [File Upload Vulnerabilities](#08-file-upload-vulnerabilities--7-labs) | 7 | 7 | 7 completed |
+| 09 | [Race Conditions](#09-race-conditions--6-labs) | 6 | 0 | Pending |
+| 10 | [SSRF](#10-server-side-request-forgery-ssrf--7-labs) | 7 | 0 | Pending |
+| 11 | [XXE Injection](#11-xml-external-entity-xxe-injection--9-labs) | 9 | 0 | Pending |
+| 12 | [NoSQL Injection](#12-nosql-injection--4-labs) | 4 | 0 | Pending |
+| 13 | [API Testing](#13-api-testing--5-labs) | 5 | 4 | 4 completed |
+| 14-31 | Additional PortSwigger topics | 148 | 0 | Pending |
+| | **TOTAL** | **256** | **38** | **38 completed** |
 
-> **Status key:** `[SOLVED]` — Write-up published &nbsp;·&nbsp; `[IN PROGRESS]` — Active &nbsp;·&nbsp; `[PENDING]` — Not started
-
----
+> **Status key:** `[SOLVED]` means a write-up is published. `[PENDING]` means the lab is planned but not yet documented in this repository.
 
 ## Repository Structure
 
@@ -113,147 +94,59 @@ Writing forces full understanding. A lab is not complete until the exploitation 
 portswigger-web-security-writeups/
 ├── README.md
 ├── .gitignore
-│
-├── 01-sql-injection/
-│   ├── 01-where-clause-hidden-data/
-│   │   ├── README.md
-│   │   └── evidence/
-│   │       └── lab-solved.png
-│   ├── 02-sqli-login-bypass/
-│   │   ├── README.md
-│   │   └── evidence/
-│   │       ├── lab-solved-administrator.jpeg
-│   │       └── sqli-analysis-notes.jpeg
-│   ├── 03-sqli-union-oracle-version-disclosure/
-│   ├── 04-sqli-union-mysql-version-enum/
-│   ├── 05-sqli-union-db-enumeration/
-│   ├── 06-sqli-oracle-union-db-enumeration/
-│   ├── 07-sqli-union-column-count-null-probing/
-│   ├── 08-sqli-union-finding-a-column-containing-text/
-│   ├── 09-sqli-union-data-extraction/
-│   ├── 10-sqli-union-multiple-values-single-column/
-│   └── 11-sqli-blind-boolean-conditional-response-trackingid-cookie/
-│   └── 12-sqli-blind-conditional-errors/
-│   └── 13-sqli-visible-error-based/
-│   └── 14-sqli-blind-time-based-pg-sleep/
-│   └── 15-sqli-blind-time-based-password-extraction/
-│   └── 16-sqli-blind-oob-dns-interaction/
-├── 02-authentication/
-      01-lab-username-enumeration-via-different-responses/
-│      ├── README.md
-│      └── evidence/
-│          └── bruteforce-password.png
-│          └──  bruteforce-username.png
-│          └── lab-solved.png
-      02-lab-username-enumeration-subtly-different-responses/
-│      ├── README.md
-│      └── evidence/
-│          └── password.png
-│          └── username.png
-│          └── lab-solved.png
-├── 03-path-traversal/
-|       01-lab-file-path-traversal-simple-case/
-│        ├── README.md
-│        └── evidence/
-│        └── 01-burp-repeater-exploit.png
-│        └── 02-lab-solved-confirmation.png
-|       02-lab-file-path-traversal-traversal-sequences-blocked-with-absolute-path-bypass/
-│        ├── README.md
-│        └── evidence/
-│        └── 01-burp-repeater-exploit.png
-│        └── 02-lab-solved-confirmation.png
-|       03-lab-traversal-sequences-stripped-non-recursively/
-│        ├── README.md
-│        └── evidence/
-│        └── exploitation.png
-│        └── lab-solved.png
-|       04-lab-file-path-traversal-traversal-sequences-stripped-with-superfluous-url-decode/
-│        ├── README.md
-│        └── evidence/
-│        └── 01-burp-repeater-exploit.png
-│        └── 02-lab-solved-confirmation.png
-|       05-lab-file-path-traversal-traversal-sequences-blocked-with-absolute-path-bypass/
-│        ├── README.md
-│        └── evidence/
-│        └── 01-burp-repeater-exploit.png
-│        └── 02-lab-solved-confirmation.png
-|       06-lab-file-path-traversal-validation-of-file-extension-with-null-byte-bypass/
-│        ├── README.md
-│        └── evidence/
-│        └── 01-burp-repeater-exploit.png
-│        └── 02-lab-solved-confirmation.png
-├── 04-os-command-injection/
+├── repo-image.png
+├── repo-image.svg
+├── API testing/
+│   ├── 01-lab-exploiting-api-endpoint-using-documentation/
+│   ├── 02-lab-finding-and-exploiting-unused-api-endpoint/
+│   ├── 03-lab-mass-assignment/
+│   └── 04-lab-server-side-parameter-pollution-query-string/
+├── Authentication/
+│   ├── 01-lab-username-enumeration-via-different-responses/
+│   └── 02-lab-username-enumeration-subtly-different-responses/
+├── File upload vulnerabilities/
+│   ├── 01-file-upload-rce-web-shell/
+│   ├── 02-file-upload-content-type-bypass/
+│   ├── 03-file-upload-path-traversal-bypass/
+│   ├── 04-lab-web-shell-upload-via-extension-blacklist-bypass/
+│   ├── 05-lab-web-shell-upload-via-obfuscated-file-extension/
+│   ├── 06-lab-remote-code-execution-via-polyglot-web-shell-upload/
+│   └── 07-web-shell-upload-race-condition/
+├── OS command injection/
+│   ├── 01-os-command-injection-simple-case/
+│   ├── 02-blind-os-command-injection-time-delays/
+│   └── 03-blind-os-command-injection-output-redirection/
+├── Path Traversal/
+│   ├── 01-lab-file-path-traversal-simple-case/
+│   ├── 02-lab-file-path-traversal-traversal-sequences-blocked-with-absolute-path-bypass/
+│   ├── 03-lab-traversal-sequences-stripped-non-recursively/
+│   ├── 04-lab-file-path-traversal-traversal-sequences-stripped-with-superfluous-url-decode/
+│   ├── 05-lab-file-path-traversal-traversal-sequences-blocked-with-absolute-path-bypass/
+│   └── 06-lab-file-path-traversal-validation-of-file-extension-with-null-byte-bypass/
+├── sql-injection/
+    ├── 01-sqli-where-clause/
+    ├── 02-sqli-login-bypass/
+    ├── 03-sqli-union-oracle-version-disclosure/
+    ├── 04-sqli-union-mysql-version-enum/
+    ├── 05-sqli-union-db-enumeration/
+    ├── 06-sqli-oracle-union-db-enumeration/
+    ├── 07-sqli-union-column-count-null-probing/
+    ├── 08-sqli-union-finding-a-column-containing-text/
+    ├── 09-sqli-union-data-extraction/
+    ├── 10-sqli-union-multiple-values-single-column/
+    ├── 11-sqli-blind-boolean-conditional-response-trackingid-cookie/
+    ├── 12-sqli-blind-conditional-errors/
+    ├── 13-sqli-visible-error-based/
+    ├── 14-sqli-blind-time-based-pg-sleep/
+    ├── 15-sqli-blind-time-based-password-extraction/
+    └── 16-sqli-blind-oob-dns-interaction/
 ├── 05-business-logic/
 ├── 06-information-disclosure/
 ├── 07-access-control/
-├── 08-file-upload-vulnerabilities/
-|       01-file-upload-rce-web-shell/
-│        ├── README.md
-│        ├── exploit.php
-│        └── evidence/
-│        └── flag.png
-│        └── lab-solved.png
-|        02-file-upload-content-type-bypass/
-│        ├── README.md
-│        ├── exploit.php
-│        └── evidence/
-│        └── flag.png
-│        └── lab-solved.png
-|        03-file-upload-path-traversal-bypass/
-│        ├── README.md
-│        ├── exploit.php
-│        └── evidence/
-│        └── flag.png
-│        └── lab-solved.png
-|        04-lab-web-shell-upload-via-extension-blacklist-bypass/
-│        ├── README.md
-│        ├── exploit.php
-│        └── evidence/
-│        └── flag.png
-│        └── lab-solved.png
-|        05-lab-web-shell-upload-via-obfuscated-file-extension/
-│        ├── README.md
-│        ├── exploit.php
-│        └── evidence/
-│        └── flag.png
-│        └── lab-solved.png
-|        06-lab-remote-code-execution-via-polyglot-web-shell-upload/
-│        ├── README.md
-│        ├── exploit.php
-│        └── evidence/
-│        └── flag.png
-│        └── lab-solved.png
-|          07-web-shell-upload-race-condition/
-│        ├── README.md
-│        ├── exploit.php
-│        ├── race_condition_attack.py
-│        └── evidence/
-│        └── flag.png
-│        └── lab-solved.png
 ├── 09-race-conditions/
 ├── 10-ssrf/
 ├── 11-xxe-injection/
 ├── 12-nosql-injection/
-├── 13-api-testing/           ├01-lab-exploiting-api-endpoint-using-documentation/
-│        ├── README.md
-│        └── evidence/
-│        └── exposed-apis.png
-│        └── lab-solved.png          ├02-lab-finding-and-exploiting-unused-api-endpoint//
-│        ├── README.md
-│        └── evidence/
-│        └── exploitation.png
-│        └── lab-solved.png
-│        └── lab-solved.png          ├
-03-lab-mass-assignment/
-│        ├── README.md
-│        └── evidence/
-│        └── exploitation.png
-│        └── lab-solved.png
-│        └── lab-solved.png          ├04-lab-server-side-parameter-pollution-query-string/
-│        ├── README.md
-│        └── evidence/
-│        └── exploitation.png
-│        └── lab-solved.png
 ├── 14-web-cache-deception/
 ├── 15-cross-site-scripting/
 ├── 16-csrf/
@@ -357,19 +250,17 @@ Path traversal allows attackers to read arbitrary files on the server filesystem
 
 ---
 
-### 04. OS Command Injection — 5 Labs
+### 04. OS Command Injection — 3 Labs
 
 OS command injection enables arbitrary system command execution on the host server, typically resulting in full system compromise, data exfiltration, or lateral movement.
 
 **Classification:** OWASP A03:2021 · CWE-78 · MITRE ATT&CK T1059
 
-|  #  | Lab Title                                                     |  Difficulty  |   Status    |                                                                                    Write-Up                                                                                    |
-| :-: | ------------------------------------------------------------- | :----------: | :---------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
-| 01  | OS command injection, simple case                             |  Apprentice  | `[SOLVED]`  |       [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/blob/main/OS%20command%20injection/01-os-command-injection-simple-case/README.md)        |
-| 02  | Blind OS command injection with time delays                   | Practitioner | `[SOLVED]`  |    [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/blob/main/OS%20command%20injection/02-blind-os-command-injection-time-delays/README.md)     |
-| 03  | Blind OS command injection with output redirection            | Practitioner | `[SOLVED]`  | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/blob/main/OS%20command%20injection/03-blind-os-command-injection-output-redirection/README.md) |
-| 04  | Blind OS command injection with out-of-band interaction       | Practitioner | `[PENDING]` |                                                                                       —                                                                                        |
-| 05  | Blind OS command injection with out-of-band data exfiltration | Practitioner | `[PENDING]` |                                                                                       —                                                                                        |
+|  #  | Lab Title                                          | Difficulty |  Status   | Write-Up |
+| :-: | -------------------------------------------------- | :--------: | :-------: | :------: |
+| 01  | OS command injection, simple case                  | Apprentice | `[SOLVED]` | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/blob/main/OS%20command%20injection/01-os-command-injection-simple-case/README.md) |
+| 02  | Blind OS command injection with time delays        | Practitioner | `[SOLVED]` | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/blob/main/OS%20command%20injection/02-blind-os-command-injection-time-delays/README.md) |
+| 03  | Blind OS command injection with output redirection | Practitioner | `[SOLVED]` | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/blob/main/OS%20command%20injection/03-blind-os-command-injection-output-redirection/README.md) |
 
 ---
 
