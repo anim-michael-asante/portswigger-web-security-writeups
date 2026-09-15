@@ -7,8 +7,8 @@
 </br>
 
 [![Platform](https://img.shields.io/badge/Platform-PortSwigger%20Web%20Security%20Academy-orange?style=flat-square)](https://portswigger.net/web-security)
-[![Labs Completed](https://img.shields.io/badge/Completed-16%2F263-brightgreen?style=flat-square)](https://github.com/anim-michael-asante/portswigger-web-security-writeups)
-[![Topics](https://img.shields.io/badge/Topics-31-purple?style=flat-square)](https://portswigger.net/web-security/all-topics)
+[![Labs Completed](https://img.shields.io/badge/Completed-38%20labs-brightgreen?style=flat-square)](https://github.com/anim-michael-asante/portswigger-web-security-writeups)
+[![Topics](https://img.shields.io/badge/Topics-6%20tracked%20categories-purple?style=flat-square)](https://portswigger.net/web-security/all-topics)
 [![OWASP](https://img.shields.io/badge/Standard-OWASP%20Top%2010%202021-red?style=flat-square)](https://owasp.org/Top10/)
 [![MITRE](https://img.shields.io/badge/Framework-MITRE%20ATT%26CK-black?style=flat-square)](https://attack.mitre.org/)
 [![License](https://img.shields.io/badge/License-MIT-blue?style=flat-square)](LICENSE)
@@ -16,7 +16,7 @@
 
 # PortSwigger Web Security Academy — Write-Ups
 
-_Structured, evidence-driven write-ups for every lab across 31 web security topic areas._
+_Structured, evidence-driven write-ups for the labs currently contained in this repository._
 
 [Browse Write-Ups](#server-side-topics) · [Track Progress](#progress-tracker) · [View Standards](#standards-and-frameworks)
 
@@ -73,7 +73,7 @@ Writing forces full understanding. A lab is not complete until the exploitation 
 | 01  | [SQL Injection](#01-sql-injection--18-labs)                                   | Apprentice — Practitioner |   18    |   16   | ![](https://img.shields.io/badge/16%2F18-brightgreen?style=flat-square)  |
 | 02  | [Authentication](#02-authentication--14-labs)                                 | Apprentice — Expert       |   14    |   2    | ![](https://img.shields.io/badge/2%2F14-brightgreen?style=flat-square)   |
 | 03  | [Path Traversal](#03-path-traversal--6-labs)                                  | Apprentice — Practitioner |    6    |   6    | ![](https://img.shields.io/badge/6%2F6-brightgreen?style=flat-square)    |
-| 04  | [OS Command Injection](#04-os-command-injection--5-labs)                      | Apprentice — Practitioner |    5    |   0    | ![](https://img.shields.io/badge/0%2F5-lightgrey?style=flat-square)      |
+| 04  | [OS Command Injection](#04-os-command-injection--5-labs)                      | Apprentice — Practitioner |    5    |   3    | ![](https://img.shields.io/badge/3%2F5-brightgreen?style=flat-square)    |
 | 05  | [Business Logic Vulnerabilities](#05-business-logic-vulnerabilities--11-labs) | Apprentice — Expert       |   11    |   0    | ![](https://img.shields.io/badge/0%2F11-lightgrey?style=flat-square)     |
 | 06  | [Information Disclosure](#06-information-disclosure--5-labs)                  | Apprentice — Practitioner |    5    |   0    | ![](https://img.shields.io/badge/0%2F5-lightgrey?style=flat-square)      |
 | 07  | [Access Control Vulnerabilities](#07-access-control-vulnerabilities--13-labs) | Apprentice — Practitioner |   13    |   0    | ![](https://img.shields.io/badge/0%2F13-lightgrey?style=flat-square)     |
@@ -101,7 +101,7 @@ Writing forces full understanding. A lab is not complete until the exploitation 
 | 29  | [JWT Attacks](#29-jwt-attacks--8-labs)                                        | Apprentice — Expert       |    8    |   0    | ![](https://img.shields.io/badge/0%2F8-lightgrey?style=flat-square)      |
 | 30  | [Prototype Pollution](#30-prototype-pollution--10-labs)                       | Apprentice — Expert       |   10    |   0    | ![](https://img.shields.io/badge/0%2F10-lightgrey?style=flat-square)     |
 | 31  | [Essential Skills](#31-essential-skills--2-labs)                              | Practitioner              |    2    |   0    | ![](https://img.shields.io/badge/0%2F2-lightgrey?style=flat-square)      |
-|     | **TOTAL**                                                                     |                           | **263** | **35** | ![](https://img.shields.io/badge/35%2F263-brightgreen?style=flat-square) |
+|     | **TOTAL**                                                                     |                           | **263** | **38** | ![](https://img.shields.io/badge/35%2F263-brightgreen?style=flat-square) |
 
 > **Status key:** `[SOLVED]` — Write-up published &nbsp;·&nbsp; `[IN PROGRESS]` — Active &nbsp;·&nbsp; `[PENDING]` — Not started
 
@@ -363,13 +363,13 @@ OS command injection enables arbitrary system command execution on the host serv
 
 **Classification:** OWASP A03:2021 · CWE-78 · MITRE ATT&CK T1059
 
-|  #  | Lab Title                                                     |  Difficulty  |   Status    | Write-Up |
-| :-: | ------------------------------------------------------------- | :----------: | :---------: | :------: |
-| 01  | OS command injection, simple case                             |  Apprentice  | `[PENDING]` |    —     |
-| 02  | Blind OS command injection with time delays                   | Practitioner | `[PENDING]` |    —     |
-| 03  | Blind OS command injection with output redirection            | Practitioner | `[PENDING]` |    —     |
-| 04  | Blind OS command injection with out-of-band interaction       | Practitioner | `[PENDING]` |    —     |
-| 05  | Blind OS command injection with out-of-band data exfiltration | Practitioner | `[PENDING]` |    —     |
+|  #  | Lab Title                                                     |  Difficulty  |   Status    |                                                                                    Write-Up                                                                                    |
+| :-: | ------------------------------------------------------------- | :----------: | :---------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| 01  | OS command injection, simple case                             |  Apprentice  | `[SOLVED]`  |       [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/blob/main/OS%20command%20injection/01-os-command-injection-simple-case/README.md)        |
+| 02  | Blind OS command injection with time delays                   | Practitioner | `[SOLVED]`  |    [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/blob/main/OS%20command%20injection/02-blind-os-command-injection-time-delays/README.md)     |
+| 03  | Blind OS command injection with output redirection            | Practitioner | `[SOLVED]`  | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/blob/main/OS%20command%20injection/03-blind-os-command-injection-output-redirection/README.md) |
+| 04  | Blind OS command injection with out-of-band interaction       | Practitioner | `[PENDING]` |                                                                                       —                                                                                        |
+| 05  | Blind OS command injection with out-of-band data exfiltration | Practitioner | `[PENDING]` |                                                                                       —                                                                                        |
 
 ---
 
