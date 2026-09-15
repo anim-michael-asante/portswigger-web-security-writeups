@@ -1,0 +1,90 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="720" viewBox="0 0 1600 720" role="img" aria-labelledby="title desc">
+  <title id="title">PortSwigger Web Security Academy write-ups</title>
+  <desc id="desc">A dark technical cover showing a request and response flow, evidence notes, and current repository progress.</desc>
+  <defs>
+    <pattern id="grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M32 0H0V32" fill="none" stroke="#203044" stroke-width="1"/>
+    </pattern>
+    <filter id="shadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="14" stdDeviation="18" flood-color="#000000" flood-opacity="0.38"/>
+    </filter>
+  </defs>
+
+  <rect width="1600" height="720" fill="#09111d"/>
+  <rect width="1600" height="720" fill="url(#grid)" opacity="0.36"/>
+  <path d="M0 600H1600" stroke="#26384d" stroke-width="2"/>
+  <path d="M0 602C280 550 420 660 720 606S1190 545 1600 600" fill="none" stroke="#f36f36" stroke-width="3" opacity="0.8"/>
+
+  <g transform="translate(86 80)">
+    <rect width="70" height="70" rx="14" fill="#f36f36"/>
+    <path d="M39 12 23 39h14l-7 22 25-31H41l8-18z" fill="#fff7ef"/>
+  </g>
+
+  <text x="184" y="110" fill="#f5f7fa" font-family="Trebuchet MS, sans-serif" font-size="24" font-weight="700" letter-spacing="3">PORTSWIGGER ACADEMY</text>
+  <text x="84" y="246" fill="#f5f7fa" font-family="Trebuchet MS, sans-serif" font-size="78" font-weight="700">Web Security</text>
+  <text x="84" y="327" fill="#f36f36" font-family="Trebuchet MS, sans-serif" font-size="78" font-weight="700">Write-ups</text>
+  <text x="88" y="379" fill="#a9b7c8" font-family="Trebuchet MS, sans-serif" font-size="22">Hands-on labs, attack paths, evidence, and lessons learned.</text>
+
+  <g transform="translate(86 450)">
+    <rect width="390" height="128" rx="12" fill="#111e2d" stroke="#33475e" stroke-width="2"/>
+    <line x1="130" y1="18" x2="130" y2="110" stroke="#33475e" stroke-width="2"/>
+    <line x1="260" y1="18" x2="260" y2="110" stroke="#33475e" stroke-width="2"/>
+    <text x="28" y="56" fill="#f36f36" font-family="Trebuchet MS, sans-serif" font-size="40" font-weight="700">38</text>
+    <text x="28" y="88" fill="#c4cfdb" font-family="Trebuchet MS, sans-serif" font-size="16">LABS SOLVED</text>
+    <text x="158" y="56" fill="#39c6d8" font-family="Trebuchet MS, sans-serif" font-size="40" font-weight="700">6</text>
+    <text x="158" y="88" fill="#c4cfdb" font-family="Trebuchet MS, sans-serif" font-size="16">CATEGORIES</text>
+    <text x="288" y="56" fill="#f5f7fa" font-family="Trebuchet MS, sans-serif" font-size="25" font-weight="700">BSc</text>
+    <text x="288" y="88" fill="#c4cfdb" font-family="Trebuchet MS, sans-serif" font-size="16">BSCP TRACK</text>
+  </g>
+
+  <g filter="url(#shadow)">
+    <rect x="610" y="86" width="860" height="548" rx="18" fill="#0d1826" stroke="#42566c" stroke-width="2"/>
+    <rect x="610" y="86" width="860" height="54" rx="18" fill="#142235"/>
+    <circle cx="644" cy="113" r="7" fill="#f36f36"/>
+    <circle cx="668" cy="113" r="7" fill="#e9b44c"/>
+    <circle cx="692" cy="113" r="7" fill="#4cc38a"/>
+    <text x="738" y="121" fill="#a9b7c8" font-family="Trebuchet MS, sans-serif" font-size="17">burp-repeater / lab-notes</text>
+
+    <rect x="654" y="178" width="360" height="166" rx="12" fill="#111f30" stroke="#39c6d8" stroke-width="2"/>
+    <text x="684" y="216" fill="#39c6d8" font-family="Consolas, monospace" font-size="18">REQUEST</text>
+    <text x="684" y="258" fill="#f5f7fa" font-family="Consolas, monospace" font-size="24">GET /filter</text>
+    <text x="684" y="296" fill="#f36f36" font-family="Consolas, monospace" font-size="21">category=' OR 1=1--</text>
+    <text x="684" y="326" fill="#8395a9" font-family="Consolas, monospace" font-size="16">scope: authorized lab</text>
+
+    <path d="M1032 260H1124" stroke="#f36f36" stroke-width="3"/>
+    <path d="m1112 248 18 12-18 12" fill="none" stroke="#f36f36" stroke-width="3"/>
+
+    <rect x="1142" y="178" width="280" height="166" rx="12" fill="#111f30" stroke="#f36f36" stroke-width="2"/>
+    <text x="1172" y="216" fill="#f36f36" font-family="Consolas, monospace" font-size="18">RESPONSE</text>
+    <text x="1172" y="258" fill="#4cc38a" font-family="Consolas, monospace" font-size="23">200 OK</text>
+    <text x="1172" y="296" fill="#f5f7fa" font-family="Consolas, monospace" font-size="19">lab solved</text>
+    <text x="1172" y="326" fill="#8395a9" font-family="Consolas, monospace" font-size="16">evidence captured</text>
+
+    <text x="654" y="408" fill="#f5f7fa" font-family="Trebuchet MS, sans-serif" font-size="21" font-weight="700">WRITE-UP INDEX</text>
+    <line x1="654" y1="428" x2="1422" y2="428" stroke="#33475e" stroke-width="2"/>
+
+    <g font-family="Trebuchet MS, sans-serif" font-size="19">
+      <rect x="654" y="456" width="224" height="48" rx="8" fill="#16283a"/>
+      <circle cx="680" cy="480" r="8" fill="#39c6d8"/>
+      <text x="700" y="487" fill="#e8eef4">SQL injection</text>
+      <rect x="900" y="456" width="224" height="48" rx="8" fill="#16283a"/>
+      <circle cx="926" cy="480" r="8" fill="#f36f36"/>
+      <text x="946" y="487" fill="#e8eef4">Authentication</text>
+      <rect x="1146" y="456" width="276" height="48" rx="8" fill="#16283a"/>
+      <circle cx="1172" cy="480" r="8" fill="#e9b44c"/>
+      <text x="1192" y="487" fill="#e8eef4">Path traversal</text>
+      <rect x="654" y="522" width="224" height="48" rx="8" fill="#16283a"/>
+      <circle cx="680" cy="546" r="8" fill="#4cc38a"/>
+      <text x="700" y="553" fill="#e8eef4">File uploads</text>
+      <rect x="900" y="522" width="224" height="48" rx="8" fill="#16283a"/>
+      <circle cx="926" cy="546" r="8" fill="#b98cff"/>
+      <text x="946" y="553" fill="#e8eef4">API testing</text>
+      <rect x="1146" y="522" width="276" height="48" rx="8" fill="#16283a"/>
+      <circle cx="1172" cy="546" r="8" fill="#ef6b8a"/>
+      <text x="1192" y="553" fill="#e8eef4">OS command injection</text>
+    </g>
+  </g>
+
+  <text x="84" y="671" fill="#6f8297" font-family="Trebuchet MS, sans-serif" font-size="16" letter-spacing="2">AUTHORIZED LABS ONLY  /  EVIDENCE-DRIVEN SECURITY NOTES</text>
+  <text x="1430" y="671" text-anchor="end" fill="#f36f36" font-family="Trebuchet MS, sans-serif" font-size="18" font-weight="700">0x1aerixis</text>
+</svg>
