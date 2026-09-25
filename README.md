@@ -74,7 +74,7 @@ Writing forces full understanding. A lab is not complete until the exploitation 
 | 02    | [Authentication](#02-authentication--14-labs)                                 |   14    |   2    | 2 completed      |
 | 03    | [Path Traversal](#03-path-traversal--6-labs)                                  |    6    |   6    | 6 completed      |
 | 04    | [OS Command Injection](#04-os-command-injection--3-labs)                      |    3    |   3    | 3 completed      |
-| 05    | [Business Logic Vulnerabilities](#05-business-logic-vulnerabilities--11-labs) |   11    |   1    | solved           |
+| 05    | [Business Logic Vulnerabilities](#05-business-logic-vulnerabilities--11-labs) |   11    |   2    | solved           |
 | 06    | [Information Disclosure](#06-information-disclosure--5-labs)                  |    5    |   0    | Pending          |
 | 07    | [Access Control Vulnerabilities](#07-access-control-vulnerabilities--13-labs) |   13    |   0    | Pending          |
 | 08    | [File Upload Vulnerabilities](#08-file-upload-vulnerabilities--7-labs)        |    7    |   7    | 7 completed      |
@@ -84,7 +84,7 @@ Writing forces full understanding. A lab is not complete until the exploitation 
 | 12    | [NoSQL Injection](#12-nosql-injection--4-labs)                                |    4    |   0    | Pending          |
 | 13    | [API Testing](#13-api-testing--5-labs)                                        |    5    |   4    | 4 completed      |
 | 14-31 | Additional PortSwigger topics                                                 |   148   |   0    | Pending          |
-|       | **TOTAL**                                                                     | **256** | **39** | **39 completed** |
+|       | **TOTAL**                                                                     | **256** | **40** | **40 completed** |
 
 > **Status key:** `[SOLVED]` means a write-up is published. `[PENDING]` means the lab is planned but not yet documented in this repository.
 
@@ -274,7 +274,7 @@ Business logic flaws arise from improper enforcement of application workflow ass
 | :-: | ---------------------------------------------- | :----------: | :---------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------: |
 | 01  | Excessive trust in client-side controls        |  Apprentice  | `[SOLVED]`  | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/tree/main/Business%20Logic%20Vulnerability/01-excessive-trust-client-side-controls) |
 | 02  | High-level logic vulnerability                 |  Apprentice  | `[PENDING]` |                                                                                  —                                                                                  |
-| 03  | Low-level logic flaw                           | Practitioner | `[PENDING]` |                                                                                  —                                                                                  |
+| 03  | Low-level logic flaw                           | Practitioner | `[SOLVED]`  | [View](https://github.com/anim-michael-asante/portswigger-web-security-writeups/tree/main/Business%20Logic%20Vulnerability/01-excessive-trust-client-side-controls) |
 | 04  | Inconsistent handling of exceptional input     | Practitioner | `[PENDING]` |                                                                                  —                                                                                  |
 | 05  | Inconsistent security controls                 | Practitioner | `[PENDING]` |                                                                                  —                                                                                  |
 | 06  | Weak isolation on dual-use endpoint            | Practitioner | `[PENDING]` |                                                                                  —                                                                                  |
