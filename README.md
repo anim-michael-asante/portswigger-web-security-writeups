@@ -75,7 +75,7 @@ Writing forces full understanding. A lab is not complete until the exploitation 
 | 03    | [Path Traversal](#03-path-traversal--6-labs)                                  |    6    |   6    | 6 completed      |
 | 04    | [OS Command Injection](#04-os-command-injection--3-labs)                      |    3    |   3    | 3 completed      |
 | 05    | [Business Logic Vulnerabilities](#05-business-logic-vulnerabilities--11-labs) |   11    |   2    | solved           |
-| 06    | [Information Disclosure](#06-information-disclosure--5-labs)                  |    5    |   0    | Pending          |
+| 06    | [Information Disclosure](#06-information-disclosure--5-labs)                  |    5    |   1    | solved          |
 | 07    | [Access Control Vulnerabilities](#07-access-control-vulnerabilities--13-labs) |   13    |   0    | Pending          |
 | 08    | [File Upload Vulnerabilities](#08-file-upload-vulnerabilities--7-labs)        |    7    |   7    | 7 completed      |
 | 09    | [Race Conditions](#09-race-conditions--6-labs)                                |    6    |   0    | Pending          |
@@ -84,7 +84,7 @@ Writing forces full understanding. A lab is not complete until the exploitation 
 | 12    | [NoSQL Injection](#12-nosql-injection--4-labs)                                |    4    |   0    | Pending          |
 | 13    | [API Testing](#13-api-testing--5-labs)                                        |    5    |   4    | 4 completed      |
 | 14-31 | Additional PortSwigger topics                                                 |   148   |   0    | Pending          |
-|       | **TOTAL**                                                                     | **256** | **40** | **40 completed** |
+|       | **TOTAL**                                                                     | **256** | **40** | **41 completed** |
 
 > **Status key:** `[SOLVED]` means a write-up is published. `[PENDING]` means the lab is planned but not yet documented in this repository.
 
@@ -294,8 +294,8 @@ Information disclosure vulnerabilities expose sensitive data — credentials, in
 
 |  #  | Lab Title                                         |  Difficulty  |   Status    | Write-Up |
 | :-: | ------------------------------------------------- | :----------: | :---------: | :------: |
-| 01  | Information disclosure in error messages          |  Apprentice  | `[PENDING]` |    —     |
-| 02  | Information disclosure on debug page              |  Apprentice  | `[PENDING]` |    —     |
+| 01  | Information disclosure in error messages          |  Apprentice  | `[SOLVED]` |    —     |
+| 02  | Information disclosure on debug page              |  Apprentice  | `[NEED PRO ACCOUNT]` |    —     |
 | 03  | Source code disclosure via backup files           |  Apprentice  | `[PENDING]` |    —     |
 | 04  | Authentication bypass via information disclosure  |  Apprentice  | `[PENDING]` |    —     |
 | 05  | Information disclosure in version control history | Practitioner | `[PENDING]` |    —     |
