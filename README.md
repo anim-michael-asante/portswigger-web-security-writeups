@@ -170,4 +170,4 @@ These artifacts are intentionally small and lab-specific. Review their contents 
 
 ## Author
 
-Maintained by [0x1aerixis](https://github.com/anim-michael-asante).
+Maintained by [Michael Asante Anim](https://github.com/anim-michael-asante).
